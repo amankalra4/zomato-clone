@@ -8,3 +8,5 @@ export const language = ["Türkçe", "हिंदी", "Português (BR)", "Indo
 export const countries = ["Australia", "Brazil", "Canada", "Chile", "Czech Republic", "Indonesia", "Ireland", "Italy", 
 "Lebanon", "Malaysia", "New Zealand", "Phillippines", "Poland", "Portugal", "Qatar", "Singapore", "Slovakia", 
 "South Africa", "Sri Lanka", "Turkey", "UAE", "United Kingdom", "USA"];
+
+export const GET_LOCATIONS = "https://developers.zomato.com/api/v2.1/locations?query=%s&count=10";
