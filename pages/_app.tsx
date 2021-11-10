@@ -3,18 +3,21 @@ import type { AppProps, AppContext } from 'next/app'
 import "../styles/globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { SnackbarProvider } from 'notistack';
+import { ThemeProvider } from "@material-ui/core/styles";
 import React from "react";
-
+import theme from "@src/modules/theme";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <SnackbarProvider
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right"
-      }}
-    >
-      <Component {...pageProps} />
-    </SnackbarProvider>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right"
+        }}
+      >
+        <Component {...pageProps} />
+      </SnackbarProvider>
+    </ThemeProvider>
   )
 }
 

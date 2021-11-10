@@ -2,6 +2,8 @@ export const webFrontend = "https://b.zmtcdn.com/webFrontend";
 
 export const webAssets = "https://b.zmtcdn.com/web_assets";
 
+export const INIDAN_THUMBNAIL = "https://b.zmtcdn.com/images/countries/flags/country_1.png";
+
 export const language = ["Türkçe", "हिंदी", "Português (BR)", "Indonesian", "Português (PT)", "Español", "Čeština",
     "Slovenčina", "Polish", "Italian", "Vietnamese"];
 
