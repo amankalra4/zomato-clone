@@ -34,18 +34,25 @@ const LoginModal = () => {
                 value={mobileNumber}
                 onChange={handleChange}
             />
-            <Button variant="contained" color={mobileNumber.length < 10 ? "secondary" : "primary"} style={{ marginTop: "20px" }}>
+            <Button variant="contained" disabled={mobileNumber.length < 10} color="primary" style={{ marginTop: "20px" }}>
                 Send OTP
             </Button>
             <DividerWithText text="or" />
-            <Button variant="contained" style={{ backgroundColor: "white", padding: "1rem 0" }}>
-                <span style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Email color="primary" /> Continue with Email</span>
+            <Button variant="contained" startIcon={<Email color="primary" />} style={{ backgroundColor: "white", padding: "1rem 0" }}>
+                Continue with Email
             </Button>
-            <Button variant="contained" style={{ backgroundColor: "white", padding: "1rem 0", marginTop: "20px" }}>
-                <span style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Image src={GoogleLogo} alt="Google Logo" height="17" width="30" /> Continue with Google</span>
-            </Button>
+            <GoogleButton hasTopMargin />
         </div>
     )
 }
+
+interface IGoogleButtonProps {
+    hasTopMargin?: boolean;
+}
+export const GoogleButton = ({ hasTopMargin = false }: IGoogleButtonProps) => (
+    <Button variant="contained" style={{ backgroundColor: "white", padding: "1rem 0", marginTop: hasTopMargin ? "20px" : 0 }}>
+        <span style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Image src={GoogleLogo} alt="Google Logo" height="17" width="30" /> Continue with Google</span>
+    </Button>
+);
 
 export default LoginModal;
