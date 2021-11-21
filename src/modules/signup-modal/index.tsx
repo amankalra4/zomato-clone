@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Button, Checkbox, FormControlLabel, TextField } from "@material-ui/core";
 import DividerWithText from "@src/components/divider-with-text";
 import React, { useState } from "react";
@@ -5,17 +6,17 @@ import { GoogleButton } from "../login-modal";
 
 const SignUpModal = () => {
     const [fullName, setFullName] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
+    // const [email, setEmail] = useState<string>("");
     const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
     const [check, setCheck] = useState<boolean>(false);
 
     const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
         setCheck(checked);
-    }
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.name === "fullName") {
-            setFullName(event.target.value)
+            setFullName(event.target.value);
         } else {
             const isEmailValid = validateEmail(event.target.value);
             if (isEmailValid) {
@@ -25,7 +26,7 @@ const SignUpModal = () => {
                 setIsEmailValid(false);
             }
         }
-    }
+    };
 
     function validateEmail(input: string) {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -53,6 +54,6 @@ const SignUpModal = () => {
             <GoogleButton />
         </div>
     );
-}
+};
 
 export default SignUpModal;

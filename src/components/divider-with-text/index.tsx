@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core";
-import { PropsWithChildren } from "react";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     container: {
         display: "flex",
         alignItems: "center"

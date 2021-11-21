@@ -14,12 +14,12 @@ interface ICenteredModal {
 function CenteredModal({ onHide, show, heading, toggleModal }: ICenteredModal) {
   return (
     <Modal
-      onHide={onHide}
-      show={show}
-      size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      style={{ padding: "0 20px" }}
+        onHide={onHide}
+        show={show}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        style={{ padding: "0 20px" }}
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -31,10 +31,10 @@ function CenteredModal({ onHide, show, heading, toggleModal }: ICenteredModal) {
       </Modal.Body>
       <Modal.Footer style={{ display: "flex", justifyContent: "flex-start" }}>
         <LoginFooter
-          text={heading === "Login" ? "New to Zomato? " : "Already have an account? "}
-          link={heading === "Login" ? "Create an account" : "Login"}
-          toggleModal={toggleModal}
-          heading={heading}
+            text={heading === "Login" ? "New to Zomato? " : "Already have an account? "}
+            link={heading === "Login" ? "Create an account" : "Login"}
+            toggleModal={toggleModal}
+            heading={heading}
         />
       </Modal.Footer>
     </Modal>
@@ -54,7 +54,7 @@ const LoginFooter = ({ text, link, toggleModal, heading }: IFooterProps) => {
       <p>{text}</p>
       <span className={classes.link} onClick={() => toggleModal(heading)}>{link}</span>
     </div>
-  )
-}
+  );
+};
 
 export default CenteredModal;

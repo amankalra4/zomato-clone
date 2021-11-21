@@ -1,15 +1,15 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+const theme = createTheme({
     palette: {
         primary: {
             main: '#ef4f5f',
-            contrastText: '#fff',
+            contrastText: '#fff'
         },
         secondary: { // this color is for disablement
             main: '#cecece',
-            contrastText: '#fff',
-        },
+            contrastText: '#fff'
+        }
         // error: {
         //     main: '#f61c07',
         // },
@@ -24,7 +24,7 @@ const theme = createMuiTheme({
         fontFamily: ['"Maven Pro"', 'sans-serif'].join(','),
         button: {
             textTransform: 'none'
-        },
+        }
     }
 });
 

@@ -1,20 +1,21 @@
-import { Button, IconButton, InputAdornment, makeStyles } from '@material-ui/core';
+/* eslint-disable max-len */
+import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import { INIDAN_THUMBNAIL } from '@src/constants';
-import React, { ChangeEvent, useState } from "react"
+import React, { ChangeEvent, useState } from "react";
 import DividerWithText from '@src/components/divider-with-text';
 import { Email } from '@material-ui/icons';
+import Image from "next/image";
 import GoogleLogo from "../../../public/icons/googleLogo.svg";
-import Image from "next/image"
 
 const LoginModal = () => {
     const [mobileNumber, setMobileNumber] = useState<string>("");
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.value.toString().length <= 10) {
-            setMobileNumber(e.target.value.toString())
+            setMobileNumber(e.target.value.toString());
         }
-    }
+    };
 
     return (
         <div style={{ display: "grid", gridTemplateColumns: "1fr" }}>
@@ -29,7 +30,7 @@ const LoginModal = () => {
                             <Image src={INIDAN_THUMBNAIL} alt="INDIAN_FLAG" width="25" height="25" />
                             <span style={{ margin: "0 20px" }}>+91</span>
                         </>
-                    ),
+                    )
                 }}
                 value={mobileNumber}
                 onChange={handleChange}
@@ -43,15 +44,19 @@ const LoginModal = () => {
             </Button>
             <GoogleButton hasTopMargin />
         </div>
-    )
-}
+    );
+};
 
 interface IGoogleButtonProps {
     hasTopMargin?: boolean;
 }
 export const GoogleButton = ({ hasTopMargin = false }: IGoogleButtonProps) => (
     <Button variant="contained" style={{ backgroundColor: "white", padding: "1rem 0", marginTop: hasTopMargin ? "20px" : 0 }}>
-        <span style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><Image src={GoogleLogo} alt="Google Logo" height="17" width="30" /> Continue with Google</span>
+        <span style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+<Image src={GoogleLogo} alt="Google Logo" height="17" width="30" />
+{' '}
+Continue with Google
+</span>
     </Button>
 );
 

@@ -185,11 +185,9 @@ export interface Restaurant {
     restaurant: Restaurant2;
 }
 
-export interface RootObject {
+export interface RestaurantRootInterface {
     results_found: number;
     results_start: number;
     results_shown: number;
     restaurants: Restaurant[];
 }
-
-

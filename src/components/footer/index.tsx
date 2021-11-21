@@ -1,9 +1,9 @@
 import React from "react";
 import Image from 'next/image';
+import { Language, Flag } from '@material-ui/icons';
 import { countries, language, webAssets } from "../../constants";
 import CommonDropDown from "./lang-country";
 import classses from "./style.module.scss";
-import { Language, Flag } from '@material-ui/icons';
 
 const Footer = () => (
     <footer>
@@ -12,10 +12,10 @@ const Footer = () => (
             <Info />
         </div>
     </footer>
-)
+);
 
 const Logo = () => {
-    const image = `${webAssets}/b40b97e677bc7b2ca77c58c61db266fe1603954218.png?fit=around|198:42&crop=198:42;*,*`
+    const image = `${webAssets}/b40b97e677bc7b2ca77c58c61db266fe1603954218.png?fit=around|198:42&crop=198:42;*,*`;
     return (
     <div className={classses.logoContainer}>
         <div className={classses.image}>
@@ -27,7 +27,8 @@ const Logo = () => {
             <CommonDropDown title="English" value={language} icon={<Language />} marginLeft />
         </div>
     </div>
-)}
+); 
+};
 
 const Info = () => (
     <div className={classses.infoContainer}>
@@ -52,7 +53,7 @@ const Info = () => (
             <SubHeading data={["Facebook", "Twitter", "Insta"]} />
         </div>
     </div>
-)
+);
 
 interface ISubHeading {
     data: string[]
@@ -60,10 +61,10 @@ interface ISubHeading {
 
 const SubHeading = ({ data }: ISubHeading) => (
     <>
-        {data.map(el => (
+        {data.map((el) => (
             <p key={el} className={classses.subHeading}>{el}</p>
         ))}
     </>
-)
+);
 
 export default Footer;
