@@ -43,7 +43,9 @@ export const getCities = (cityName: string) => {
     }).then((res) => res.data).catch((err) => err);
 };
 
-export const getRestaurants = (entityId: string, cityName?: string | undefined, cuisineId?: string, start = 0, count = 10) => {
+export const CARDS_TO_BE_SHOWN = 9;
+
+export const getRestaurants = (entityId: string, cityName?: string | undefined, cuisineId?: string, start = 0, count = CARDS_TO_BE_SHOWN) => {
     const commonURL = `https://developers.zomato.com/api/v2.1/search?entity_id=${entityId}&entity_type=city`;
     let appendedString = "";
     // if case is for restuarnt search in search bar
@@ -58,5 +60,5 @@ export const getRestaurants = (entityId: string, cityName?: string | undefined, 
         headers: {
             "user-key": config.config.zomatoAPI
         }
-    }).then((res) => { return { status: res.status, data: res.data } }).catch((err) => { return { status: err?.response?.status, data: undefined } });
+    }).then((res) => { return { status: res.status, data: res.data }; }).catch((err) => { return { status: err?.response?.status, data: undefined }; });
 };

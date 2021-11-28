@@ -46,8 +46,8 @@ const Searchbar = () => {
         setSelectedCityId(newValue.city_id);
         const getSubLocation: string = newValue.title.split(",")[0].toLowerCase();
         push({
-            pathname: `/${newValue.city_name?.toLowerCase()}`,
-            query: { area: getSubLocation, cityId: newValue.city_id }
+            pathname: "/location",
+            query: { cityName: newValue.city_name?.toLowerCase(), area: getSubLocation, cityId: newValue.city_id }
         });
         // Need to check later
         // push(`/${newValue.city_name?.toLowerCase()}?area=${encodeURIComponent(getSubLocation)}`);

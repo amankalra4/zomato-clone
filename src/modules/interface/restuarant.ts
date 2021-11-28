@@ -174,6 +174,7 @@ export interface Restaurant2 {
     has_table_booking: number;
     events_url: string;
     phone_numbers: string;
+    order_url?: string;
     all_reviews: AllReviews;
     establishment: string[];
     establishment_types: any[];
@@ -181,7 +182,7 @@ export interface Restaurant2 {
     book_url: string;
 }
 
-export interface Restaurant {
+export interface IRestaurant {
     restaurant: Restaurant2;
 }
 
@@ -189,5 +190,5 @@ export interface RestaurantRootInterface {
     results_found: number;
     results_start: number;
     results_shown: number;
-    restaurants: Restaurant[];
+    restaurants: IRestaurant[];
 }

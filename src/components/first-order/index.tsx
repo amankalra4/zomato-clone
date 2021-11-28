@@ -2,7 +2,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FIRST_ORDER_BURGER, FIRST_ORDER_CHICKEN, FIRST_ORDER_PIZZA, FIRST_ORDER_ROLLS } from "@src/constants";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import { IScrollableTabsProps } from "../tabs";
+import classes from "./styles.module.scss";
 
 type firsOrderItems = "Pizza" | "Burger" | "Rolls" | "Chicken";
 
@@ -45,14 +47,18 @@ const FirstOrderSection = ({ location, area, cityId }: IScrollableTabsProps) => 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
             {firstOrderArray.map((el) => (
                 <div key={el.text} style={{ display: "grid", justifyItems: "center", placeContent: "space-evenly" }}>
-                    <img 
+                    <Image 
                         src={el.image} 
-                        alt={el.text} 
-                        style={{maxWidth: "80%", cursor: "pointer", maxHeight: "80%" }} 
+                        alt={el.text}
+                        width={200}
+                        height={200}
                         onClick={() => push({ 
-                                pathname: `/${location}/delivery`, 
-                                query: { cuisineId: el.cuisineId, cityId, area } 
+                                pathname: "first-order", 
+                                query: { cityName: location, cuisineId: el.cuisineId, cityId, area } 
                             })} 
+                        quality={100}
+                        loading="lazy"
+                        className={classes.firstOrderImage}
                     />
                     <p>{el.text}</p>
                 </div>

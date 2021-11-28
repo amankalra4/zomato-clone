@@ -51,7 +51,7 @@ export interface IScrollableTabsProps {
   area: string;
   cityId: string;
   cuisineId?: boolean;
-  data?: RestaurantRootInterface | undefined;
+  data?: RestaurantRootInterface[] | undefined;
 }
 
 const ScrollableTabs = ({ location, area, cityId, cuisineId, data }: IScrollableTabsProps) => {
