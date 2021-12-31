@@ -1,0 +1,12 @@
+@import "../../variables.scss";
+
+.container {
+    display: flex;
+    .personIcon {
+        background-color: white;
+        border-radius: 50%;
+    }
+    .signUp {
+        margin-left: 20px;
+    }
+}

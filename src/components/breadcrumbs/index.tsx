@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Breadcrumbs, Typography } from "@material-ui/core";
-import Link from '@material-ui/core/Link';
+import { Breadcrumbs, ButtonBase, Typography } from "@material-ui/core";
+// import Link from "@material-ui/core/Link";
 import { useRouter } from "next/router";
+import classes from "./style.module.scss";
 
 interface IBreadCrumbProps {
     pathArray: Array<string>
@@ -9,19 +10,18 @@ interface IBreadCrumbProps {
 
 const BreadCrumbs = ({ pathArray }: IBreadCrumbProps) => (
     <Breadcrumbs>
-        {pathArray.map((el, index) => <Item data={el} index={index} length={pathArray.length} key={el} />)}
+        {pathArray.map((el, index) => <Item data={el} index={index} key={el} />)}
     </Breadcrumbs>
 );
 
 interface IItemProps {
     data: string;
     index: number;
-    length: number;
 }
-const Item = ({ data, index, length }: IItemProps) => {
-    if (index !== 0) return <Typography color="textSecondary" style={{ textTransform: "capitalize" }}>{data}</Typography>;
+const Item = ({ data, index }: IItemProps) => {
+    if (index !== 0) return <Typography color="textSecondary" className={classes.breadCrumbText}>{data}</Typography>;
     const { push } = useRouter();
-    return <Link color="textPrimary" onClick={() => push("/")}>{data}</Link>;
+    return <ButtonBase className={classes.breadCrumbLink} onClick={() => push("/")}>{data}</ButtonBase>;
 };
 
 export default BreadCrumbs;

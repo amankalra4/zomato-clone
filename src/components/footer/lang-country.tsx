@@ -10,7 +10,7 @@ interface ICommonDropDown {
 }
 
 const CommonDropDown = ({ title, value, icon, marginLeft }: ICommonDropDown) => (
-    <FormControl className={classes.formClass} xyz-abc={marginLeft ? "margin" : ""}>
+    <FormControl className={classes.formClass} data-src={marginLeft ? "margin" : ""}>
          <Select value={title}>
             <MenuItem value={title}>
                 <span>{title}</span>

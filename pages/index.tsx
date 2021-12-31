@@ -1,14 +1,19 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import type { NextPage } from 'next';
-import React from 'react';
-import App from '@src/components/app';
-import OgMetaCombo from '@src/components/og-meta-combo';
+import type { NextPage } from "next";
+import React from "react";
+import OgMetaData from "@src/components/og-meta-combo";
+import Footer from "@src/components/footer";
+import HomePageData from "@src/components/home-page";
 
 const Home: NextPage = () => {
   return (
-    <App>
-      <OgMetaCombo title="Zomato" description="Zomato" />
-    </App>
+    <>
+      <OgMetaData
+          title="Zomato"
+          description="A one go place to order food online"
+      />
+      <HomePageData />
+      <Footer />
+    </>
   );
 };
 

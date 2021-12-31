@@ -1,7 +1,7 @@
 import React from "react";
-import Image from 'next/image';
-import { Language, Flag } from '@material-ui/icons';
-import { countries, language, webAssets } from "../../constants";
+import Image from "next/image";
+import { Language, Flag } from "@material-ui/icons";
+import { countries, language, footerImage } from "../../constants";
 import CommonDropDown from "./lang-country";
 import classses from "./style.module.scss";
 
@@ -15,13 +15,11 @@ const Footer = () => (
 );
 
 const Logo = () => {
-    const image = `${webAssets}/b40b97e677bc7b2ca77c58c61db266fe1603954218.png?fit=around|198:42&crop=198:42;*,*`;
     return (
     <div className={classses.logoContainer}>
         <div className={classses.image}>
-            <Image src={image} alt="zomato" layout="responsive" width={100} height={25} />
+            <Image src={footerImage} alt="Zomato Footer" loading="lazy" width={100} height={25} />
         </div>
-        {/* <img src={image} alt="zomato" /> */}
         <div className={classses.countryInfo}>
             <CommonDropDown title="India" value={countries} icon={<Flag />} />
             <CommonDropDown title="English" value={language} icon={<Language />} marginLeft />
@@ -47,10 +45,6 @@ const Info = () => (
         <div>
             <h2>For You</h2>
             <SubHeading data={["Privacy", "Terms", "Security", "Sitemap"]} />
-        </div>
-        <div className={classses.socialLinks}>
-            <h2>Social Links</h2>
-            <SubHeading data={["Facebook", "Twitter", "Insta"]} />
         </div>
     </div>
 );

@@ -1,8 +1,12 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import { FIRST_ORDER_BURGER, FIRST_ORDER_CHICKEN, FIRST_ORDER_PIZZA, FIRST_ORDER_ROLLS } from "@src/constants";
+import {
+    FIRST_ORDER_BURGER,
+    FIRST_ORDER_CHICKEN,
+    FIRST_ORDER_PIZZA,
+    FIRST_ORDER_ROLLS
+} from "@src/constants";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { ButtonBase } from "@material-ui/core";
 import { IScrollableTabsProps } from "../tabs";
 import classes from "./styles.module.scss";
 
@@ -12,7 +16,7 @@ type orderObject = {
     image: string;
     text: firsOrderItems;
     cuisineId: string;
-}
+};
 
 const firstOrderArray: Array<orderObject> = [
     {
@@ -37,32 +41,44 @@ const firstOrderArray: Array<orderObject> = [
     }
 ];
 
-const FirstOrderSection = ({ location, area, cityId }: IScrollableTabsProps) => {
+const FirstOrderSection = ({
+    location,
+    area,
+    cityId
+}: IScrollableTabsProps) => {
     const { push } = useRouter();
     return (
-        <div style={{ padding: "4rem 0px", background: "rgb(248, 248, 248)" }}>
-            <h3 style={{ color: "rgb(28, 28, 28)", fontSize: "2rem", margin: "0px 0px 3.2rem" }}>
-                Inspiration for your first order
-            </h3>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr" }}>
-            {firstOrderArray.map((el) => (
-                <div key={el.text} style={{ display: "grid", justifyItems: "center", placeContent: "space-evenly" }}>
-                    <Image 
-                        src={el.image} 
-                        alt={el.text}
-                        width={200}
-                        height={200}
-                        onClick={() => push({ 
-                                pathname: "first-order", 
-                                query: { cityName: location, cuisineId: el.cuisineId, cityId, area } 
-                            })} 
-                        quality={100}
-                        loading="lazy"
-                        className={classes.firstOrderImage}
-                    />
-                    <p>{el.text}</p>
-                </div>
-            ))}
+        <div className={classes.container}>
+            <h1 className={classes.heading}>Inspiration for your first order</h1>
+            <div className={classes.imagesContainer}>
+                {firstOrderArray.map((el) => (
+                    <div key={el.text} className={classes.firstOrderImages}>
+                        <ButtonBase
+                            onClick={() =>
+                                push({
+                                    pathname: "first-order",
+                                    query: {
+                                        cityName: location,
+                                        cuisineId: el.cuisineId,
+                                        cityId,
+                                        area
+                                    }
+                                })
+                            }
+                        >
+                            <Image
+                                src={el.image}
+                                alt={el.text}
+                                width={200}
+                                height={200}
+                                quality={100}
+                                priority
+                                className={classes.firstOrderImage}
+                            />
+                        </ButtonBase>
+                        <p>{el.text}</p>
+                    </div>
+                ))}
             </div>
         </div>
     );

@@ -1,8 +1,8 @@
 import React from "react";
 import { Modal } from "react-bootstrap";
-import Link from "next/link";
 import LoginModal from "@src/modules/login-modal";
 import SignUpModal from "@src/modules/signup-modal";
+import { ButtonBase } from "@material-ui/core";
 import classes from "./style.module.scss";
 
 interface ICenteredModal {
@@ -16,7 +16,7 @@ function CenteredModal({ onHide, show, heading, toggleModal }: ICenteredModal) {
     <Modal
         onHide={onHide}
         show={show}
-        size="md"
+        size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
         style={{ padding: "0 20px" }}
@@ -52,7 +52,7 @@ const LoginFooter = ({ text, link, toggleModal, heading }: IFooterProps) => {
   return (
     <div style={{ display: "flex" }}>
       <p>{text}</p>
-      <span className={classes.link} onClick={() => toggleModal(heading)}>{link}</span>
+      <ButtonBase className={classes.footerButton} onClick={() => toggleModal(heading)}>{link}</ButtonBase>
     </div>
   );
 };

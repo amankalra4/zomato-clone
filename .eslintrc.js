@@ -16,18 +16,15 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module"
   },
-  plugins: [
-    "react",
-    "@typescript-eslint"
-  ],
+  plugins: ["react", "@typescript-eslint"],
   rules: {
     indent: "off",
-    quotes: 0,
+    quotes: ["warn", "double"],
     "import/extensions": 0,
     "comma-dangle": ["warn", "never"],
     "no-underscore-dangle": 0,
     "no-restricted-syntax": 0,
-    "max-len": ["error", 130],
+    "max-len": ["error", { code: 130, tabWidth: 4 }],
     camelcase: 0,
     "import/prefer-default-export": 0,
     "prefer-promise-reject-errors": 0,
@@ -55,27 +52,38 @@ module.exports = {
     "no-tabs": "off",
     radix: "warn",
     "linebreak-style": 0,
-    "react/jsx-first-prop-new-line": "off",
-    "react/jsx-closing-bracket-location": "off",
     "object-curly-spacing": "off",
     "no-unused-vars": ["error", { args: "none" }],
     "no-mixed-spaces-and-tabs": "off",
     "react/jsx-closing-tag-location": "off",
     "jsx-a11y/mouse-events-have-key-events": "off",
-    "jsx-a11y/label-has-associated-control": ["error", {
-      required: {
-        some: ["nesting", "id"]
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        required: {
+          some: ["nesting", "id"]
+        }
       }
-    }],
-    "jsx-a11y/label-has-for": ["error", {
-      required: {
-        some: ["nesting", "id"]
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        required: {
+          some: ["nesting", "id"]
+        }
       }
-    }],
-    "react/function-component-definition": [0, {
-      namedComponents: ["function-declaration", "function-expression", "arrow-function"],
-      unnamedComponents: ["function-expression", "arrow-function"]
-    }]
+    ],
+    "react/function-component-definition": [
+      0,
+      {
+        namedComponents: [
+          "function-declaration",
+          "function-expression",
+          "arrow-function"
+        ],
+        unnamedComponents: ["function-expression", "arrow-function"]
+      }
+    ]
   },
   settings: {
     "import/resolver": {

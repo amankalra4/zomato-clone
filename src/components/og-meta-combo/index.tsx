@@ -1,12 +1,12 @@
 import Head from "next/head";
 
-interface IOgMetaCombo {
+interface IOgMetaData {
     title?: string;
     description?: string;
     image?: string;
 }
 
-export default function OgMetaCombo(props: IOgMetaCombo) {
+export default function OgMetaData(props: IOgMetaData) {
     const { title, description, image = "/zomato.png" } = props;
     return (
         <Head>

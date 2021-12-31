@@ -4,5 +4,6 @@
     },
     "eslint.validate": ["javascript"],
     "typescript.suggestionActions.enabled": false,
-    "javascript.suggestionActions.enabled": false
+    "javascript.suggestionActions.enabled": false,
+    "editor.formatOnSave": true
 }

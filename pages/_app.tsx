@@ -1,14 +1,15 @@
 import App from "next/app";
-import type { AppProps, AppContext } from 'next/app';
-import "../styles/globals.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { SnackbarProvider } from 'notistack';
+import type { AppProps, AppContext } from "next/app";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { SnackbarProvider } from "notistack";
 import { ThemeProvider } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
 import theme from "@src/modules/theme";
 import Router from "next/router";
 import LinearDeterminate from "@src/components/progress-bar";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import classes from "../styles/globals.module.scss";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,11 +26,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     Router.events.on("routeChangeComplete", () => setLoading(false));
     Router.events.on("routeChangeError", () => setLoading(false));
     return () => {
-      Router.events.off('routeChangeError', () => setLoading(false));
+      Router.events.off("routeChangeError", () => setLoading(false));
     };
   }, []);
   return (
-    <ThemeProvider theme={theme}>
+    <div className={classes.globalStyle}>
+      <ThemeProvider theme={theme}>
       {loading && <LinearDeterminate />}
       <SnackbarProvider
           anchorOrigin={{
@@ -38,10 +40,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <Component {...pageProps} />
         </QueryClientProvider>
       </SnackbarProvider>
     </ThemeProvider>
+    </div>
   );
 }
 

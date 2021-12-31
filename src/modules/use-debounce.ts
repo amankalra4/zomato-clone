@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import _ from 'lodash';
+import _ from "lodash";
 
 interface IDebounceProps {
     handleChange: (input: string) => void;
@@ -7,13 +7,13 @@ interface IDebounceProps {
 }
 
 const useDebounce = ({ handleChange, time }: IDebounceProps) => {
-    const inputRef = useRef<any>(null)
+    const inputRef = useRef<any>(null);
     useEffect(() => {
         inputRef.current = _.debounce(handleChange, time);
     }, []);
     return {
         inputRef
-    }
-}
+    };
+};
 
 export default useDebounce;

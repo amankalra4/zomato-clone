@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import {
+  Tabs,
+  Tab,
+  Typography,
+  Box,
+  TabScrollButton,
+  withStyles
+} from "@material-ui/core";
 import Image from "next/image";
 import {
   DELIVERY_ICON_DISABLED,
@@ -13,9 +17,12 @@ import {
   NIGHTLIFE_ICON_ENABLED
 } from "@src/constants";
 import MediaCard from "@src/modules/restaurant-cards";
+import { changeToCamelCase } from "@src/modules/camel-case";
+import useDevice from "@src/custom-hooks/use-is-Phone";
 import classes from "./style.module.scss";
 import FirstOrderSection from "../first-order";
 import { RestaurantRootInterface } from "../../modules/interface/restuarant";
+import CustomFilters from "../filters";
 
 interface TabPanelProps {
   text?: string;
@@ -24,9 +31,7 @@ interface TabPanelProps {
   children?: React.ReactNode;
 }
 const TabPanel = (props: TabPanelProps) => {
-  const {
-    value, index, children, text
-  } = props;
+  const { value, index, children, text } = props;
   return (
     <div>
       {value === index && (
@@ -38,11 +43,22 @@ const TabPanel = (props: TabPanelProps) => {
   );
 };
 
+const MyTabScrollButton = withStyles((theme: any) => ({
+  root: {
+    width: 28,
+    overflow: "hidden",
+    transition: "width 0.5s",
+    "&.Mui-disabled": {
+      width: 0
+    }
+  }
+}))(TabScrollButton);
+
 type Disabled = {
   delivery: boolean;
   dine: boolean;
   nightLife: boolean;
-}
+};
 
 type Label_types = "Delivery" | "Dining Out" | "Night Life";
 
@@ -54,9 +70,19 @@ export interface IScrollableTabsProps {
   data?: RestaurantRootInterface[] | undefined;
 }
 
-const ScrollableTabs = ({ location, area, cityId, cuisineId, data }: IScrollableTabsProps) => {
+const ScrollableTabs = ({
+  location,
+  area,
+  cityId,
+  cuisineId,
+  data
+}: IScrollableTabsProps) => {
   const [value, setValue] = useState<number>(0);
-  const [disabled, setDisabled] = useState<Disabled>({ delivery: false, dine: true, nightLife: true });
+  const [disabled, setDisabled] = useState<Disabled>({
+    delivery: false,
+    dine: true,
+    nightLife: true
+  });
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     // eslint-disable-next-line default-case
     switch (newValue) {
@@ -83,47 +109,65 @@ const ScrollableTabs = ({ location, area, cityId, cuisineId, data }: IScrollable
           indicatorColor="primary"
           textColor="primary"
           aria-label="scrollable force tabs example"
+          ScrollButtonComponent={MyTabScrollButton}
+          style={{ margin: "20px 0" }}
       >
         {/* alternate way */}
         {/* eslint-disable-next-line max-len */}
         {/* {customTabArray.map((el, index) => <CustomTab key={el.label} nonTabValue={value} index={index} text={el.text!} label={el.label} />)} */}
         <Tab
             label="Delivery"
-            icon={(
+            icon={
             <TabImage
-                path={!disabled.delivery ? DELIVERY_ICON_ENABLED : DELIVERY_ICON_DISABLED}
+                path={
+                !disabled.delivery
+                  ? DELIVERY_ICON_ENABLED
+                  : DELIVERY_ICON_DISABLED
+              }
                 width="75"
                 height="55"
                 altText="Delivery"
             />
-          )}
+          }
             className={classes.one}
         />
         <Tab
             label="Dining Out"
-            icon={(
+            icon={
             <TabImage
-                path={!disabled.dine ? DINEOUT_ICON_ENABLED : DINEOUT_ICON_DISABLED}
+                path={
+                !disabled.dine ? DINEOUT_ICON_ENABLED : DINEOUT_ICON_DISABLED
+              }
                 width="65"
                 height="60"
                 altText="Dining Out"
             />
-          )}
+          }
             className={classes.one}
         />
         <Tab
             label="Night Life"
-            icon={(
+            icon={
             <TabImage
-                path={!disabled.nightLife ? NIGHTLIFE_ICON_ENABLED : NIGHTLIFE_ICON_DISABLED}
+                path={
+                !disabled.nightLife
+                  ? NIGHTLIFE_ICON_ENABLED
+                  : NIGHTLIFE_ICON_DISABLED
+              }
                 altText="Night Life"
             />
-          )}
+          }
             className={classes.one}
         />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <DeliveryInfo location={location} area={area} cityId={cityId} cuisineId={cuisineId} data={data} />
+        <DeliveryInfo
+            location={location}
+            area={area}
+            cityId={cityId}
+            cuisineId={cuisineId}
+            data={data}
+        />
       </TabPanel>
       <TabPanel value={value} index={1} text="Welcome to Dineout" />
       <TabPanel value={value} index={2} text="Welcome to Night Life" />
@@ -138,8 +182,21 @@ interface ITabImageProps {
   altText: Label_types;
 }
 
-const TabImage = ({ path, width = "75", height = "55", altText }: ITabImageProps) => {
-  return <Image src={path} width={width} height={height} alt={altText} />;
+const TabImage = ({
+  path,
+  width = "75",
+  height = "55",
+  altText
+}: ITabImageProps) => {
+  const isPhone = useDevice("575");
+  return (
+    <Image
+        src={path}
+        width={isPhone ? 55 : width}
+        height={isPhone ? 40 : height}
+        alt={altText}
+    />
+  );
 };
 
 export default ScrollableTabs;
@@ -220,14 +277,38 @@ export default ScrollableTabs;
 //         {...other} />;
 // };
 
-const DeliveryInfo = ({ location, area, cityId, cuisineId, data }: IScrollableTabsProps) => (
+const DeliveryInfo = ({
+  location,
+  area,
+  cityId,
+  cuisineId,
+  data
+}: IScrollableTabsProps) => (
   <>
     <Filters />
-    {cuisineId ? <MediaCard cardData={data} /> : <FirstOrderSection location={location} area={area} cityId={cityId} />}
-    <RestaurantList />
+    {cuisineId ? (
+      <>
+        <h1>Food for your first order</h1>
+        <MediaCard cardData={data} />
+      </>
+    ) : (
+      <>
+        <FirstOrderSection location={location} area={area} cityId={cityId} />
+        <h1
+            style={{
+            color: "rgb(28, 28, 28)",
+            fontSize: "2rem",
+            margin: "2.2rem 0px"
+          }}
+        >
+          Best food near 
+{" "}
+{changeToCamelCase(area)}
+        </h1>
+        <MediaCard cardData={data} />
+      </>
+    )}
   </>
 );
 
-const Filters = () => <p>Filters</p>;
-
-const RestaurantList = () => <p>Restaurants</p>;
+const Filters = () => <CustomFilters />;
