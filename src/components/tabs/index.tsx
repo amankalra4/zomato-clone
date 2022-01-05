@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import {
   Tabs,
   Tab,
-  Typography,
+  // Typography,
   Box,
   TabScrollButton,
-  withStyles
+  withStyles,
+  CircularProgress
 } from "@material-ui/core";
-import Image from "next/image";
 import {
   DELIVERY_ICON_DISABLED,
   DELIVERY_ICON_ENABLED,
@@ -19,10 +19,15 @@ import {
 import MediaCard from "@src/modules/restaurant-cards";
 import { changeToCamelCase } from "@src/modules/camel-case";
 import useDevice from "@src/custom-hooks/use-is-Phone";
-import classes from "./style.module.scss";
+import dynamic from "next/dynamic";
+import useInfiniteScroll from "@src/custom-hooks/use-infinite-scroll";
 import FirstOrderSection from "../first-order";
-import { RestaurantRootInterface } from "../../modules/interface/restuarant";
 import CustomFilters from "../filters";
+import CardSkeleton from "../card-skeletons";
+import EndOfSearchResults from "../end-of-search";
+
+const NightLife = dynamic(() => import("../night-life"), { loading: () => <CardSkeleton arrayLength={4} /> });
+const DiningOut = dynamic(() => import("../dining-out"), { loading: () => <CardSkeleton arrayLength={4} /> });
 
 interface TabPanelProps {
   text?: string;
@@ -36,7 +41,7 @@ const TabPanel = (props: TabPanelProps) => {
     <div>
       {value === index && (
         <Box>
-          <Typography>{typeof text === "string" ? text : children}</Typography>
+          {typeof text === "string" ? text : children}
         </Box>
       )}
     </div>
@@ -66,8 +71,8 @@ export interface IScrollableTabsProps {
   location: string;
   area: string;
   cityId: string;
-  cuisineId?: boolean;
-  data?: RestaurantRootInterface[] | undefined;
+  cuisineId?: string;
+  showByCuisine?:boolean
 }
 
 const ScrollableTabs = ({
@@ -75,7 +80,7 @@ const ScrollableTabs = ({
   area,
   cityId,
   cuisineId,
-  data
+  showByCuisine = false
 }: IScrollableTabsProps) => {
   const [value, setValue] = useState<number>(0);
   const [disabled, setDisabled] = useState<Disabled>({
@@ -101,6 +106,9 @@ const ScrollableTabs = ({
 
   return (
     <div>
+      <link rel="preload" href={DELIVERY_ICON_ENABLED} as="image" />
+      <link rel="preload" href={DINEOUT_ICON_DISABLED} as="image" />
+      <link rel="preload" href={NIGHTLIFE_ICON_DISABLED} as="image" />
       <Tabs
           value={value}
           onChange={handleChange}
@@ -129,7 +137,6 @@ const ScrollableTabs = ({
                 altText="Delivery"
             />
           }
-            className={classes.one}
         />
         <Tab
             label="Dining Out"
@@ -143,7 +150,6 @@ const ScrollableTabs = ({
                 altText="Dining Out"
             />
           }
-            className={classes.one}
         />
         <Tab
             label="Night Life"
@@ -157,7 +163,6 @@ const ScrollableTabs = ({
                 altText="Night Life"
             />
           }
-            className={classes.one}
         />
       </Tabs>
       <TabPanel value={value} index={0}>
@@ -166,11 +171,15 @@ const ScrollableTabs = ({
             area={area}
             cityId={cityId}
             cuisineId={cuisineId}
-            data={data}
+            showByCuisine={showByCuisine}
         />
       </TabPanel>
-      <TabPanel value={value} index={1} text="Welcome to Dineout" />
-      <TabPanel value={value} index={2} text="Welcome to Night Life" />
+      <TabPanel value={value} index={1}>
+        <DiningOut />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <NightLife location={location} />
+      </TabPanel>
     </div>
   );
 };
@@ -190,8 +199,9 @@ const TabImage = ({
 }: ITabImageProps) => {
   const isPhone = useDevice("575");
   return (
-    <Image
+    <img
         src={path}
+        dat-src={path}
         width={isPhone ? 55 : width}
         height={isPhone ? 40 : height}
         alt={altText}
@@ -282,14 +292,29 @@ const DeliveryInfo = ({
   area,
   cityId,
   cuisineId,
-  data
-}: IScrollableTabsProps) => (
+  showByCuisine
+}: IScrollableTabsProps) => {
+  const { data, isFetchingNextPage, hasNextPage, isLoading } =
+    useInfiniteScroll({
+      cityId,
+      secondParam: showByCuisine ? cuisineId! : location,
+      queryKey: "location-specific-restaurants"
+    });
+    // if (status === "error") {
+    //   return (
+    //     <p>
+    //       Error:
+    //       {error}
+    //     </p>
+    //   );
+    // }
+  return (
   <>
     <Filters />
     {cuisineId ? (
       <>
         <h1>Food for your first order</h1>
-        <MediaCard cardData={data} />
+        <MediaCard cardData={data?.pages.map((el) => el)} />
       </>
     ) : (
       <>
@@ -305,10 +330,19 @@ const DeliveryInfo = ({
 {" "}
 {changeToCamelCase(area)}
         </h1>
-        <MediaCard cardData={data} />
+        <MediaCard cardData={data?.pages.map((el) => el)} />
       </>
     )}
+    {isFetchingNextPage ? (
+            <CircularProgress
+                style={{ display: "flex", margin: "20px auto" }}
+            />
+          ) : (
+            !hasNextPage && !isLoading && <EndOfSearchResults />
+          )}
+          {isLoading && <CardSkeleton arrayLength={12} />}
   </>
-);
+); 
+};
 
 const Filters = () => <CustomFilters />;

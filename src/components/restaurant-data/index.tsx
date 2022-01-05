@@ -24,7 +24,17 @@ import {
     UserRating
 } from "@src/modules/interface/restuarant";
 import React, { useEffect, useState } from "react";
-import classes from "./style.module.scss";
+import {
+    container,
+    chipContainer,
+    phoneNumberContainer,
+    collapse,
+    cuisines,
+    location,
+    heading,
+    moreInfoContainer,
+    openClosed
+} from "./styles";
 
 interface IRestaurantData {
     restaurantInfo: Restaurant2;
@@ -47,11 +57,11 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
 
     return (
         <div
-            className={classes.container}
+            className={container}
             style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
         >
             {showAlert && (
-                <Collapse in={showAlert} timeout="auto" className={classes.collapse}>
+                <Collapse in={showAlert} timeout="auto" className={collapse}>
                     <Alert
                         action={
                             <IconButton
@@ -71,21 +81,16 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
                 </Collapse>
             )}
             <div>
-                <h1 className={classes.heading}>{restaurantInfo.name}</h1>
+                <h1 className={heading}>{restaurantInfo.name}</h1>
                 <section>
-                    <p className={classes.cuisines}>{restaurantInfo.cuisines}</p>
-                    <p className={classes.location}>
-                        {restaurantInfo.location.locality_verbose}
-                    </p>
+                    <p className={cuisines}>{restaurantInfo.cuisines}</p>
+                    <p className={location}>{restaurantInfo.location.locality_verbose}</p>
                 </section>
-                <p
-                    className={classes.openClosed}
-                    data-src={restaurantInfo.is_delivering_now}
-                >
+                <p className={openClosed} data-src={restaurantInfo.is_delivering_now}>
                     {restaurantInfo.is_delivering_now ? "Open Now" : "Currently Closed"}
                 </p>
             </div>
-            <div className={classes.chipContainer}>
+            <div className={chipContainer}>
                 <ButtonBase
                     href={`${mapsURL}?q=${restaurantInfo.location.latitude},${restaurantInfo.location.longitude}`}
                     target="_blank"
@@ -104,10 +109,10 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
                     <Chip icon={<MenuBook />} label="Check Menu" color="primary" />
                 </ButtonBase>
                 {restaurantInfo.is_delivering_now ? (
-                <ButtonBase href={restaurantInfo.order_url!} target="_blank">
-                    <Chip icon={<Kitchen />} label="Order Now" color="primary" />
-                </ButtonBase>
-            ) : null}
+                    <ButtonBase href={restaurantInfo.order_url!} target="_blank">
+                        <Chip icon={<Kitchen />} label="Order Now" color="primary" />
+                    </ButtonBase>
+                ) : null}
             </div>
             <MoreInfo highlights={restaurantInfo.highlights} />
             <PhoneNumbers phoneNumbers={restaurantInfo.phone_numbers} />
@@ -139,7 +144,7 @@ interface IMoreInfoProps {
     highlights: string[];
 }
 const MoreInfo = ({ highlights }: IMoreInfoProps) => (
-    <div className={classes.moreInfoContainer}>
+    <div className={moreInfoContainer}>
         <h3>More Information for you</h3>
         <div>
             {highlights.map((el) => (
@@ -153,7 +158,7 @@ interface IPhoneNumbersProps {
     phoneNumbers: string;
 }
 const PhoneNumbers = ({ phoneNumbers }: IPhoneNumbersProps) => (
-    <div className={classes.phoneNumberContainer}>
+    <div className={phoneNumberContainer}>
         <Chip icon={<Call />} label="Phone Number(s)" color="primary" />
         <p>{phoneNumbers}</p>
     </div>

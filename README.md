@@ -1,34 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a project built on NextJS.
 
-## Getting Started
+## AIM
 
-First, run the development server:
+The aim of this project is to search restaurants and check restaurant details near you or in any city or across countries where Zomato provides their services.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+All APIs used here were provided by Zomato.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack Used
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. NextJS
+2. TypeScript
+3. React Query
+3. SCSS Modules
+4. Material UI
+5. React Glider
+6. Emotion CSS
+7. Axios
+8. Bootstrap
+9. React Error Boundary
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Dev Related Details
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Used NextJS built in features:
+- Server Side Rendering and Client Side Rendering
+- Dynamic Imports
+- Image component
 
-## Learn More
+2. Infinite Scrolling
+- Implemented with the help of react-query to load more data based on user requirement.
+- This helped us to limit the unnecessary API calls if user find the restaurant earlier while searching.
+- It also helped to have good UI experience by not having pagination but having infinite scroll.
 
-To learn more about Next.js, take a look at the following resources:
+3. Debouncing
+- Used debouncing with the help of lodash.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. SEO
+- Have used og meta tags to have a good SEO performance.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. Web Vitals
+- Since web vitals is one of the core performance metric of a website, we have used all the required techniques to have good LCP, CLS, TBT score so as to have good performance.
+- Pre loaded images wherever required to have less LCP.
+- Used Emotion CSS, Skeletons to avoid layout shift.
+- Used light weight packages like - react glider to have less TBT.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+6. Created custom hooks
+- Created custom hooks whereever required so as to have easy development.

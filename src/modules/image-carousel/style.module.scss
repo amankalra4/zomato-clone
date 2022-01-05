@@ -1,4 +1,5 @@
 @import "../../variables.scss";
+@import "../../../styles/glider.module.scss";
 
 .noHover {
   &:hover,
@@ -7,43 +8,15 @@
   }
 }
 .container {
+    @extend .root;
     :global(.glider-contain) {
-      width: 50%;
-      :global(.glider-dots) {
-        margin: 0 0 20px;
-        :global(.glider-dot.active) {
-          background-color: #ef4f5f;
-        }
-      }
-      :global(.glider-next) {
-        right: -30px;
-        @extend .noHover;
-      }
-      :global(.glider-prev) {
-        left: -30px;
-        @extend .noHover;
-      }
+        width: 50% !important;
     }
-    :global(.glider-track) {
-      margin: 2rem 0;
-      span {
-        width: 12% !important;
-        margin: 0 auto !important;
-        max-height: 12rem;
-      }
-      img {
-        border-radius: 16px;
-      }
-    }
-    @include width-lesser-than(sm){
-      :global(.glider-contain) {
-        width: 100%;
-        :global(.glider-next) {
-          right: -23px;
+    .sliderRoot {
+        img {
+            border-radius: 16px;
+            width: 10% !important;
+            margin: 0 auto;
         }
-        :global(.glider-prev) {
-          left: -23px;
-        }
-      }
     }
 }

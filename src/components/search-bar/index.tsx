@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import axios from "axios";
 import { Autocomplete } from "@material-ui/lab";
 import { GET_LOCATIONS } from "@src/constants";
 import { useSnackbar } from "notistack";
@@ -9,8 +8,8 @@ import { useRouter } from "next/router";
 import { Search } from "@material-ui/icons";
 import { InputAdornment } from "@material-ui/core";
 import useDevice from "@src/custom-hooks/use-is-Phone";
+import { commonHeader } from "@src/constants/api-call";
 import { LocationSuggestion } from "./location";
-import config from "../../../next.config";
 import classes from "./style.module.scss";
 
 interface ISearchBarProps {
@@ -25,12 +24,8 @@ const Searchbar = ({ searchBarBackground = "none" }: ISearchBarProps) => {
   // console.log("env check", process.env.NODE_ENV) -- to check ENV
 
   function handleChange(inputValue: string) {
-    axios
-      .get(GET_LOCATIONS.replace("%s", inputValue), {
-        headers: {
-          "user-key": config.config.zomatoAPI
-        }
-      })
+    const inputURL = GET_LOCATIONS.replace("%s", inputValue);
+    commonHeader(inputURL)
       .then((result) => {
         if (result.data.location_suggestions.length) {
           setOutput(result.data.location_suggestions);

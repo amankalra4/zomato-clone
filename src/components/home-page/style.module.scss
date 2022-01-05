@@ -1,10 +1,6 @@
 @import "../../variables.scss";
 
 .container {
-  background-image: url("https://b.zmtcdn.com/web_assets/81f3ff974d82520780078ba1cfbd453a1583259680.png");
-  min-height: 25rem;
-  max-height: 50rem;
-  background-repeat: no-repeat, no-repeat;
   .logoContainer {
     margin: 0 auto;
     display: flex;
@@ -14,18 +10,12 @@
     color: white;
     flex-direction: column;
     align-items: center;
-    .homePageLogo {
-      width: 20%;
-    }
     .bannerHeading {
       margin: 1rem 0;
     }
   }
   @include width-lesser-than(md) {
     .logoContainer {
-      .homePageLogo {
-        width: 50%;
-      }
       .bannerHeading {
         text-align: center;
         margin: 2rem 0;
@@ -41,19 +31,13 @@
   max-width: 80rem;
   margin: 1.5rem auto;
   .cardRoot {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     transition: all 0.4s ease;
-    margin: 2rem 0;
     cursor: pointer;
-    width: 70%;
     box-shadow: 0 0 0.2em rgb(0 0 0 / 30%);
     border-radius: 16px;
     background-color: white;
     .imageTitles {
       margin-top: 1rem;
-      font-weight: 600;
     }
   }
   .cardRoot:hover {

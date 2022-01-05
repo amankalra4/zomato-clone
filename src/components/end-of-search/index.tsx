@@ -7,7 +7,7 @@ const EndOfSearchResults = () => (
         <h3>End of search results</h3>
         <Image 
             src={END_OF_SEARCH_RESULTS} 
-            alt="abc" 
+            alt="end-of-search" 
             width={180} 
             height={150}
             loading="lazy" 

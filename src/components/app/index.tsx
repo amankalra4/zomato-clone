@@ -1,8 +1,8 @@
-import useDevice from "@src/custom-hooks/use-is-Phone";
 import dynamic from "next/dynamic";
 import React from "react";
 import Header from "../header";
 import Searchbar from "../search-bar";
+import { searchBar, belowHeader } from "./styles";
 
 const Footer = dynamic(() => import("../footer"));
 
@@ -17,12 +17,11 @@ export interface IHeaderProps {
 }
 
 const App = ({ showHeader = true, children, color = "black", showLogo = true }: IAppProps) => {
-    const isPhone: boolean = useDevice("767");
     return (
         <div>
             {showHeader && <Header color={color} showLogo={showLogo} />}
-            {isPhone && <div style={{ padding: "6rem 0 0", margin: "0 auto" }}><Searchbar /></div>}
-            <div style={{ padding: showHeader && !isPhone ? "7rem 0 2rem" : "0" }}>
+            <div className={searchBar}><Searchbar /></div>
+            <div data-src={showHeader} className={belowHeader}>
                 {children}
             </div>
             <Footer />

@@ -1,22 +1,29 @@
 /* eslint-disable max-len */
-import axios from "axios";
-import config from "../../next.config";
+import { commonHeader } from "./api-call";
 
 const endPoint = "https://b.zmtcdn.com";
 
-const assetsEndPoint = `${endPoint}/data/o2_assets`;
+export const INIDAN_THUMBNAIL = `${endPoint}/images/countries/flags/country_1.png`;
 
-const dishEndPoint = `${endPoint}/data/dish_images`;
+export const END_OF_SEARCH_RESULTS = `${endPoint}/web/assets/search/6d548ba48f0e4e4b46c19ad4b15a3f011615379209.jpeg`;
 
-export const webFrontend = `${endPoint}/webFrontend`;
+export const HOME_PAGE_FOOD_ICON = `${endPoint}/images/online_ordering/delivery.svg`;
+
+export const HOME_PAGE_MENU_ICON = `${endPoint}/images/online_ordering/menu.svg`;
+
+/* ******************************************************************************************* */
 
 export const webAssets = `${endPoint}/web_assets`;
 
 export const footerImage = `${webAssets}/b40b97e677bc7b2ca77c58c61db266fe1603954218.png`;
 
-export const INIDAN_THUMBNAIL = `${endPoint}/images/countries/flags/country_1.png`;
+export const HOME_PAGE_LOGO = `${webAssets}/8313a97515fcb0447d2d77c276532a511583262271.png`;
 
-export const END_OF_SEARCH_RESULTS = `${endPoint}/web/assets/search/6d548ba48f0e4e4b46c19ad4b15a3f011615379209.jpeg`;
+export const HOME_PAGE_TOP_BANNER = `${webAssets}/81f3ff974d82520780078ba1cfbd453a1583259680.png`;
+
+/* ******************************************************************************************* */
+
+const assetsEndPoint = `${endPoint}/data/o2_assets`;
 
 export const DELIVERY_ICON_ENABLED = `${assetsEndPoint}/c0bb85d3a6347b2ec070a8db694588261616149578.png?output-format=webp`;
 
@@ -32,11 +39,19 @@ export const NIGHTLIFE_ICON_DISABLED = `${assetsEndPoint}/01040767e4943c398e38e3
 
 export const FIRST_ORDER_PIZZA = `${assetsEndPoint}/d0bd7c9405ac87f6aa65e31fe55800941632716575.png`;
 
+/* ******************************************************************************************* */
+
+const dishEndPoint = `${endPoint}/data/dish_images`;
+
 export const FIRST_ORDER_ROLLS = `${dishEndPoint}/c2f22c42f7ba90d81440a88449f4e5891634806087.png`;
 
 export const FIRST_ORDER_CHICKEN = `${dishEndPoint}/197987b7ebcd1ee08f8c25ea4e77e20f1634731334.png`;
 
 export const FIRST_ORDER_BURGER = `${dishEndPoint}/ccb7dc2ba2b054419f805da7f05704471634886169.png`;
+
+/* ******************************************************************************************* */
+
+export const webFrontend = `${endPoint}/webFrontend`;
 
 export const HOME_PAGE_ORDER_FOOD_ONLINE = `${webFrontend}/64dffaa58ffa55a377cdf42b6a690e721585809275.png`;
 
@@ -46,11 +61,19 @@ export const HOME_PAGE_ZOMATO_PRO = `${webFrontend}/b256d0dd8a29f9e0623ecaaea910
 
 export const HOME_PAGE_NIGHT_LIFE = `${webFrontend}/8ff4212b71b948ed5b6d2ce0d2bc99981594031410.png`;
 
-export const HOME_PAGE_LOGO = `${webAssets}/8313a97515fcb0447d2d77c276532a511583262271.png`;
+/* ******************************************************************************************* */
 
-export const HOME_PAGE_FOOD_ICON = `${endPoint}/images/online_ordering/delivery.svg`;
+const collectionEndPoint = `${endPoint}/data/collections`;
 
-export const HOME_PAGE_MENU_ICON = `${endPoint}/images/online_ordering/menu.svg`;
+export const NIGHTLIFE_IMAGE_1 = `${collectionEndPoint}/420f473015c7d64962b60bb355828192_1613380120.jpg?output-format=webp`;
+
+export const NIGHTLIFE_IMAGE_2 = `${collectionEndPoint}/42e666d436d9a3b90431e6cc4a6b242d_1582106525.jpg?output-format=webp`;
+
+export const NIGHTLIFE_IMAGE_3 = `${collectionEndPoint}/67c4acc3f607dbcff71a8e1e77a70c8a_1535469199.jpg?output-format=webp`;
+
+export const NIGHTLIFE_IMAGE_4 = `${collectionEndPoint}/9a3e5fb300b74eb5a3b22f8a328fcb99_1530849038.jpg?output-format=webp`;
+
+/* ******************************************************************************************* */
 
 export const language = [
   "Türkçe",
@@ -96,12 +119,8 @@ export const GET_LOCATIONS =
   "https://developers.zomato.com/api/v2.1/locations?query=%s&count=10";
 
 export const getCities = (cityName: string) => {
-  return axios
-    .get(`https://developers.zomato.com/api/v2.1/cities?q=${cityName}`, {
-      headers: {
-        "user-key": config.config.zomatoAPI
-      }
-    })
+  const cityURL = `https://developers.zomato.com/api/v2.1/cities?q=${cityName}`;
+  return commonHeader(cityURL)
     .then((res) => res.data)
     .catch((err) => err);
 };
@@ -125,12 +144,7 @@ export const getRestaurants = (
     appendedString = `&cuisines=${cuisineId}`;
   }
   const finalURL = commonURL + appendedString;
-  return axios
-    .get(finalURL, {
-      headers: {
-        "user-key": config.config.zomatoAPI
-      }
-    })
+  return commonHeader(finalURL)
     .then((res) => {
       return { status: res.status, data: res.data };
     })
@@ -141,12 +155,18 @@ export const getRestaurants = (
 
 export const getRestaurantDetails = (resId: string) => {
   const restaurantURL = `https://developers.zomato.com/api/v2.1/restaurant?res_id=${resId}`;
-  return axios
-    .get(restaurantURL, {
-      headers: {
-        "user-key": config.config.zomatoAPI
-      }
+  return commonHeader(restaurantURL)
+    .then((res) => {
+      return res.data;
     })
+    .catch((err) => {
+      return err?.response?.status;
+    });
+};
+
+export const getCollections = (cityId: string, count = 4) => {
+  const collectionsURL = `https://developers.zomato.com/api/v2.1/collections?city_id=${cityId}&count=${count}`;
+  return commonHeader(collectionsURL)
     .then((res) => {
       return res.data;
     })

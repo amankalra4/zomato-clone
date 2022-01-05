@@ -37,10 +37,9 @@ export default function MediaCard({ cardData }: ICardProps) {
                       children={
                         <img
                             src={el.restaurant.thumb}
-                            width={380}
-                            height={150}
-                            alt="abc"
-                            // layout="responsive"
+                            width="100%"
+                            height="100%"
+                            alt={el.restaurant.name}
                             loading="lazy"
                         />
                     }

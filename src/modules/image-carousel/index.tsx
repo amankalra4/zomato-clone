@@ -1,22 +1,21 @@
 import React from "react";
 import Glider, { GliderProps } from "react-glider";
+import "react-glider/glider.defaults.css";
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
-import Image from "next/image";
 import classes from "./style.module.scss";
 import { Photo } from "../interface/restuarant";
 
 const ImageSlider = ({ imageArray, firstImage }: IImageCarouselProps) => (
   <>
-    <Image src={firstImage} alt="restaurant image" width={150} height={150} quality={100} loading="lazy" layout="responsive" />
+    <img src={firstImage} alt="restaurant" width={150} height={150} loading="lazy" />
     {imageArray.map((el) => (
-        <Image
+        <img
             src={el.photo.thumb_url}
-            alt="restaurant image"
+            alt="restaurant"
             width={150}
             height={150}
-            quality={100}
             loading="lazy"
-            layout="responsive"
+            key={el.photo.id}
         />
     ))}
   </>

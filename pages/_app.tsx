@@ -9,7 +9,7 @@ import Router from "next/router";
 import LinearDeterminate from "@src/components/progress-bar";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import classes from "../styles/globals.module.scss";
+import { globalStyle } from "styles/globalStyle";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     };
   }, []);
   return (
-    <div className={classes.globalStyle}>
+    <div className={globalStyle}>
       <ThemeProvider theme={theme}>
       {loading && <LinearDeterminate />}
       <SnackbarProvider

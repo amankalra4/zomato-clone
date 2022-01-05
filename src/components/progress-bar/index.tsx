@@ -4,7 +4,10 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 const useStyles = makeStyles({
   root: {
-    width: "100%"
+    width: "100%",
+    position: "fixed",
+    top: 0,
+    zIndex: 20
   }
 });
 

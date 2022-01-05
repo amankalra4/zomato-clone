@@ -9,6 +9,7 @@ import Image from "next/image";
 import { ButtonBase } from "@material-ui/core";
 import { IScrollableTabsProps } from "../tabs";
 import classes from "./styles.module.scss";
+import { heading } from "./styles";
 
 type firsOrderItems = "Pizza" | "Burger" | "Rolls" | "Chicken";
 
@@ -49,7 +50,7 @@ const FirstOrderSection = ({
     const { push } = useRouter();
     return (
         <div className={classes.container}>
-            <h1 className={classes.heading}>Inspiration for your first order</h1>
+            <h1 className={heading}>Inspiration for your first order</h1>
             <div className={classes.imagesContainer}>
                 {firstOrderArray.map((el) => (
                     <div key={el.text} className={classes.firstOrderImages}>
