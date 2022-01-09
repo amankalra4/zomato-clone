@@ -28,6 +28,7 @@ const FirstOrder = () => {
             cityId={cityId}
             cuisineId={cuisineId}
             showByCuisine
+            queryKey="first-order-restaurants"
         />
       </div>
     </App>

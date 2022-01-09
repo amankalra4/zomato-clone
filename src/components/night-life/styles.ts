@@ -19,6 +19,14 @@ export const nightLife = css`
     color: black;
     img {
       border-radius: 8px;
+      height: 20rem;
+    }
+  }
+  @media (max-width: 576px) {
+    > div {
+      img {
+        height: unset;
+      }
     }
   }
 `;
@@ -31,6 +39,7 @@ export const imageSubHeading = css`
   z-index: 2;
   color: white;
   display: flex;
+  border-radius: 8px;
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 0.9) 0%,

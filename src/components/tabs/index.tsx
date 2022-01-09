@@ -72,7 +72,8 @@ export interface IScrollableTabsProps {
   area: string;
   cityId: string;
   cuisineId?: string;
-  showByCuisine?:boolean
+  showByCuisine?:boolean;
+  queryKey?: string;
 }
 
 const ScrollableTabs = ({
@@ -80,7 +81,8 @@ const ScrollableTabs = ({
   area,
   cityId,
   cuisineId,
-  showByCuisine = false
+  showByCuisine = false,
+  queryKey
 }: IScrollableTabsProps) => {
   const [value, setValue] = useState<number>(0);
   const [disabled, setDisabled] = useState<Disabled>({
@@ -172,6 +174,7 @@ const ScrollableTabs = ({
             cityId={cityId}
             cuisineId={cuisineId}
             showByCuisine={showByCuisine}
+            queryKey={queryKey}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -205,6 +208,7 @@ const TabImage = ({
         width={isPhone ? 55 : width}
         height={isPhone ? 40 : height}
         alt={altText}
+        style={{ aspectRatio: "1/1" }}
     />
   );
 };
@@ -292,28 +296,29 @@ const DeliveryInfo = ({
   area,
   cityId,
   cuisineId,
-  showByCuisine
+  showByCuisine,
+  queryKey
 }: IScrollableTabsProps) => {
   const { data, isFetchingNextPage, hasNextPage, isLoading } =
     useInfiniteScroll({
       cityId,
       secondParam: showByCuisine ? cuisineId! : location,
-      queryKey: "location-specific-restaurants"
+      queryKey: queryKey!
     });
-    // if (status === "error") {
-    //   return (
-    //     <p>
-    //       Error:
-    //       {error}
-    //     </p>
-    //   );
-    // }
   return (
   <>
     <Filters />
     {cuisineId ? (
       <>
-        <h1>Food for your first order</h1>
+        <h1
+            style={{
+            color: "rgb(28, 28, 28)",
+            fontSize: "2rem",
+            margin: "2.2rem 0px"
+          }}
+        >
+          Food for your first order
+        </h1>
         <MediaCard cardData={data?.pages.map((el) => el)} />
       </>
     ) : (

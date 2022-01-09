@@ -1,6 +1,6 @@
 import React from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
-import classes from "./style.module.scss";
+import { container, innerContainer, rectangleSkeleton, textSkeleton } from "./styles";
 
 interface ICardSkeletonProps {
   arrayLength: number;
@@ -12,18 +12,18 @@ export default function CardSkeleton({ arrayLength = 4 }: ICardSkeletonProps) {
     arr.push(i);
   }
   return (
-    <div className={classes.container}>
+    <div className={container}>
       {arr.map((el) => (
-        <div className={classes.innerContainer} key={el}>
+        <div className={innerContainer} key={el}>
           <Skeleton
               variant="rect"
               width={100}
               height={100}
-              className={classes.rectangleSkeleton}
+              className={rectangleSkeleton}
           />
-          <Skeleton variant="text" className={classes.textSkeleton} />
-          <Skeleton variant="text" className={classes.textSkeleton} />
-          <Skeleton variant="text" className={classes.textSkeleton} />
+          <Skeleton variant="text" className={textSkeleton} />
+          <Skeleton variant="text" className={textSkeleton} />
+          <Skeleton variant="text" className={textSkeleton} />
         </div>
       ))}
     </div>

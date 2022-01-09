@@ -72,7 +72,9 @@ const useInfiniteScroll = ({
       }
     };
 
-    document.addEventListener("scroll", onScroll);
+    if (isFetched && data?.pages[0].results_found > 12) {
+      document.addEventListener("scroll", onScroll);
+    }
     return () => {
       document.removeEventListener("scroll", onScroll);
     };

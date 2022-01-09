@@ -19,7 +19,7 @@ export const footerImage = `${webAssets}/b40b97e677bc7b2ca77c58c61db266fe1603954
 
 export const HOME_PAGE_LOGO = `${webAssets}/8313a97515fcb0447d2d77c276532a511583262271.png`;
 
-export const HOME_PAGE_TOP_BANNER = `${webAssets}/81f3ff974d82520780078ba1cfbd453a1583259680.png`;
+export const HOME_PAGE_TOP_BANNER = `${webAssets}/81f3ff974d82520780078ba1cfbd453a1583259680.png?fit=around|1000:400&crop=1000:400;*,*`;
 
 /* ******************************************************************************************* */
 
@@ -53,13 +53,13 @@ export const FIRST_ORDER_BURGER = `${dishEndPoint}/ccb7dc2ba2b054419f805da7f0570
 
 export const webFrontend = `${endPoint}/webFrontend`;
 
-export const HOME_PAGE_ORDER_FOOD_ONLINE = `${webFrontend}/64dffaa58ffa55a377cdf42b6a690e721585809275.png`;
+export const HOME_PAGE_ORDER_FOOD_ONLINE = `${webFrontend}/64dffaa58ffa55a377cdf42b6a690e721585809275.png?fit=around|402:360&crop=402:360;*,*`;
 
-export const HOME_PAGE_GO_OUT_FOR_A_MEAL = `${webFrontend}/95f005332f5b9e71b9406828b63335331585809309.png`;
+export const HOME_PAGE_GO_OUT_FOR_A_MEAL = `${webFrontend}/95f005332f5b9e71b9406828b63335331585809309.png?fit=around|402:360&crop=402:360;*,*`;
 
-export const HOME_PAGE_ZOMATO_PRO = `${webFrontend}/b256d0dd8a29f9e0623ecaaea910534d1585809352.png`;
+export const HOME_PAGE_ZOMATO_PRO = `${webFrontend}/b256d0dd8a29f9e0623ecaaea910534d1585809352.png?fit=around|402:360&crop=402:360;*,*`;
 
-export const HOME_PAGE_NIGHT_LIFE = `${webFrontend}/8ff4212b71b948ed5b6d2ce0d2bc99981594031410.png`;
+export const HOME_PAGE_NIGHT_LIFE = `${webFrontend}/8ff4212b71b948ed5b6d2ce0d2bc99981594031410.png?fit=around|402:360&crop=402:360;*,*`;
 
 /* ******************************************************************************************* */
 
@@ -115,17 +115,16 @@ export const countries = [
   "USA"
 ];
 
-export const GET_LOCATIONS =
-  "https://developers.zomato.com/api/v2.1/locations?query=%s&count=10";
+export const CARDS_TO_BE_SHOWN = 12;
+
+export const GET_LOCATIONS = "locations?query=%s&count=10";
 
 export const getCities = (cityName: string) => {
-  const cityURL = `https://developers.zomato.com/api/v2.1/cities?q=${cityName}`;
+  const cityURL = `cities?q=${cityName}`;
   return commonHeader(cityURL)
     .then((res) => res.data)
     .catch((err) => err);
 };
-
-export const CARDS_TO_BE_SHOWN = 12;
 
 export const getRestaurants = (
   entityId: string,
@@ -134,7 +133,7 @@ export const getRestaurants = (
   start = 0,
   count = CARDS_TO_BE_SHOWN
 ) => {
-  const commonURL = `https://developers.zomato.com/api/v2.1/search?entity_id=${entityId}&entity_type=city&start=${start}&count=${count}`;
+  const commonURL = `search?entity_id=${entityId}&entity_type=city&start=${start}&count=${count}`;
   let appendedString = "";
   // if case is for restuarnt search in search bar
   // else case is for searching a particular cuisine in an area.
@@ -154,23 +153,11 @@ export const getRestaurants = (
 };
 
 export const getRestaurantDetails = (resId: string) => {
-  const restaurantURL = `https://developers.zomato.com/api/v2.1/restaurant?res_id=${resId}`;
-  return commonHeader(restaurantURL)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      return err?.response?.status;
-    });
+  const restaurantURL = `restaurant?res_id=${resId}`;
+  return commonHeader(restaurantURL).then((res) => res.data).catch((err) => err?.response?.status);
 };
 
 export const getCollections = (cityId: string, count = 4) => {
-  const collectionsURL = `https://developers.zomato.com/api/v2.1/collections?city_id=${cityId}&count=${count}`;
-  return commonHeader(collectionsURL)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      return err?.response?.status;
-    });
+  const collectionsURL = `collections?city_id=${cityId}&count=${count}`;
+  return commonHeader(collectionsURL).then((res) => res.data).catch((err) => err?.response?.status);
 };

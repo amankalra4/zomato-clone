@@ -10,7 +10,7 @@ import { InputAdornment } from "@material-ui/core";
 import useDevice from "@src/custom-hooks/use-is-Phone";
 import { commonHeader } from "@src/constants/api-call";
 import { LocationSuggestion } from "./location";
-import classes from "./style.module.scss";
+import { autoComplete, autoCompleteLoader } from "./styles";
 
 interface ISearchBarProps {
   searchBarBackground?: string;
@@ -68,7 +68,7 @@ const Searchbar = ({ searchBarBackground = "none" }: ISearchBarProps) => {
                 variant="outlined"
                 fullWidth
                 onChange={handleInputChange}
-                className={classes.searchBar}
+                // className={searchBar}
                 style={{ margin: searchBarBackground === "none" ? "20px 0" : "0" }}
                 InputProps={{
                     ...params.InputProps,
@@ -86,7 +86,7 @@ const Searchbar = ({ searchBarBackground = "none" }: ISearchBarProps) => {
         freeSolo
         closeIcon={null}
         onChange={handleAutoCompleteChange}
-        className={classes.autoComplete}
+        className={autoComplete}
         data-src={(!isPhone && searchBarBackground) ? "true" : "false"}
         disableClearable
         forcePopupIcon={false}
@@ -95,7 +95,7 @@ const Searchbar = ({ searchBarBackground = "none" }: ISearchBarProps) => {
 };
 
 const AutoCompleteLoader = () => (
-  <div className={classes.autoCompleteLoader}>
+  <div className={autoCompleteLoader}>
     Loading...
   </div>
 );

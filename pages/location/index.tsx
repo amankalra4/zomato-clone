@@ -23,6 +23,7 @@ const Locations = () => {
   const cityId: string = query.cityId as string;
   const cityName: string = query.cityName as string;
   const area: string = query.area as string;
+
   return (
     <App>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -32,7 +33,7 @@ const Locations = () => {
         />
         <div style={{ padding: "0 2rem" }}>
           <BreadCrumbs pathArray={["Home", "India", cityName, area]} />
-          <ScrollableTabs location={cityName} area={area} cityId={cityId} />
+          <ScrollableTabs location={cityName} area={area} cityId={cityId} queryKey="location-specific-restaurants" />
         </div>
       </ErrorBoundary>
     </App>

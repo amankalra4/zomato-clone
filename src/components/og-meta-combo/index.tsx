@@ -3,11 +3,10 @@ import Head from "next/head";
 interface IOgMetaData {
     title?: string;
     description?: string;
-    image?: string;
 }
 
 export default function OgMetaData(props: IOgMetaData) {
-    const { title, description, image = "/zomato.png" } = props;
+    const { title, description } = props;
     return (
         <Head>
             {title && (
@@ -22,7 +21,7 @@ export default function OgMetaData(props: IOgMetaData) {
                     <meta property="og:description" content={description} />
                 </>
             )}
-            {image && <meta property="og:image" content={image} />}
+            <meta property="og:image" content="/icons/zomato.png" />
         </Head>
     );
 }

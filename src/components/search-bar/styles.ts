@@ -1,6 +1,6 @@
-@import "../../variables.scss";
+import { css } from "@emotion/css";
 
-.autoComplete {
+const autoComplete = css`
     width: 50%;
     height: 100%;
     border-radius: 8px;
@@ -22,12 +22,17 @@
             border: 0.5px solid;
         }
     }
-    @include width-lesser-than(md) {
+    @media (max-width: 767px) {
         width: 80%;
         margin: 0 auto;
     }
-}
+`;
 
-.autoCompleteLoader {
+const autoCompleteLoader = css`
     border-radius: 8px;
-}
+`;
+
+export {
+    autoComplete,
+    autoCompleteLoader
+};

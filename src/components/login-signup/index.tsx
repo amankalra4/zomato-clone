@@ -4,7 +4,7 @@ import { ButtonBase } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import useDevice from "@src/custom-hooks/use-is-Phone";
 import { IHeaderProps } from "../app";
-import classes from "./style.module.scss";
+import { container, personIcon, signUp } from "./styles";
 
 const CenteredModal = dynamic(() => import("../modal"));
 
@@ -45,10 +45,10 @@ const CommonLogin = ({ color }: IHeaderProps) => {
   };
 
   return (
-    <div className={classes.container} style={{ color }}>
+    <div className={container} style={{ color }}>
       {isPhone ? (
         <ButtonBase onClick={() => handleLoginSingUp("Login")}>
-          <PersonIcon color="primary" className={classes.personIcon} />
+          <PersonIcon color="primary" className={personIcon} />
         </ButtonBase>
       ) : (
         <>
@@ -56,7 +56,7 @@ const CommonLogin = ({ color }: IHeaderProps) => {
             Login
           </ButtonBase>
           <ButtonBase
-              className={classes.signUp}
+              className={signUp}
               onClick={() => handleLoginSingUp("SignUp")}
           >
             Sign Up
