@@ -53,13 +53,13 @@ export const FIRST_ORDER_BURGER = `${dishEndPoint}/ccb7dc2ba2b054419f805da7f0570
 
 export const webFrontend = `${endPoint}/webFrontend`;
 
-export const HOME_PAGE_ORDER_FOOD_ONLINE = `${webFrontend}/64dffaa58ffa55a377cdf42b6a690e721585809275.png?fit=around|402:360&crop=402:360;*,*`;
+export const HOME_PAGE_ORDER_FOOD_ONLINE = `${webFrontend}/64dffaa58ffa55a377cdf42b6a690e721585809275.png`;
 
-export const HOME_PAGE_GO_OUT_FOR_A_MEAL = `${webFrontend}/95f005332f5b9e71b9406828b63335331585809309.png?fit=around|402:360&crop=402:360;*,*`;
+export const HOME_PAGE_GO_OUT_FOR_A_MEAL = `${webFrontend}/95f005332f5b9e71b9406828b63335331585809309.png`;
 
-export const HOME_PAGE_ZOMATO_PRO = `${webFrontend}/b256d0dd8a29f9e0623ecaaea910534d1585809352.png?fit=around|402:360&crop=402:360;*,*`;
+export const HOME_PAGE_ZOMATO_PRO = `${webFrontend}/b256d0dd8a29f9e0623ecaaea910534d1585809352.png`;
 
-export const HOME_PAGE_NIGHT_LIFE = `${webFrontend}/8ff4212b71b948ed5b6d2ce0d2bc99981594031410.png?fit=around|402:360&crop=402:360;*,*`;
+export const HOME_PAGE_NIGHT_LIFE = `${webFrontend}/8ff4212b71b948ed5b6d2ce0d2bc99981594031410.png`;
 
 /* ******************************************************************************************* */
 

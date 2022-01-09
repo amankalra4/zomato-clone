@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <>
       <OgMetaData
-          title="Zomato"
+          title="Zomato-Clone"
           description="A one go place to order food online"
       />
       <HomePageData />
