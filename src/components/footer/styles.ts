@@ -1,6 +1,6 @@
-@import "../../variables.scss";
+import { css } from "@emotion/css";
 
-.container {
+const container = css`
     background-color: #f8f8f8;
     padding: 4.8rem 2.2rem;
     display: flex;
@@ -8,72 +8,86 @@
     h1, h2, h3 {
         margin: 0 0 20px;
     }
-    @include width-lesser-than (md) {
+    @media (max-wdith: 767px) {
         padding: 1rem 2.2rem;
     }
-    @include width-lesser-than (xs) {
+    @media (max-wdith: 576px) {
         h1, h2, h3 {
             font-size: 16px;
         }
     }
-}
+`;
 
-.logoContainer {
+const logoContainer = css`
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-bottom: 4rem;
     align-items: center;
-    .image {
-        width: 11%;
-    }
-    .countryInfo {
-        display: flex;
-        .language {
-            margin-left: 20px;
-        }
-    }
-    @include width-lesser-than (md) {
+    @media (max-width: 767px) {
         flex-direction: column;
         align-items: flex-start;
         padding-bottom: 2rem;
         margin-bottom: 0;
-        .image {
-            width: 50%;
-        }
-        .countryInfo {
-            margin-top: 1rem;
-            flex-direction: column;
-        }
     }
-}
+`;
 
-.infoContainer {
+const image = css`
+    width: 11%;
+    @media (max-width: 767px) {
+        width: 50%;
+    }
+`;
+
+const countryInfo = css`
+    display: flex;
+    @media (max-width: 767px) {
+        margin-top: 1rem;
+        flex-direction: column;
+    }
+`;
+
+const language = css`
+    margin-left: 20px;
+`;
+
+const infoContainer = css`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
     justify-items: center;
-    @include width-lesser-than (md) {
+    @media (max-width: 767px) {
         grid-template-columns: repeat(2, 1fr);
         justify-items: unset;
     }
-    @include width-lesser-than (xs) {
+    @media (max-width: 320px) {
         font-size: 13px;
     }
-}
+`;
 
-.subHeading {
+const subHeading = css`
     color: #696969;
     cursor: pointer;
-}
+`;
 
-.formClass {
+const formClass = css`
     &[data-src="margin"] {
         margin-left: 2rem;
-        @include width-lesser-than (md) {
+        @media (max-width: 767px) {
             margin-left: 0;
             margin-top: 2rem;
         }
     }
-}
+`;
+
+export {
+    container,
+    logoContainer,
+    image,
+    countryInfo,
+    language,
+    infoContainer,
+    subHeading,
+    formClass
+};

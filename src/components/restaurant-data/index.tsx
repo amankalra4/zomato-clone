@@ -13,8 +13,7 @@ import {
     Share,
     Check,
     StarRate,
-    QueryBuilder,
-    Kitchen
+    QueryBuilder
 } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 import ImageCarousel from "@src/modules/image-carousel";
@@ -91,6 +90,20 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
                 </p>
             </div>
             <div className={chipContainer}>
+                {restaurantInfo.is_delivering_now ? (
+                    <ButtonBase href={restaurantInfo.order_url!} target="_blank">
+                        <div
+                            style={{
+                                background: "green",
+                                color: "white",
+                                borderRadius: "8px",
+                                padding: "5px 10px"
+                            }}
+                        >
+                            Order Now
+                        </div>
+                    </ButtonBase>
+                ) : null}
                 <ButtonBase
                     href={`${mapsURL}?q=${restaurantInfo.location.latitude},${restaurantInfo.location.longitude}`}
                     target="_blank"
@@ -108,11 +121,6 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
                 <ButtonBase href={restaurantInfo.menu_url} target="_blank">
                     <Chip icon={<MenuBook />} label="Check Menu" color="primary" />
                 </ButtonBase>
-                {restaurantInfo.is_delivering_now ? (
-                    <ButtonBase href={restaurantInfo.order_url!} target="_blank">
-                        <Chip icon={<Kitchen />} label="Order Now" color="primary" />
-                    </ButtonBase>
-                ) : null}
             </div>
             <MoreInfo highlights={restaurantInfo.highlights} />
             <PhoneNumbers phoneNumbers={restaurantInfo.phone_numbers} />

@@ -9,14 +9,21 @@
 }
 .container {
     @extend .root;
-    :global(.glider-contain) {
-        width: 50% !important;
-    }
     .sliderRoot {
         img {
             border-radius: 16px;
-            width: 10% !important;
+            width: 15% !important;
             margin: 0 auto;
+        }
+    }
+    @include width-greater-than(md) {
+        :global(.glider-contain) {
+            width: 50% !important;
+        }
+        .sliderRoot {
+            img {
+                width: 10% !important;
+            }
         }
     }
 }

@@ -36,4 +36,5 @@ export const firstOrderImages = css`
 
 export const firstOrderImage = css`
   cursor: pointer;
+  border-radius: 50%;
 `;

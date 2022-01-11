@@ -1,6 +1,6 @@
-import { CARDS_TO_BE_SHOWN, getRestaurants } from "@src/constants";
 import { useEffect } from "react";
-import { useInfiniteQuery } from "react-query";
+import { CARDS_TO_BE_SHOWN, getRestaurants } from "@src/constants";
+import { useInfiniteQuery, useQueryClient } from "react-query";
 
 const getPaginatedRestaurants = async (
   cityId: string,
@@ -30,6 +30,7 @@ const useInfiniteScroll = ({
   secondParam,
   queryKey
 }: IInfiniteScrollProps) => {
+  const queryClient = useQueryClient();
   const {
     data,
     error,
@@ -55,6 +56,10 @@ const useInfiniteScroll = ({
       }
     }
   );
+
+  useEffect(() => {
+    queryClient.fetchInfiniteQuery(queryKey);
+  }, [cityId]);
 
   useEffect(() => {
     let fetching = false;

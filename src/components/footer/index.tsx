@@ -1,13 +1,19 @@
 import React from "react";
 import Image from "next/image";
-import { Language, Flag } from "@material-ui/icons";
 import { countries, language, footerImage } from "../../constants";
 import CommonDropDown from "./lang-country";
-import classses from "./style.module.scss";
+import {
+    container,
+    countryInfo,
+    image,
+    infoContainer,
+    logoContainer,
+    subHeading
+} from "./styles";
 
 const Footer = () => (
     <footer>
-        <div className={classses.container}>
+        <div className={container}>
             <Logo />
             <Info />
         </div>
@@ -16,47 +22,91 @@ const Footer = () => (
 
 const Logo = () => {
     return (
-    <div className={classses.logoContainer}>
-        <div className={classses.image}>
-            <Image src={footerImage} alt="Zomato Footer" loading="lazy" width={100} height={25} />
+        <div className={logoContainer}>
+            <div className={image}>
+                <Image
+                    src={footerImage}
+                    alt="Zomato Footer"
+                    loading="lazy"
+                    width={100}
+                    height={25}
+                />
+            </div>
+            <div className={countryInfo}>
+                <CommonDropDown title="India" value={countries} />
+                <CommonDropDown title="English" value={language} marginLeft />
+            </div>
         </div>
-        <div className={classses.countryInfo}>
-            <CommonDropDown title="India" value={countries} icon={<Flag />} />
-            <CommonDropDown title="English" value={language} icon={<Language />} marginLeft />
-        </div>
-    </div>
-); 
+    );
 };
 
+type HeadingType = "Company" | "For Foodies" | "Restaurants" | "For You";
+
+type SubHeadingType =
+    | [
+        "Who We Are",
+        "Blog",
+        "Careers",
+        "Report Fraud",
+        "Contact",
+        "Investor Relations"
+    ]
+    | ["Code of Conduct", "Community", "Blogger Help", "Mobile Apps"]
+    | ["Add Restaurants"]
+    | ["Privacy", "Terms", "Security", "Sitemap"];
+
+type InfoArray = {
+    heading: HeadingType;
+    subHeading: SubHeadingType;
+};
+
+const infoArray: InfoArray[] = [
+    {
+        heading: "Company",
+        subHeading: [
+            "Who We Are",
+            "Blog",
+            "Careers",
+            "Report Fraud",
+            "Contact",
+            "Investor Relations"
+        ]
+    },
+    {
+        heading: "For Foodies",
+        subHeading: ["Code of Conduct", "Community", "Blogger Help", "Mobile Apps"]
+    },
+    {
+        heading: "Restaurants",
+        subHeading: ["Add Restaurants"]
+    },
+    {
+        heading: "For You",
+        subHeading: ["Privacy", "Terms", "Security", "Sitemap"]
+    }
+];
+
 const Info = () => (
-    <div className={classses.infoContainer}>
-        <div>
-            <h2>Company</h2>
-            <SubHeading data={["Who We Are", "Blog", "Careers", "Report Fraud", "Contact", "Investor Relations"]} />
-        </div>
-        <div>
-            <h2>For Foodies</h2>
-            <SubHeading data={["Code of Conduct", "Community", "Blogger Help", "Mobile Apps"]} />
-        </div>
-        <div>
-            <h2>Restaurants</h2>
-            <SubHeading data={["Add Restaurants"]} />
-        </div>
-        <div>
-            <h2>For You</h2>
-            <SubHeading data={["Privacy", "Terms", "Security", "Sitemap"]} />
-        </div>
+    <div className={infoContainer}>
+        {infoArray.map((el) => (
+            <div key={el.heading}>
+                <h2>{el.heading}</h2>
+                <SubHeading data={el.subHeading} />
+            </div>
+        ))}
     </div>
 );
 
 interface ISubHeading {
-    data: string[]
+    data: string[];
 }
 
 const SubHeading = ({ data }: ISubHeading) => (
     <>
         {data.map((el) => (
-            <p key={el} className={classses.subHeading}>{el}</p>
+            <p key={el} className={subHeading}>
+                {el}
+            </p>
         ))}
     </>
 );
