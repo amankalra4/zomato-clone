@@ -45,3 +45,6 @@ All APIs used here were provided by Zomato.
 
 6. Created custom hooks
 - Created custom hooks whereever required so as to have easy development.
+
+7. Deployment
+- Deployed the application on vercel.
