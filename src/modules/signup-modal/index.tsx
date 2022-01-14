@@ -8,10 +8,10 @@ import {
 import DividerWithText from "@src/components/divider-with-text";
 import React, { useState } from "react";
 import { GoogleButton } from "../login-modal";
+import { container } from "./styles";
 
 const SignUpModal = () => {
   const [fullName, setFullName] = useState<string>("");
-  // const [email, setEmail] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const [check, setCheck] = useState<boolean>(false);
 
@@ -29,7 +29,6 @@ const SignUpModal = () => {
       const emailValid = validateEmail(event.target.value);
       if (emailValid) {
         setIsEmailValid(true);
-        // setEmail(event.target.value);
       } else {
         setIsEmailValid(false);
       }
@@ -43,14 +42,14 @@ const SignUpModal = () => {
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr" }}>
+    <div className={container}>
       <TextField
-          style={{ marginBottom: "1.2rem" }}
           name="fullName"
           placeholder="Full Name"
           label="Full Name"
           variant="outlined"
           onChange={handleChange}
+          style={{ marginBottom: "1.2rem" }}
       />
       <TextField
           label="Email"

@@ -11,6 +11,10 @@ export const HOME_PAGE_FOOD_ICON = `${endPoint}/images/online_ordering/delivery.
 
 export const HOME_PAGE_MENU_ICON = `${endPoint}/images/online_ordering/menu.svg`;
 
+export const ERROR_400_IMAGE = `${endPoint}/404_web787058f236e16cef33bf733ade2e08ba1574663725.png?output-format=webp`;
+
+export const ERROR_500_IMAGE = `${endPoint}/images/z404x2.png?output-format=webp`;
+
 /* ******************************************************************************************* */
 
 export const webAssets = `${endPoint}/web_assets`;

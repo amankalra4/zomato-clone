@@ -2,6 +2,7 @@ import { css } from "@emotion/css";
 
 const container = css`
     background-color: #f8f8f8;
+    border-top: 1px solid rgb(0 0 0 / 35%);
     padding: 4.8rem 2.2rem;
     display: flex;
     flex-direction: column;

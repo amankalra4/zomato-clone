@@ -310,7 +310,7 @@ const DeliveryInfo = ({
     <Filters />
     {cuisineId ? (
       <>
-        <h1
+        {data?.pages[0].results_found > 0 && <h1
             style={{
             color: "rgb(28, 28, 28)",
             fontSize: "2rem",
@@ -318,13 +318,13 @@ const DeliveryInfo = ({
           }}
         >
           Food for your first order
-        </h1>
+        </h1>}
         <MediaCard cardData={data?.pages.map((el) => el)} />
       </>
     ) : (
       <>
         <FirstOrderSection location={location} area={area} cityId={cityId} />
-        <h1
+        {data?.pages[0].results_found > 0 && <h1
             style={{
             color: "rgb(28, 28, 28)",
             fontSize: "2rem",
@@ -334,7 +334,7 @@ const DeliveryInfo = ({
           Best food near 
 {" "}
 {changeToCamelCase(area)}
-        </h1>
+        </h1>}
         <MediaCard cardData={data?.pages.map((el) => el)} />
       </>
     )}
@@ -343,7 +343,7 @@ const DeliveryInfo = ({
                 style={{ display: "flex", margin: "20px auto" }}
             />
           ) : (
-            !hasNextPage && !isLoading && <EndOfSearchResults />
+            !hasNextPage && !isLoading && data?.pages[0].results_found > 0 && <EndOfSearchResults />
           )}
           {isLoading && <CardSkeleton arrayLength={12} />}
   </>

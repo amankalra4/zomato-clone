@@ -18,6 +18,7 @@ export const header = css`
         height: 100px;
         position: fixed;
         background: #f8f8f8;
+        border-bottom: 1px solid rgb(0 0 0 / 35%);
         z-index: 10;
         width: 100%;
     }

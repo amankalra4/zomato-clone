@@ -5,7 +5,7 @@ import FastfoodIcon from "@material-ui/icons/Fastfood";
 import React from "react";
 import { Modal } from "react-bootstrap";
 import VerticalTabs from "../vertical-tabs";
-import classes from "./style.module.scss";
+import { chip, container } from "./styles";
 
 const CustomFilters = () => {
   const [open, setOpen] = React.useState(false);
@@ -17,23 +17,23 @@ const CustomFilters = () => {
     setOpen(false);
   };
   return (
-    <div className={classes.container}>
+    <div className={container}>
       <Chip
           avatar={<TuneIcon />}
           label="Filters"
-          className={classes.firstChip}
+          className={chip}
           onClick={handleOpen}
       />
       <Chip
           avatar={<FastfoodIcon />}
           label="Cuisines"
-          className={classes.secondChip}
+          className={chip}
           onClick={handleOpen}
       />
       <Chip
           avatar={<PaymentIcon />}
           label="Cost per Person"
-          className={classes.thirdChip}
+          className={chip}
           onClick={handleOpen}
       />
       <FilterModal show={open} onHide={handleClose} />

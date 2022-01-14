@@ -77,13 +77,13 @@ const useInfiniteScroll = ({
       }
     };
 
-    if (isFetched && data?.pages[0].results_found > 12) {
+    if (isFetched && data?.pages[0].results_found > CARDS_TO_BE_SHOWN) {
       document.addEventListener("scroll", onScroll);
     }
     return () => {
       document.removeEventListener("scroll", onScroll);
     };
-  }, [isFetched]);
+  }, [isFetched, hasNextPage]);
   return {
     data,
     error,

@@ -56,10 +56,17 @@ const imageTitles = css`
     margin-top: 1rem;
 `;
 
+const topBannerContainer = css`
+    position: relative;
+    min-height: 25rem;
+    max-height: 50rem;
+`;
+
 export {
     bannerHeadingClass,
     cardRoot,
     imageTitles,
     imagesContainer,
-    logoContainer
+    logoContainer,
+    topBannerContainer
 };

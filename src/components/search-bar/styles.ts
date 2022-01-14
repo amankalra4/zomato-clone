@@ -15,11 +15,13 @@ const autoComplete = css`
         margin: 20px;
         > div > div {
             border: 0.5px solid;
+            background: white;
         }
     }
     &[data-src="false"] {
         > div > div {
             border: 0.5px solid;
+            background: white;
         }
     }
     @media (max-width: 767px) {

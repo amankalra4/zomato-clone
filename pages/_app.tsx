@@ -10,6 +10,8 @@ import LinearDeterminate from "@src/components/progress-bar";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { globalStyle } from "styles/globalStyle";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorComponent from "./_error";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,6 +20,8 @@ const queryClient = new QueryClient({
     }
   }
 });
+
+const Helper = () => <ErrorComponent statusCode={500} url={window.location.pathname} />;
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,19 +36,21 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className={globalStyle}>
       <ThemeProvider theme={theme}>
-      {loading && <LinearDeterminate />}
-      <SnackbarProvider
-          anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right"
-        }}
-      >
-        <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <Component {...pageProps} />
-        </QueryClientProvider>
-      </SnackbarProvider>
-    </ThemeProvider>
+        {loading && <LinearDeterminate />}
+        <SnackbarProvider
+            anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right"
+          }}
+        >
+          <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <ErrorBoundary FallbackComponent={Helper}>
+              <Component {...pageProps} />
+            </ErrorBoundary>
+          </QueryClientProvider>
+        </SnackbarProvider>
+      </ThemeProvider>
     </div>
   );
 }

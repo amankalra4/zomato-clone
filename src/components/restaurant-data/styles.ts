@@ -1,6 +1,9 @@
 import { css } from "@emotion/css";
 
 export const container = css`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   p {
     margin: 0;
   }
@@ -62,4 +65,22 @@ export const phoneNumberContainer = css`
 
 export const collapse = css`
   margin: 20px 0 0;
+`;
+
+export const orderNow = css`
+  background-color: green;
+  color: white;
+  border-radius: 8px;
+  padding: 5px 10px;
+`;
+
+export const ratingClass = css`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+`;
+
+export const timingsClass = css`
+  display: flex;
+  gap: 20px;
 `;

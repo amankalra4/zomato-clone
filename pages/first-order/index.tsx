@@ -14,23 +14,23 @@ const FirstOrder = () => {
 
   return (
     <App>
-      <OgMetaData
-          title={`Food Devlivery - ${changeToCamelCase(cityName)}`}
-          description={`Food for your first order at - ${changeToCamelCase(
-          cityName
-        )}`}
-      />
-      <div style={{ padding: "0 2rem" }}>
-        <BreadCrumbs pathArray={["Home", "India", cityName, area]} />
-        <ScrollableTabs
-            location={cityName}
-            area={area}
-            cityId={cityId}
-            cuisineId={cuisineId}
-            showByCuisine
-            queryKey="first-order-restaurants"
+        <OgMetaData
+            title={`Food Devlivery - ${changeToCamelCase(cityName)}`}
+            description={`Food for your first order at - ${changeToCamelCase(
+            cityName
+          )}`}
         />
-      </div>
+        <div style={{ padding: "0 2rem" }}>
+          <BreadCrumbs pathArray={["Home", "India", cityName, area]} />
+          <ScrollableTabs
+              location={cityName}
+              area={area}
+              cityId={cityId}
+              cuisineId={cuisineId}
+              showByCuisine
+              queryKey="first-order-restaurants"
+          />
+        </div>
     </App>
   );
 };

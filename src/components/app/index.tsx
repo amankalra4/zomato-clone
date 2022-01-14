@@ -12,15 +12,22 @@ interface IAppProps extends IHeaderProps {
 }
 
 export interface IHeaderProps {
-    color?: string
-    showLogo?: boolean
+    color?: string;
+    showLogo?: boolean;
 }
 
-const App = ({ showHeader = true, children, color = "black", showLogo = true }: IAppProps) => {
+const App = ({
+    showHeader = true,
+    children,
+    color = "black",
+    showLogo = true
+}: IAppProps) => {
     return (
         <div>
             {showHeader && <Header color={color} showLogo={showLogo} />}
-            <div className={searchBar}><Searchbar /></div>
+            <div className={searchBar}>
+                <Searchbar />
+            </div>
             <div data-src={showHeader} className={belowHeader}>
                 {children}
             </div>

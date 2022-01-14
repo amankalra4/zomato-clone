@@ -6,6 +6,7 @@ import DividerWithText from "@src/components/divider-with-text";
 import { Email } from "@material-ui/icons";
 import Image from "next/image";
 import GoogleLogo from "../../../public/icons/googleLogo.svg";
+import { container, googleButton, text } from "./styles";
 
 const LoginModal = () => {
   const [mobileNumber, setMobileNumber] = useState<string>("");
@@ -17,7 +18,7 @@ const LoginModal = () => {
   };
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr" }}>
+    <div className={container}>
       <TextField
           id="input-with-icon-textfield"
           variant="outlined"
@@ -67,20 +68,13 @@ export const GoogleButton = ({ hasTopMargin = false }: IGoogleButtonProps) => (
   <Button
       variant="contained"
       style={{
-      backgroundColor: "white",
-      padding: "1rem 0",
       marginTop: hasTopMargin ? "20px" : 0
     }}
+      className={googleButton}
   >
-    <span
-        style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
+    <span className={text}>
       <Image src={GoogleLogo} alt="Google Logo" height="17" width="30" />
-{" "}
+      {" "}
       Continue with Google
     </span>
   </Button>

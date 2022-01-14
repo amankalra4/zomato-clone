@@ -32,7 +32,10 @@ import {
     location,
     heading,
     moreInfoContainer,
-    openClosed
+    openClosed,
+    orderNow,
+    ratingClass,
+    timingsClass
 } from "./styles";
 
 interface IRestaurantData {
@@ -55,10 +58,7 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
     }, [showAlert]);
 
     return (
-        <div
-            className={container}
-            style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-        >
+        <div className={container}>
             {showAlert && (
                 <Collapse in={showAlert} timeout="auto" className={collapse}>
                     <Alert
@@ -92,14 +92,7 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
             <div className={chipContainer}>
                 {restaurantInfo.is_delivering_now ? (
                     <ButtonBase href={restaurantInfo.order_url!} target="_blank">
-                        <div
-                            style={{
-                                background: "green",
-                                color: "white",
-                                borderRadius: "8px",
-                                padding: "5px 10px"
-                            }}
-                        >
+                        <div className={orderNow}>
                             Order Now
                         </div>
                     </ButtonBase>
@@ -124,15 +117,15 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
             </div>
             <MoreInfo highlights={restaurantInfo.highlights} />
             <PhoneNumbers phoneNumbers={restaurantInfo.phone_numbers} />
-            <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+            <div className={ratingClass}>
                 <h3>Rated</h3>
                 <Rating rating={restaurantInfo.user_rating} />
             </div>
-            <div style={{ display: "flex", gap: "20px" }}>
+            <div className={timingsClass}>
                 <h3>Timings</h3>
                 <Timings timings={restaurantInfo.timings} />
             </div>
-            <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+            <div className={ratingClass}>
                 <h3>Average Cost</h3>
                 <p style={{ paddingBottom: "5px" }}>
                     {`${restaurantInfo.currency} ${restaurantInfo.average_cost_for_two} for two people (approx.)`}

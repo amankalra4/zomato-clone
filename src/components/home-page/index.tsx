@@ -15,7 +15,8 @@ import {
   bannerHeadingClass,
   imagesContainer,
   cardRoot,
-  imageTitles
+  imageTitles,
+  topBannerContainer
 } from "./styles";
 
 const HomePageData = () => (
@@ -29,9 +30,7 @@ const TopBanner = () => {
   const bannerHeading = "Discover best food & drinks";
   const isPhone = useDevice("767");
   return (
-    <div
-        style={{ position: "relative", minHeight: "25rem", maxHeight: "50rem" }}
-    >
+    <div className={topBannerContainer}>
       <link rel="preload" href={HOME_PAGE_TOP_BANNER} as="image" />
       <img
           src={HOME_PAGE_TOP_BANNER}
