@@ -7,7 +7,6 @@ import {
   HOME_PAGE_ZOMATO_PRO
 } from "@src/constants";
 import useDevice from "@src/custom-hooks/use-is-Phone";
-import React from "react";
 import Header from "../header";
 import Searchbar from "../search-bar";
 import {

@@ -5,7 +5,6 @@ import {
     NIGHTLIFE_IMAGE_3,
     NIGHTLIFE_IMAGE_4
 } from "@src/constants";
-import React from "react";
 import Link from "next/link";
 import { imageSubHeading, nightLife, subHeading } from "./styles";
 

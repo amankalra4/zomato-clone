@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/no-children-prop */
-import React from "react";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -29,7 +28,7 @@ export default function MediaCard({ cardData }: ICardProps) {
     <div className={cardsContainer}>
       {cardData?.map((el1) =>
       (el1.results_found > 0 ? (
-        el1.restaurants.map((el) => <CardComponent data={el} />)
+        el1.restaurants.map((el) => <CardComponent key={el.restaurant.id} data={el} />)
       ) : (
         <h2 key={el1.results_shown} style={{ margin: "20px 0" }}>
           Sorry! We Couldn't find any restaurants.
@@ -44,7 +43,7 @@ interface ICardComponentProps {
 }
 
 const CardComponent = ({ data }: ICardComponentProps) => (
-  <Card className={cardsRoot} key={data.restaurant.id}>
+  <Card className={cardsRoot}>
     <TopData data={data} />
     <BottomData data={data} />
   </Card>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal } from "react-bootstrap";
 import LoginModal from "@src/modules/login-modal";
 import SignUpModal from "@src/modules/signup-modal";

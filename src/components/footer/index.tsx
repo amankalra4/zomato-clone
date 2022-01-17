@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import { countries, language, footerImage } from "../../constants";
 import CommonDropDown from "./lang-country";

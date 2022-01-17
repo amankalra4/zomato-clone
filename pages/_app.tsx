@@ -3,7 +3,7 @@ import type { AppProps, AppContext } from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { SnackbarProvider } from "notistack";
 import { ThemeProvider } from "@material-ui/core/styles";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import theme from "@src/modules/theme";
 import Router from "next/router";
 import LinearDeterminate from "@src/components/progress-bar";

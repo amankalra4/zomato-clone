@@ -3,9 +3,9 @@ import Head from "next/head";
 import { NextPageContext } from "next";
 import App from "@src/components/app";
 import dynamic from "next/dynamic";
-import { ERROR_400_IMAGE, ERROR_500_IMAGE } from "@src/constants";
+import { ERROR_404_IMAGE, ERROR_500_IMAGE } from "@src/constants";
 
-const ErrorFallback = dynamic(() => import("@src/components/error-component"));
+const ErrorFallback = dynamic(() => /* webpackChunkName: "aman 1" */ import("@src/components/error-component"));
 
 interface IProps {
     url?: string;
@@ -15,7 +15,7 @@ interface IProps {
 function ErrorComponent(props: IProps) {
     const { statusCode, url } = props;
     const title = statusCode === 404 ? "Page Not Found" : "Something Went Wrong";
-    const imageURL = statusCode === 404 ? ERROR_400_IMAGE : ERROR_500_IMAGE;
+    const imageURL = statusCode === 404 ? ERROR_404_IMAGE : ERROR_500_IMAGE;
 
     return (
         <>

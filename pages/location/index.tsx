@@ -4,6 +4,7 @@ import BreadCrumbs from "@src/components/breadcrumbs";
 import ScrollableTabs from "@src/components/tabs";
 import { changeToCamelCase } from "@src/modules/camel-case";
 import { useRouter } from "next/router";
+import Container from "@src/components/container";
 
 const Locations = () => {
   const { query } = useRouter();
@@ -17,7 +18,7 @@ const Locations = () => {
             title={`Food Devlivery - ${changeToCamelCase(cityName)}`}
             description={`Best food near ${changeToCamelCase(cityName)}`}
         />
-        <div style={{ padding: "0 2rem" }}>
+        <Container>
           <BreadCrumbs pathArray={["Home", "India", cityName, area]} />
           <ScrollableTabs
               location={cityName}
@@ -25,7 +26,7 @@ const Locations = () => {
               cityId={cityId}
               queryKey="location-specific-restaurants"
           />
-        </div>
+        </Container>
     </App>
   );
 };

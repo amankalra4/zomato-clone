@@ -1,13 +1,5 @@
-import React, { useState } from "react";
-import {
-  Tabs,
-  Tab,
-  // Typography,
-  Box,
-  TabScrollButton,
-  withStyles,
-  CircularProgress
-} from "@material-ui/core";
+import { useState, ChangeEvent } from "react";
+import { Tabs, Tab } from "@material-ui/core";
 import {
   DELIVERY_ICON_DISABLED,
   DELIVERY_ICON_ENABLED,
@@ -16,63 +8,32 @@ import {
   NIGHTLIFE_ICON_DISABLED,
   NIGHTLIFE_ICON_ENABLED
 } from "@src/constants";
-import MediaCard from "@src/modules/restaurant-cards";
-import { changeToCamelCase } from "@src/modules/camel-case";
-import useDevice from "@src/custom-hooks/use-is-Phone";
 import dynamic from "next/dynamic";
-import useInfiniteScroll from "@src/custom-hooks/use-infinite-scroll";
-import FirstOrderSection from "../first-order";
-import CustomFilters from "../filters";
 import CardSkeleton from "../card-skeletons";
-import EndOfSearchResults from "../end-of-search";
+import DeliveryInfo from "./delivery-info";
+import TabImage from "./tab-image";
+import TabPanel from "./tab-panel";
+import MyTabScrollButton from "./tab-scroll-button";
 
-const NightLife = dynamic(() => import("../night-life"), { loading: () => <CardSkeleton arrayLength={4} /> });
-const DiningOut = dynamic(() => import("../dining-out"), { loading: () => <CardSkeleton arrayLength={4} /> });
+const NightLife = dynamic(() => import("../night-life"), {
+  loading: () => <CardSkeleton arrayLength={4} />
+});
 
-interface TabPanelProps {
-  text?: string;
-  index: any;
-  value: any;
-  children?: React.ReactNode;
-}
-const TabPanel = (props: TabPanelProps) => {
-  const { value, index, children, text } = props;
-  return (
-    <div>
-      {value === index && (
-        <Box>
-          {typeof text === "string" ? text : children}
-        </Box>
-      )}
-    </div>
-  );
-};
-
-const MyTabScrollButton = withStyles((theme: any) => ({
-  root: {
-    width: 28,
-    overflow: "hidden",
-    transition: "width 0.5s",
-    "&.Mui-disabled": {
-      width: 0
-    }
-  }
-}))(TabScrollButton);
+const DiningOut = dynamic(() => import("../dining-out"), {
+  loading: () => <CardSkeleton arrayLength={4} />
+});
 
 type Disabled = {
   delivery: boolean;
   dine: boolean;
   nightLife: boolean;
 };
-
-type Label_types = "Delivery" | "Dining Out" | "Night Life";
-
 export interface IScrollableTabsProps {
   location: string;
   area: string;
   cityId: string;
   cuisineId?: string;
-  showByCuisine?:boolean;
+  showByCuisine?: boolean;
   queryKey?: string;
 }
 
@@ -90,7 +51,7 @@ const ScrollableTabs = ({
     dine: true,
     nightLife: true
   });
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleChange = (event: ChangeEvent<{}>, newValue: number) => {
     // eslint-disable-next-line default-case
     switch (newValue) {
       case 0:
@@ -187,167 +148,4 @@ const ScrollableTabs = ({
   );
 };
 
-interface ITabImageProps {
-  path: string;
-  width?: string;
-  height?: string;
-  altText: Label_types;
-}
-
-const TabImage = ({
-  path,
-  width = "75",
-  height = "55",
-  altText
-}: ITabImageProps) => {
-  const isPhone = useDevice("575");
-  return (
-    <img
-        src={path}
-        dat-src={path}
-        width={isPhone ? 55 : width}
-        height={isPhone ? 40 : height}
-        alt={altText}
-        style={{ aspectRatio: "1/1" }}
-    />
-  );
-};
-
 export default ScrollableTabs;
-
-// type Mode_types = "delivery" | "dineout" | "nightLife";
-
-// type Details = {
-//     text?: Mode_types,
-//     label: Label_types
-// }
-
-// type ITabs = Array<Details>
-
-// const customTabArray: ITabs = [
-//     {
-//         text: "delivery",
-//         label: "Delivery"
-//     },
-//     {
-//         text: "dineout",
-//         label: "Dining Out"
-//     },
-//     {
-//         text: "nightLife",
-//         label: "Night Life"
-//     }
-// ];
-
-// type Mode_props = {
-//     disabled: string,
-//     enabled: string,
-//     width?: string,
-//     height?: string
-// }
-
-// type Modes = {
-//     delivery: Mode_props,
-//     dineout: Mode_props,
-//     nightLife: Mode_props
-// }
-
-// const customTabObject: Modes = {
-//     delivery: {
-//         disabled: DELIVERY_ICON_DISABLED,
-//         enabled: DELIVERY_ICON_ENABLED,
-//         width: "75",
-//         height: "55"
-//     },
-//     dineout: {
-//         disabled: DINEOUT_ICON_DISABLED,
-//         enabled: DINEOUT_ICON_ENABLED,
-//         width: "65",
-//         height: "60"
-//     },
-//     nightLife: {
-//         disabled: NIGHTLIFE_ICON_DISABLED,
-//         enabled: NIGHTLIFE_ICON_ENABLED
-//     }
-// }
-
-// interface ICustomTabProps {
-//     nonTabValue: number;
-//     index: number;
-//     text: Mode_types;
-//     label: Label_types;
-// }
-// const CustomTab = (props: ICustomTabProps) => {
-//     const { nonTabValue, index, text, label, ...other } = props;
-//     return <Tab
-//         label={label}
-//         icon={<TabImage
-//             path={nonTabValue === index ? customTabObject[text].enabled : customTabObject[text].disabled}
-//             width={customTabObject[text].width}
-//             height={customTabObject[text].height}
-//             altText={label}
-//         />}
-//         className={classes.one}
-//         {...other} />;
-// };
-
-const DeliveryInfo = ({
-  location,
-  area,
-  cityId,
-  cuisineId,
-  showByCuisine,
-  queryKey
-}: IScrollableTabsProps) => {
-  const { data, isFetchingNextPage, hasNextPage, isLoading } =
-    useInfiniteScroll({
-      cityId,
-      secondParam: showByCuisine ? cuisineId! : location,
-      queryKey: queryKey!
-    });
-  return (
-  <>
-    <Filters />
-    {cuisineId ? (
-      <>
-        {data?.pages[0].results_found > 0 && <h1
-            style={{
-            color: "rgb(28, 28, 28)",
-            fontSize: "2rem",
-            margin: "2.2rem 0px"
-          }}
-        >
-          Food for your first order
-        </h1>}
-        <MediaCard cardData={data?.pages.map((el) => el)} />
-      </>
-    ) : (
-      <>
-        <FirstOrderSection location={location} area={area} cityId={cityId} />
-        {data?.pages[0].results_found > 0 && <h1
-            style={{
-            color: "rgb(28, 28, 28)",
-            fontSize: "2rem",
-            margin: "2.2rem 0px"
-          }}
-        >
-          Best food near 
-{" "}
-{changeToCamelCase(area)}
-        </h1>}
-        <MediaCard cardData={data?.pages.map((el) => el)} />
-      </>
-    )}
-    {isFetchingNextPage ? (
-            <CircularProgress
-                style={{ display: "flex", margin: "20px auto" }}
-            />
-          ) : (
-            !hasNextPage && !isLoading && data?.pages[0].results_found > 0 && <EndOfSearchResults />
-          )}
-          {isLoading && <CardSkeleton arrayLength={12} />}
-  </>
-); 
-};
-
-const Filters = () => <CustomFilters />;

@@ -3,19 +3,18 @@ import { css } from "@emotion/css";
 const container = css`
   display: flex;
   margin: 20px 0;
-  > :first-child {
-    margin-right: 20px;
+  > :nth-child(odd) {
+    margin: 0 !important;
   }
-  > :last-child {
-    margin-left: 20px;
+  > * {
+    margin: 0 20px !important;
   }
   @media (max-width: 576px) {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    > :first-child,
-    > :last-child {
-      margin: 0;
+    > * {
+      margin: 0 !important;
     }
   }
 `;

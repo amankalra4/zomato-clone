@@ -1,4 +1,3 @@
-import React from "react";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { container, innerContainer, rectangleSkeleton, textSkeleton } from "./styles";
 

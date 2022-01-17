@@ -1,5 +1,4 @@
 import { FormControl, MenuItem, Select } from "@material-ui/core";
-import React from "react";
 import { formClass } from "./styles";
 
 interface ICommonDropDown {

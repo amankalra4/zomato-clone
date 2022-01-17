@@ -22,7 +22,7 @@ import {
     Restaurant2,
     UserRating
 } from "@src/modules/interface/restuarant";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
     container,
     chipContainer,

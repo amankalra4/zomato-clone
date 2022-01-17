@@ -6,7 +6,7 @@ import {
   TextField
 } from "@material-ui/core";
 import DividerWithText from "@src/components/divider-with-text";
-import React, { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { GoogleButton } from "../login-modal";
 import { container } from "./styles";
 
@@ -16,13 +16,13 @@ const SignUpModal = () => {
   const [check, setCheck] = useState<boolean>(false);
 
   const handleCheckBox = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
     setCheck(checked);
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.name === "fullName") {
       setFullName(event.target.value);
     } else {

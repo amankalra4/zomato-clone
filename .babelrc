@@ -1,4 +1,11 @@
 {
-    "presets": [["next/babel"]],
-    "plugins": ["@emotion/babel-plugin"]
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": { "modules": false }
+      }
+    ]
+  ],
+  "plugins": ["@emotion/babel-plugin"]
 }

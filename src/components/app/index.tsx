@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import React from "react";
+import { ReactNode } from "react";
 import Header from "../header";
 import Searchbar from "../search-bar";
 import { searchBar, belowHeader } from "./styles";
@@ -8,7 +8,7 @@ const Footer = dynamic(() => import("../footer"));
 
 interface IAppProps extends IHeaderProps {
     showHeader?: boolean;
-    children?: React.ReactNode;
+    children?: ReactNode;
 }
 
 export interface IHeaderProps {

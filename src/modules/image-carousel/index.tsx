@@ -1,4 +1,3 @@
-import React from "react";
 import Glider, { GliderProps } from "react-glider";
 import "react-glider/glider.defaults.css";
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";

@@ -4,6 +4,7 @@ import BreadCrumbs from "@src/components/breadcrumbs";
 import ScrollableTabs from "@src/components/tabs";
 import { useRouter } from "next/router";
 import { changeToCamelCase } from "@src/modules/camel-case";
+import Container from "@src/components/container";
 
 const FirstOrder = () => {
   const { query } = useRouter();
@@ -15,12 +16,12 @@ const FirstOrder = () => {
   return (
     <App>
         <OgMetaData
-            title={`Food Devlivery - ${changeToCamelCase(cityName)}`}
+            title={`First Devlivery - ${changeToCamelCase(cityName)}`}
             description={`Food for your first order at - ${changeToCamelCase(
             cityName
           )}`}
         />
-        <div style={{ padding: "0 2rem" }}>
+        <Container>
           <BreadCrumbs pathArray={["Home", "India", cityName, area]} />
           <ScrollableTabs
               location={cityName}
@@ -30,7 +31,7 @@ const FirstOrder = () => {
               showByCuisine
               queryKey="first-order-restaurants"
           />
-        </div>
+        </Container>
     </App>
   );
 };

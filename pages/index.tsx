@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import React from "react";
 import OgMetaData from "@src/components/og-meta-combo";
 import Footer from "@src/components/footer";
 import HomePageData from "@src/components/home-page";

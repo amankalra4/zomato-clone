@@ -32,7 +32,7 @@ All APIs used here were provided by Zomato.
 - It also helped to have good UI experience by not having pagination but having infinite scroll.
 
 3. Debouncing
-- Used debouncing with the help of lodash.
+- Used debouncing with the help of lodash-es.
 
 4. SEO
 - Have used og meta tags to have a good SEO performance.
