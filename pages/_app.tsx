@@ -21,7 +21,7 @@ const queryClient = new QueryClient({
   }
 });
 
-const Helper = () => <ErrorComponent statusCode={500} url={window.location.pathname} />;
+const Helper = () => <ErrorComponent statusCode={500} _url={window.location.pathname} />;
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -32,6 +32,17 @@ function MyApp({ Component, pageProps }: AppProps) {
     return () => {
       Router.events.off("routeChangeError", () => setLoading(false));
     };
+  }, []);
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/service-worker.js", { scope: "/" }).then((registration) => {
+          console.log("Service worker registered: ", registration);
+        }).catch((registrationError) => {
+          console.log("Service worker registration failed: ", registrationError);
+        });
+      });
+    }
   }, []);
   return (
     <div className={globalStyle}>

@@ -10,18 +10,9 @@ const theme = createTheme({
             main: "#cecece",
             contrastText: "#fff"
         }
-        // error: {
-        //     main: '#f61c07',
-        // },
-        // success: {
-        //     main: '#20c913',
-        // },
-        // background: {
-        //     default: '#fff',
-        // },
     },
     typography: {
-        fontFamily: ["\"Mulish\"", "sans-serif"].join(","),
+        fontFamily: ["Mulish", "sans-serif"].join(","),
         button: {
             textTransform: "none",
             color: "#ef4f5f"

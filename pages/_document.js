@@ -11,8 +11,10 @@ class MyDocument extends Document {
       <Html>
         <Head>
         <link rel="icon" href="/icons/zomato.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" defer />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin defer />
+        <link rel="manifest" href="manifest.json" />
+        <link rel="preconnect" href="https://b.zmtcdn.com" />
+        <link rel="dns-prefetch" href="https://b.zmtcdn.com" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" defer />
         <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet" defer />
         </Head>
         <body>
