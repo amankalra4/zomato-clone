@@ -30,15 +30,13 @@ const TopBanner = () => {
   const isPhone = useDevice("767");
   return (
     <div className={topBannerContainer}>
-      <link rel="preload" href={HOME_PAGE_TOP_BANNER} as="image" />
       <img
           src={HOME_PAGE_TOP_BANNER}
           data-src={HOME_PAGE_TOP_BANNER}
           width="100%"
           height="100%"
           alt="home-page-top-banner"
-          loading="eager"
-          style={{ position: "absolute" }}
+          style={{ position: "absolute", objectFit: "cover" }}
       />
       <Header color="white" showLogo={false} />
       <div className={logoContainer} style={{ color: "white" }}>
@@ -73,8 +71,6 @@ const StaticImages = () => {
   ];
   return (
     <div className={imagesContainer}>
-      <link rel="preload" href={HOME_PAGE_ORDER_FOOD_ONLINE} as="image" />
-      <link rel="preload" href={HOME_PAGE_GO_OUT_FOR_A_MEAL} as="image" />
       {homePageImages.map((el, index) => (
         <div className={cardRoot} key={el}>
           <img

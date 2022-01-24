@@ -69,6 +69,7 @@ const TopData = ({ data }: ICardComponentProps) => (
                 height="100%"
                 alt={data.restaurant.name}
                 loading="lazy"
+                style={{ objectFit: "cover" }}
             />
           }
         />
