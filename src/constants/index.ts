@@ -3,6 +3,8 @@ import { commonHeader } from "./api-call";
 
 const endPoint = "https://b.zmtcdn.com";
 
+const cmsEndPoint = "https://images.prismic.io/zomato-clone";
+
 export const INIDAN_THUMBNAIL = `${endPoint}/images/countries/flags/country_1.png`;
 
 export const END_OF_SEARCH_RESULTS = `${endPoint}/web/assets/search/6d548ba48f0e4e4b46c19ad4b15a3f011615379209.jpeg`;
@@ -21,49 +23,47 @@ export const webAssets = `${endPoint}/web_assets`;
 
 export const footerImage = `${webAssets}/b40b97e677bc7b2ca77c58c61db266fe1603954218.png`;
 
-export const HOME_PAGE_LOGO = `${webAssets}/8313a97515fcb0447d2d77c276532a511583262271.png`;
+export const HOME_PAGE_LOGO = `${cmsEndPoint}/13ca225c-dcaf-4f13-af61-c053796e599a_zomato-logo.avif?auto=compress,format`;
 
-export const HOME_PAGE_TOP_BANNER = `${webAssets}/81f3ff974d82520780078ba1cfbd453a1583259680.png?fit=around|1000:400&crop=1000:400;*,*`;
+export const HOME_PAGE_TOP_BANNER = `${cmsEndPoint}/bcfad4e9-eb46-4f09-8c16-954954cb56f4_zomato-top-banner.webp?auto=compress,format`;
 
 /* ******************************************************************************************* */
 
 const assetsEndPoint = `${endPoint}/data/o2_assets`;
 
-export const DELIVERY_ICON_ENABLED = `${assetsEndPoint}/c0bb85d3a6347b2ec070a8db694588261616149578.png?output-format=webp`;
+export const DELIVERY_ICON_ENABLED = `${cmsEndPoint}/3bfc3197-3c0f-49fa-82ba-344f70a8e06b_zomato-delivery.avif?auto=compress,format`;
 
 export const DELIVERY_ICON_DISABLED = `${assetsEndPoint}/246bbd71fbba420d5996452be3024d351616150055.png?output-format=webp`;
 
 export const DINEOUT_ICON_ENABLED = `${assetsEndPoint}/30fa0a844f3ba82073e5f78c65c18b371616149662.png?output-format=webp`;
 
-export const DINEOUT_ICON_DISABLED = `${assetsEndPoint}/78d25215ff4c1299578ed36eefd5f39d1616149985.png`;
+export const DINEOUT_ICON_DISABLED = `${cmsEndPoint}/b9fe1bd6-3d93-4100-8132-7513bfee1889_zomato-dine-out-disabled.avif?auto=compress,format`;
 
 export const NIGHTLIFE_ICON_ENABLED = `${assetsEndPoint}/855687dc64a5e06d737dae45b7f6a13b1616149818.png`;
 
-export const NIGHTLIFE_ICON_DISABLED = `${assetsEndPoint}/01040767e4943c398e38e3592bb1ba8a1616150142.png`;
+export const NIGHTLIFE_ICON_DISABLED = `${cmsEndPoint}/219619bb-4a94-4e2d-89dd-7f6a9456b58e_zomato-night-life-disabled.webp?auto=compress,format`;
 
-export const FIRST_ORDER_PIZZA = `${assetsEndPoint}/d0bd7c9405ac87f6aa65e31fe55800941632716575.png`;
+export const FIRST_ORDER_PIZZA = `${cmsEndPoint}/fb9421e0-c9d0-4dfc-9604-e2b961c891ff_zomato-pizza.avif?auto=compress,format`;
 
 /* ******************************************************************************************* */
 
-const dishEndPoint = `${endPoint}/data/dish_images`;
+export const FIRST_ORDER_ROLLS = `${cmsEndPoint}/9ee44d1f-eded-4e08-94ac-8353c24a374a_zomato-rolls.avif?auto=compress,format`;
 
-export const FIRST_ORDER_ROLLS = `${dishEndPoint}/c2f22c42f7ba90d81440a88449f4e5891634806087.png`;
+export const FIRST_ORDER_CHICKEN = `${cmsEndPoint}/b13a2402-c4cd-4b94-ad40-d11a226e2201_zomato-chicken.webp?auto=compress,format`;
 
-export const FIRST_ORDER_CHICKEN = `${dishEndPoint}/197987b7ebcd1ee08f8c25ea4e77e20f1634731334.png`;
-
-export const FIRST_ORDER_BURGER = `${dishEndPoint}/ccb7dc2ba2b054419f805da7f05704471634886169.png`;
+export const FIRST_ORDER_BURGER = `${cmsEndPoint}/497ba0ea-ab76-4b0f-b591-5a91e9c5ca70_zomato-burger.avif?auto=compress,format`;
 
 /* ******************************************************************************************* */
 
 export const webFrontend = `${endPoint}/webFrontend`;
 
-export const HOME_PAGE_ORDER_FOOD_ONLINE = `${webFrontend}/64dffaa58ffa55a377cdf42b6a690e721585809275.png`;
+export const HOME_PAGE_ORDER_FOOD_ONLINE = `${cmsEndPoint}/f5f8fea4-465d-4f3a-a685-d0bc87d7097c_zomato-2.avif?auto=compress,format`;
 
-export const HOME_PAGE_GO_OUT_FOR_A_MEAL = `${webFrontend}/95f005332f5b9e71b9406828b63335331585809309.png`;
+export const HOME_PAGE_GO_OUT_FOR_A_MEAL = `${cmsEndPoint}/591ca46c-11b3-4a0f-b49a-1f9e4a120b77_zomato-1.avif?auto=compress,format`;
 
-export const HOME_PAGE_ZOMATO_PRO = `${webFrontend}/b256d0dd8a29f9e0623ecaaea910534d1585809352.png`;
+export const HOME_PAGE_ZOMATO_PRO = `${cmsEndPoint}/7cd2e681-b6d8-4f08-b589-021ff37dbd34_zomato-pro.avif?auto=compress,format`;
 
-export const HOME_PAGE_NIGHT_LIFE = `${webFrontend}/8ff4212b71b948ed5b6d2ce0d2bc99981594031410.png`;
+export const HOME_PAGE_NIGHT_LIFE = `${cmsEndPoint}/1fd0b75b-31db-43ef-a5ee-84392040e27b_zomato-night-life.webp?auto=compress,format`;
 
 /* ******************************************************************************************* */
 
