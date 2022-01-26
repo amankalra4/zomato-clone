@@ -16,8 +16,22 @@ const cardsRoot = css`
   border-radius: 8px !important;
 `;
 
+const mediaRoot = css`
+  &:hover {
+    img {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
+  }
+`;
+
 const media = css`
   height: 140px;
+  > img {
+    object-fit: cover;
+    transition: transform 0.4s ease-in-out 0s, opacity 1.63s ease 0s,
+      filter 0.4s ease 0s;
+  }
 `;
 
 const ellipsis = css`
@@ -42,10 +56,11 @@ const cuisinesContainer = css`
 `;
 
 export {
-    cardsContainer,
-    cardsRoot,
-    media,
-    ellipsis,
-    nameContainer,
-    cuisinesContainer
+  cardsContainer,
+  cardsRoot,
+  media,
+  ellipsis,
+  nameContainer,
+  cuisinesContainer,
+  mediaRoot
 };

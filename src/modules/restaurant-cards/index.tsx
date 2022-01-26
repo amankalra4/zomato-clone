@@ -16,7 +16,8 @@ import {
   cuisinesContainer,
   ellipsis,
   media,
-  nameContainer
+  nameContainer,
+  mediaRoot
 } from "./styles";
 
 interface ICardProps {
@@ -58,7 +59,7 @@ const TopData = ({ data }: ICardComponentProps) => (
         .toLowerCase()}?id=${data.restaurant.id}`}
         key={data.restaurant.id}
     >
-      <div>
+      <div className={mediaRoot}>
         <CardMedia
             className={media}
             title={data.restaurant.name}
@@ -69,7 +70,6 @@ const TopData = ({ data }: ICardComponentProps) => (
                 height="100%"
                 alt={data.restaurant.name}
                 loading="lazy"
-                style={{ objectFit: "cover" }}
             />
           }
         />
