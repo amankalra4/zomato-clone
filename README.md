@@ -28,7 +28,7 @@ All APIs used here were provided by Zomato.
 
 2. Infinite Scrolling
 - Implemented with the help of react-query to load more data based on user requirement.
-- This helped us to limit the unnecessary API calls if user find the restaurant earlier while searching.
+- This helped us to limit the unnecessary API calls if user finds the restaurant earlier while searching.
 - It also helped to have good UI experience by not having pagination but having infinite scroll.
 
 3. Debouncing
@@ -38,13 +38,16 @@ All APIs used here were provided by Zomato.
 - Have used og meta tags to have a good SEO performance.
 
 5. Web Vitals
-- Since web vitals is one of the core performance metric of a website, we have used all the required techniques to have good LCP, CLS, TBT score so as to have good performance.
+- Since web vitals is one of the core performance metric of a website, we have used all the required techniques to have good LCP, CLS, TBT score.
 - Pre loaded images wherever required to have less LCP.
 - Used Emotion CSS, Skeletons to avoid layout shift.
 - Used light weight packages like - react glider to have less TBT.
 
 6. Created custom hooks
-- Created custom hooks whereever required so as to have easy development.
+- Created custom hooks wherever required so as to have easy development.
 
 7. Deployment
 - Deployed the application on vercel.
+
+8. PWA
+- Have made the application compatible on any device with the help of PWA.
