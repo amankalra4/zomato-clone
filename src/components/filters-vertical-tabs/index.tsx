@@ -1,7 +1,6 @@
 import { ReactNode, useState, ChangeEvent } from "react";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import dynamic from "next/dynamic";
 import classes from "./styles.module.scss";
@@ -26,17 +25,18 @@ function TabPanel(props: TabPanelProps) {
         id={`vertical-tabpanel-${index}`}
         aria-labelledby={`vertical-tab-${index}`}
         {...other}
+        style={{ flexGrow: 0.9, display: "flex" }}
     >
       {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
+        <Box p={3} style={{ width: "100%" }}>
+          {children}
         </Box>
       )}
     </div>
   );
 }
 
-export default function VerticalTabs() {
+export default function VerticalTabs({ currency }: { currency: string }) {
   const [value, setValue] = useState(0);
   const filterTypes = ["Cuisines", "Rating", "Cost Per Person"];
   // const [filteredObject, setFilteredObject] = useState({ cuisines: {}, rating: 0, cost })
@@ -64,7 +64,7 @@ export default function VerticalTabs() {
         <RatingFilter />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <CostPerPersonSlider />
+        <CostPerPersonSlider currency={currency} />
       </TabPanel>
     </div>
   );

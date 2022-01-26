@@ -32,7 +32,7 @@ const chipData: ChipData[] = [
   }
 ];
 
-const CustomFilters = () => {
+const CustomFilters = ({ currency }: { currency: string }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -44,7 +44,7 @@ const CustomFilters = () => {
   return (
     <div className={container}>
       {chipData.map((el) => <Chip key={el.label} avatar={el.icon} label={el.label} className={chip} onClick={handleOpen} />)}
-      {open && <FilterModal show={open} onHide={handleClose} />}
+      {open && <FilterModal show={open} onHide={handleClose} currency={currency} />}
     </div>
   );
 };

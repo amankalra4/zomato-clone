@@ -5,9 +5,10 @@ import VerticalTabs from "../filters-vertical-tabs";
 interface IFilterModalProps {
     show: boolean;
     onHide: () => void;
+    currency: string;
 }
 
-const FilterModal = ({ show, onHide }: IFilterModalProps) => {
+const FilterModal = ({ show, onHide, currency }: IFilterModalProps) => {
     return (
         <Modal
             onHide={onHide}
@@ -21,7 +22,7 @@ const FilterModal = ({ show, onHide }: IFilterModalProps) => {
                 <Modal.Title id="contained-modal-title-vcenter">Filters</Modal.Title>
             </Modal.Header>
             <Modal.Body style={{ padding: 0 }}>
-                <VerticalTabs />
+                <VerticalTabs currency={currency} />
             </Modal.Body>
             <Modal.Footer style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Button variant="contained" style={{ marginRight: "20px" }}>
