@@ -1,5 +1,6 @@
 import Box from "@material-ui/core/Box";
 import Modal from "@material-ui/core/Modal";
+import useDevice from "@src/custom-hooks/use-is-Phone";
 import CircularLoader from "./circular-loader";
 
 const style = {
@@ -7,7 +8,6 @@ const style = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
     bgcolor: "background.paper",
     border: "none",
     boxShadow: 24,
@@ -16,10 +16,11 @@ const style = {
 };
 
 export default function BasicModal() {
+    const isPhone = useDevice("560");
     return (
         <div>
             <Modal open>
-                <Box sx={style}>
+                <Box sx={style} style={{ width: isPhone ? "90%" : "400px" }}>
                     <CircularLoader />
                 </Box>
             </Modal>
