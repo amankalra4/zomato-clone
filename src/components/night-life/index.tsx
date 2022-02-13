@@ -1,16 +1,8 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import { ArrowRight } from "@material-ui/icons";
-import {
-    NIGHTLIFE_IMAGE_1,
-    NIGHTLIFE_IMAGE_2,
-    NIGHTLIFE_IMAGE_3,
-    NIGHTLIFE_IMAGE_4
-} from "@src/constants";
+import { NIGHTLIFE_IMAGE_1, NIGHTLIFE_IMAGE_2, NIGHTLIFE_IMAGE_3, NIGHTLIFE_IMAGE_4 } from "@src/constants";
 import Link from "next/link";
 import { imageSubHeading, nightLife, subHeading } from "./styles";
-
-interface INightLifeProps {
-    location: string;
-}
 
 export type nightLifeCollection = {
     text: string;
@@ -42,7 +34,7 @@ const nightLifeCollectionArray: nightLifeCollection[] = [
     }
 ];
 
-const NightLife = ({ location }: INightLifeProps) => {
+const NightLife = ({ location }: { location: string }) => {
     return (
         <div>
             <CommonHeading location={location} />
@@ -51,13 +43,11 @@ const NightLife = ({ location }: INightLifeProps) => {
     );
 };
 
-export const CommonHeading = ({ location }: INightLifeProps) => (
+export const CommonHeading = ({ location }: { location: string }) => (
     <>
         <h1>Collections</h1>
         <h4 className={subHeading}>
-            Explore restaurants, cafes, pubs, and bars in 
-            {" "}
-            <strong>{location}</strong>
+            Explore restaurants, cafes, pubs, and bars in <strong>{location}</strong>
         </h4>
     </>
 );
@@ -72,21 +62,19 @@ export const CommonBanners = ({ imagesTextArray }: ICommonBannerProps) => (
                 <Link href={el.url ? el.url : "#"} passHref>
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a target={el.url ? "_blank" : "_self"}>
-                    <img src={el.images} alt="night-life" height="100%" width="100%" />
-                    <div className={imageSubHeading}>
-                        <h5>{el.text}</h5>
-                        <h5>
-                            {el.numberOfPlaces}
-                            {" "}
-                            Places
-                            <ArrowRight />
-                        </h5>
-                    </div>
+                        <img src={el.images} alt="night-life" height="100%" width="100%" />
+                        <div className={imageSubHeading}>
+                            <h5>{el.text}</h5>
+                            <h5>
+                                {el.numberOfPlaces} Places
+                                <ArrowRight />
+                            </h5>
+                        </div>
                     </a>
                 </Link>
             </div>
         ))}
     </div>
-); 
+);
 
 export default NightLife;

@@ -1,97 +1,73 @@
 import { useEffect } from "react";
 import { CARDS_TO_BE_SHOWN, getRestaurants } from "@src/constants";
 import { useInfiniteQuery, useQueryClient } from "react-query";
+import { RestaurantRootInterface } from "@src/modules/interface/restuarant";
 
-const getPaginatedRestaurants = async (
-  cityId: string,
-  secondParam: string,
-  resultStart: number
-) => {
-  const result = await getRestaurants(
-    cityId,
-    undefined,
-    secondParam as string,
-    resultStart,
-    100 - resultStart < CARDS_TO_BE_SHOWN
-      ? 100 - resultStart
-      : CARDS_TO_BE_SHOWN
-  );
-  return result.data;
+const getPaginatedRestaurants = async (cityId: string, cuisineId: string, resultStart: number, cityName: string) => {
+    const result = await getRestaurants(
+        cityId,
+        cuisineId ? undefined : cityName,
+        cuisineId as string,
+        resultStart,
+        100 - resultStart < CARDS_TO_BE_SHOWN ? 100 - resultStart : CARDS_TO_BE_SHOWN
+    );
+    return result.data;
 };
 
 interface IInfiniteScrollProps {
-  cityId: string;
-  secondParam: string;
-  queryKey: string;
+    cityId: string;
+    cuisineId: string;
+    queryKey: string;
+    cityName: string;
 }
 
-const useInfiniteScroll = ({
-  cityId,
-  secondParam,
-  queryKey
-}: IInfiniteScrollProps) => {
-  const queryClient = useQueryClient();
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-    isFetched,
-    isLoading
-  } = useInfiniteQuery(
-    queryKey,
-    ({ pageParam = 0 }) =>
-      getPaginatedRestaurants(cityId, secondParam, pageParam),
-    {
-      getNextPageParam: (lastPage, allPages) => {
-        const totalPages =
-          lastPage.results_found > 100 ? 100 : lastPage.results_found;
-        const maxPages = totalPages / CARDS_TO_BE_SHOWN + 1;
-        const nextPage = allPages.length + 1;
-        return nextPage <= maxPages
-          ? lastPage.results_shown + lastPage.results_start
-          : undefined;
-      }
-    }
-  );
+const useInfiniteScroll = ({ cityId, cuisineId, queryKey, cityName }: IInfiniteScrollProps) => {
+    const queryClient = useQueryClient();
+    const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status, isFetched, isLoading } =
+        useInfiniteQuery<RestaurantRootInterface>(
+            queryKey,
+            ({ pageParam = 0 }) => getPaginatedRestaurants(cityId, cuisineId, pageParam, cityName),
+            {
+                getNextPageParam: (lastPage, allPages) => {
+                    const totalPages = lastPage.results_found > 100 ? 100 : lastPage.results_found;
+                    const maxPages = totalPages / CARDS_TO_BE_SHOWN + 1;
+                    const nextPage = allPages.length + 1;
+                    return nextPage <= maxPages ? lastPage.results_shown + lastPage.results_start : undefined;
+                }
+            }
+        );
 
-  useEffect(() => {
-    queryClient.fetchInfiniteQuery(queryKey);
-  }, [cityId]);
+    useEffect(() => {
+        queryClient.fetchInfiniteQuery(queryKey);
+        queryClient.fetchQuery("get-cuisines");
+    }, [cityId]);
 
-  useEffect(() => {
-    let fetching = false;
-    const onScroll = async (event: any) => {
-      const { scrollHeight, scrollTop, clientHeight } =
-        event.target.scrollingElement;
-      if (
-        !fetching &&
-        scrollHeight - scrollTop <= clientHeight * 3 &&
-        isFetched
-      ) {
-        fetching = true;
-        if (hasNextPage) await fetchNextPage();
-        fetching = false;
-      }
+    useEffect(() => {
+        let fetching = false;
+        const onScroll = async (event: any) => {
+            const { scrollHeight, scrollTop, clientHeight } = event.target.scrollingElement;
+            if (!fetching && scrollHeight - scrollTop <= clientHeight * 3 && isFetched) {
+                fetching = true;
+                if (hasNextPage) await fetchNextPage();
+                fetching = false;
+            }
+        };
+
+        if (isFetched && data?.pages[0].results_found! > CARDS_TO_BE_SHOWN) {
+            document.addEventListener("scroll", onScroll);
+        }
+        return () => {
+            document.removeEventListener("scroll", onScroll);
+        };
+    }, [isFetched, hasNextPage]);
+    return {
+        data,
+        error,
+        isFetchingNextPage,
+        status,
+        hasNextPage,
+        isLoading
     };
-
-    if (isFetched && data?.pages[0].results_found > CARDS_TO_BE_SHOWN) {
-      document.addEventListener("scroll", onScroll);
-    }
-    return () => {
-      document.removeEventListener("scroll", onScroll);
-    };
-  }, [isFetched, hasNextPage]);
-  return {
-    data,
-    error,
-    isFetchingNextPage,
-    status,
-    hasNextPage,
-    isLoading
-  };
 };
 
 export default useInfiniteScroll;

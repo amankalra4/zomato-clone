@@ -22,6 +22,7 @@ const imageContainer = css`
     width: 80%;
     display: flex;
     margin: 0 auto;
+    object-fit: contain;
   }
   @media (max-width: 576px) {
     height: 320px;

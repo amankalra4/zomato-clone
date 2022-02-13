@@ -49,7 +49,7 @@ export const FIRST_ORDER_PIZZA = `${cmsEndPoint}/fb9421e0-c9d0-4dfc-9604-e2b961c
 
 export const FIRST_ORDER_ROLLS = `${cmsEndPoint}/9ee44d1f-eded-4e08-94ac-8353c24a374a_zomato-rolls.avif?auto=compress,format`;
 
-export const FIRST_ORDER_CHICKEN = `${cmsEndPoint}/b13a2402-c4cd-4b94-ad40-d11a226e2201_zomato-chicken.webp?auto=compress,format`;
+export const FIRST_ORDER_SANDWICH = `${cmsEndPoint}/0adf3f83-97a7-4a49-ade0-24e31c1cb87f_sandwich.avif?auto=compress,format`;
 
 export const FIRST_ORDER_BURGER = `${cmsEndPoint}/497ba0ea-ab76-4b0f-b591-5a91e9c5ca70_zomato-burger.avif?auto=compress,format`;
 
@@ -80,43 +80,43 @@ export const NIGHTLIFE_IMAGE_4 = `${collectionEndPoint}/9a3e5fb300b74eb5a3b22f8a
 /* ******************************************************************************************* */
 
 export const language = [
-  "Türkçe",
-  "हिंदी",
-  "Português (BR)",
-  "Indonesian",
-  "Português (PT)",
-  "Español",
-  "Čeština",
-  "Slovenčina",
-  "Polish",
-  "Italian",
-  "Vietnamese"
+    "Türkçe",
+    "हिंदी",
+    "Português (BR)",
+    "Indonesian",
+    "Português (PT)",
+    "Español",
+    "Čeština",
+    "Slovenčina",
+    "Polish",
+    "Italian",
+    "Vietnamese"
 ];
 
 export const countries = [
-  "Australia",
-  "Brazil",
-  "Canada",
-  "Chile",
-  "Czech Republic",
-  "Indonesia",
-  "Ireland",
-  "Italy",
-  "Lebanon",
-  "Malaysia",
-  "New Zealand",
-  "Phillippines",
-  "Poland",
-  "Portugal",
-  "Qatar",
-  "Singapore",
-  "Slovakia",
-  "South Africa",
-  "Sri Lanka",
-  "Turkey",
-  "UAE",
-  "United Kingdom",
-  "USA"
+    "Australia",
+    "Brazil",
+    "Canada",
+    "Chile",
+    "Czech Republic",
+    "Indonesia",
+    "Ireland",
+    "Italy",
+    "Lebanon",
+    "Malaysia",
+    "New Zealand",
+    "Phillippines",
+    "Poland",
+    "Portugal",
+    "Qatar",
+    "Singapore",
+    "Slovakia",
+    "South Africa",
+    "Sri Lanka",
+    "Turkey",
+    "UAE",
+    "United Kingdom",
+    "USA"
 ];
 
 export const CARDS_TO_BE_SHOWN = 12;
@@ -124,44 +124,55 @@ export const CARDS_TO_BE_SHOWN = 12;
 export const GET_LOCATIONS = "locations?query=%s&count=10";
 
 export const getCities = (cityName: string) => {
-  const cityURL = `cities?q=${cityName}`;
-  return commonHeader(cityURL)
-    .then((res) => res.data)
-    .catch((err) => err);
+    const cityURL = `cities?q=${cityName}`;
+    return commonHeader(cityURL)
+        .then((res) => res.data)
+        .catch((err) => err);
 };
 
 export const getRestaurants = (
-  entityId: string,
-  cityName?: string | undefined,
-  cuisineId?: string,
-  start = 0,
-  count = CARDS_TO_BE_SHOWN
+    entityId: string,
+    cityName?: string | undefined,
+    cuisineId?: string,
+    start = 0,
+    count = CARDS_TO_BE_SHOWN
 ) => {
-  const commonURL = `search?entity_id=${entityId}&entity_type=city&start=${start}&count=${count}`;
-  let appendedString = "";
-  // if case is for restuarnt search in search bar
-  // else case is for searching a particular cuisine in an area.
-  if (cityName && entityId) {
-    appendedString = `&q=${cityName}`;
-  } else {
-    appendedString = `&cuisines=${cuisineId}`;
-  }
-  const finalURL = commonURL + appendedString;
-  return commonHeader(finalURL)
-    .then((res) => {
-      return { status: res.status, data: res.data };
-    })
-    .catch((err) => {
-      return { status: err?.response?.status, data: undefined };
-    });
+    const commonURL = `search?entity_id=${entityId}&entity_type=city&start=${start}&count=${count}`;
+    let appendedString = "";
+    // if case is for restuarnt search in search bar
+    // else case is for searching a particular cuisine in an area.
+    if (cityName && entityId) {
+        appendedString = `&q=${cityName}`;
+    } else {
+        appendedString = `&cuisines=${cuisineId}`;
+    }
+    const finalURL = commonURL + appendedString;
+    return commonHeader(finalURL)
+        .then((res) => {
+            return { status: res.status, data: res.data };
+        })
+        .catch((err) => {
+            return { status: err?.response?.status, data: undefined };
+        });
 };
 
 export const getRestaurantDetails = (resId: string) => {
-  const restaurantURL = `restaurant?res_id=${resId}`;
-  return commonHeader(restaurantURL).then((res) => res.data).catch((err) => err?.response?.status);
+    const restaurantURL = `restaurant?res_id=${resId}`;
+    return commonHeader(restaurantURL)
+        .then((res) => res.data)
+        .catch((err) => err?.response?.status);
 };
 
 export const getCollections = (cityId: string, count = 4) => {
-  const collectionsURL = `collections?city_id=${cityId}&count=${count}`;
-  return commonHeader(collectionsURL).then((res) => res.data).catch((err) => err?.response?.status);
+    const collectionsURL = `collections?city_id=${cityId}&count=${count}`;
+    return commonHeader(collectionsURL)
+        .then((res) => res.data)
+        .catch((err) => err?.response?.status);
+};
+
+export const getCuisines = (cityId: string) => {
+    const collectionsURL = `cuisines?city_id=${cityId}`;
+    return commonHeader(collectionsURL)
+        .then((res) => res.data)
+        .catch((err) => err?.response?.status);
 };

@@ -1,16 +1,10 @@
-import {
-    FIRST_ORDER_BURGER,
-    FIRST_ORDER_CHICKEN,
-    FIRST_ORDER_PIZZA,
-    FIRST_ORDER_ROLLS
-} from "@src/constants";
+import { FIRST_ORDER_BURGER, FIRST_ORDER_SANDWICH, FIRST_ORDER_PIZZA, FIRST_ORDER_ROLLS } from "@src/constants";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { ButtonBase } from "@material-ui/core";
-import { IScrollableTabsProps } from "../tabs";
 import { container, firstOrderImage, firstOrderImages, heading, imagesContainer } from "./styles";
 
-type firsOrderItems = "Pizza" | "Burger" | "Rolls" | "Chicken";
+type firsOrderItems = "Pizza" | "Burger" | "Rolls" | "Sandwich";
 
 type orderObject = {
     image: string;
@@ -35,18 +29,14 @@ const firstOrderArray: Array<orderObject> = [
         cuisineId: "1023"
     },
     {
-        image: FIRST_ORDER_CHICKEN,
-        text: "Chicken",
-        cuisineId: "994"
+        image: FIRST_ORDER_SANDWICH,
+        text: "Sandwich",
+        cuisineId: "304"
     }
 ];
 
-const FirstOrderSection = ({
-    location,
-    area,
-    cityId
-}: IScrollableTabsProps) => {
-    const { push } = useRouter();
+const FirstOrderSection = () => {
+    const { push, query } = useRouter();
     return (
         <div className={container}>
             <h1 className={heading}>Inspiration for your first order</h1>
@@ -58,10 +48,9 @@ const FirstOrderSection = ({
                                 push({
                                     pathname: "first-order",
                                     query: {
-                                        cityName: location,
+                                        ...query,
                                         cuisineId: el.cuisineId,
-                                        cityId,
-                                        area
+                                        item: el.text
                                     }
                                 })
                             }

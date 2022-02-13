@@ -1,51 +1,29 @@
-import { makeStyles } from "@material-ui/core/styles";
-import Rating from "@material-ui/lab/Rating";
-import Box from "@material-ui/core/Box";
-import { useState } from "react";
+import { useContext, useState, ChangeEvent } from "react";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import { OrderContext, orderType } from "../filters";
 
-const labels: { [index: string]: string } = {
-    0.5: "Useless",
-    1: "Useless+",
-    1.5: "Poor",
-    2: "Poor+",
-    2.5: "Ok",
-    3: "Ok+",
-    3.5: "Good",
-    4: "Good+",
-    4.5: "Excellent",
-    5: "Excellent+"
-};
+const RatingFilter = ({ handleRatingChange }: { handleRatingChange: (value: orderType) => void }) => {
+    const { rating } = useContext(OrderContext);
+    const [value, setValue] = useState<orderType>(rating);
 
-const useStyles = makeStyles({
-    root: {
-        width: 200,
-        display: "flex",
-        alignItems: "center"
-    }
-});
-
-const RatingFilter = () => {
-    const [value, setValue] = useState<number | null>(2);
-    const [hover, setHover] = useState(-1);
-    const classes = useStyles();
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        handleRatingChange((event.target as HTMLInputElement).value as orderType);
+        setValue((event.target as HTMLInputElement).value as orderType);
+    };
 
     return (
-        <div className={classes.root}>
-            <Rating
-                name="hover-feedback"
-                value={value}
-                precision={0.5}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
-                }}
-                onChangeActive={(event, newHover) => {
-                    setHover(newHover);
-                }}
-            />
-            {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
-            )}
-        </div>
+        <>
+            <h5>Rating</h5>
+            <FormControl component="fieldset">
+                <RadioGroup value={value} onChange={handleChange}>
+                    <FormControlLabel value="desc" control={<Radio color="primary" />} label="Rating: High to Low" />
+                    <FormControlLabel value="asc" control={<Radio color="primary" />} label="Rating: Low to High" />
+                </RadioGroup>
+            </FormControl>
+        </>
     );
 };
 
