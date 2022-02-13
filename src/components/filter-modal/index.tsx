@@ -21,7 +21,7 @@ const FilterModal = ({ show, onHide, handleClearAll, handleApply, children, clea
         <Modal
             onHide={onHide}
             show={show}
-            size="md"
+            size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
             style={{ maxHeight: "70%", position: "absolute", top: "16%" }}
