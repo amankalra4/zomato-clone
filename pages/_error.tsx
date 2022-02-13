@@ -1,7 +1,7 @@
 import { ReactText } from "react";
 import Head from "next/head";
 import { NextPageContext } from "next";
-import App from "@src/components/app";
+import AppWrapper from "@src/components/app";
 import dynamic from "next/dynamic";
 import { ERROR_404_IMAGE, ERROR_500_IMAGE } from "@src/constants";
 
@@ -21,15 +21,12 @@ function ErrorComponent(props: IProps) {
         <>
             <Head>
                 <title>{title}</title>
-                <meta
-                    name="description"
-                    content="We can't seem to find what you're looking for."
-                />
+                <meta name="description" content="We can't seem to find what you're looking for." />
                 <link rel="canonical" href={_url} />
             </Head>
-            <App>
+            <AppWrapper>
                 <ErrorFallback heading={title} imageURL={imageURL} />
-            </App>
+            </AppWrapper>
         </>
     );
 }

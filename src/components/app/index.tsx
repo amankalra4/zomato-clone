@@ -16,12 +16,7 @@ export interface IHeaderProps {
     showLogo?: boolean;
 }
 
-const App = ({
-    showHeader = true,
-    children,
-    color = "black",
-    showLogo = true
-}: IAppProps) => {
+const AppWrapper = ({ showHeader = true, children, color = "black", showLogo = true }: IAppProps) => {
     return (
         <div>
             {showHeader && <Header color={color} showLogo={showLogo} />}
@@ -36,4 +31,4 @@ const App = ({
     );
 };
 
-export default App;
+export default AppWrapper;

@@ -20,11 +20,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-interface IDividerProps {
-    text: string;
-}
-
-const DividerWithText = ({ text }: IDividerProps) => {
+const DividerWithText = ({ text }: { text: string }) => {
     const classes = useStyles();
     return (
         <div className={classes.container}>

@@ -1,27 +1,8 @@
-import {
-    ButtonBase,
-    Chip,
-    Collapse,
-    IconButton,
-    Typography
-} from "@material-ui/core";
-import {
-    Call,
-    Close,
-    Directions,
-    MenuBook,
-    Share,
-    Check,
-    StarRate,
-    QueryBuilder
-} from "@material-ui/icons";
+import { ButtonBase, Chip, Collapse, IconButton, Typography } from "@material-ui/core";
+import { Call, Close, Directions, MenuBook, Share, Check, StarRate, QueryBuilder } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 import ImageCarousel from "@src/modules/image-carousel";
-import {
-    Photo,
-    Restaurant2,
-    UserRating
-} from "@src/modules/interface/restuarant";
+import { Photo, Restaurant2, UserRating } from "@src/modules/interface/restuarant";
 import { useEffect, useState } from "react";
 import {
     container,
@@ -38,10 +19,7 @@ import {
     timingsClass
 } from "./styles";
 
-interface IRestaurantData {
-    restaurantInfo: Restaurant2;
-}
-const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
+const RestaurantData = ({ restaurantInfo }: { restaurantInfo: Restaurant2 }) => {
     const [showAlert, setShowAlert] = useState(false);
     const mapsURL = "https://www.google.com/maps";
 
@@ -92,9 +70,7 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
             <div className={chipContainer}>
                 {restaurantInfo.is_delivering_now ? (
                     <ButtonBase href={restaurantInfo.order_url!} target="_blank">
-                        <div className={orderNow}>
-                            Order Now
-                        </div>
+                        <div className={orderNow}>Order Now</div>
                     </ButtonBase>
                 ) : null}
                 <ButtonBase
@@ -131,20 +107,14 @@ const RestaurantData = ({ restaurantInfo }: IRestaurantData) => {
                     {`${restaurantInfo.currency} ${restaurantInfo.average_cost_for_two} for two people (approx.)`}
                 </p>
             </div>
-            <ImagesByPeople
-                photos={restaurantInfo.photos}
-                firstImage={restaurantInfo.thumb}
-            />
+            <ImagesByPeople photos={restaurantInfo.photos} firstImage={restaurantInfo.thumb} />
         </div>
     );
 };
 
 export default RestaurantData;
 
-interface IMoreInfoProps {
-    highlights: string[];
-}
-const MoreInfo = ({ highlights }: IMoreInfoProps) => (
+const MoreInfo = ({ highlights }: { highlights: string[] }) => (
     <div className={moreInfoContainer}>
         <h3>More Information for you</h3>
         <div>
@@ -155,20 +125,14 @@ const MoreInfo = ({ highlights }: IMoreInfoProps) => (
     </div>
 );
 
-interface IPhoneNumbersProps {
-    phoneNumbers: string;
-}
-const PhoneNumbers = ({ phoneNumbers }: IPhoneNumbersProps) => (
+const PhoneNumbers = ({ phoneNumbers }: { phoneNumbers: string }) => (
     <div className={phoneNumberContainer}>
         <Chip icon={<Call />} label="Phone Number(s)" color="primary" />
         <p>{phoneNumbers}</p>
     </div>
 );
 
-interface IRatingProps {
-    rating: UserRating;
-}
-export const Rating = ({ rating }: IRatingProps) => (
+export const Rating = ({ rating }: { rating: UserRating }) => (
     <Typography
         style={{
             background: `#${rating.rating_color}`,
@@ -191,10 +155,7 @@ export const Rating = ({ rating }: IRatingProps) => (
     </Typography>
 );
 
-interface ITimingsProps {
-    timings: string;
-}
-const Timings = ({ timings }: ITimingsProps) => (
+const Timings = ({ timings }: { timings: string }) => (
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
         <QueryBuilder color="primary" />
         <p>{timings}</p>

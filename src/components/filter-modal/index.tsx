@@ -1,34 +1,44 @@
 import { Button } from "@material-ui/core";
+import { ReactNode, memo } from "react";
 import { Modal } from "react-bootstrap";
-import VerticalTabs from "../filters-vertical-tabs";
 
 interface IFilterModalProps {
     show: boolean;
     onHide: () => void;
-    currency: string;
+    handleClearAll?: () => void;
+    handleApply: () => void;
+    children: ReactNode;
+    clearAllNotRequired?: boolean;
 }
 
-const FilterModal = ({ show, onHide, currency }: IFilterModalProps) => {
+const FilterModal = ({ show, onHide, handleClearAll, handleApply, children, clearAllNotRequired = false }: IFilterModalProps) => {
+    const handleApplyClick = () => {
+        handleApply();
+        onHide();
+    };
+
     return (
         <Modal
             onHide={onHide}
             show={show}
-            size="lg"
+            size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-            style={{ padding: "0 20px", borderRadius: "16px" }}
+            style={{ maxHeight: "70%", position: "absolute", top: "16%" }}
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">Filters</Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{ padding: 0 }}>
-                <VerticalTabs currency={currency} />
-            </Modal.Body>
-            <Modal.Footer style={{ display: "flex", justifyContent: "flex-end" }}>
-                <Button variant="contained" style={{ marginRight: "20px" }}>
-                    Clear All
-                </Button>
-                <Button variant="contained" color="primary">
+            <Modal.Body>{children}</Modal.Body>
+            <Modal.Footer
+                style={{ display: "flex", justifyContent: "flex-end", position: "sticky", bottom: 0, background: "white" }}
+            >
+                {!clearAllNotRequired && (
+                    <Button variant="contained" style={{ marginRight: "20px" }} onClick={handleClearAll}>
+                        Clear All
+                    </Button>
+                )}
+                <Button variant="contained" color="primary" onClick={handleApplyClick}>
                     Apply
                 </Button>
             </Modal.Footer>
@@ -36,4 +46,4 @@ const FilterModal = ({ show, onHide, currency }: IFilterModalProps) => {
     );
 };
 
-export default FilterModal;
+export default memo(FilterModal);

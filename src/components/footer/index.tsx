@@ -1,14 +1,7 @@
 import Image from "next/image";
 import { countries, language, footerImage } from "../../constants";
 import CommonDropDown from "./lang-country";
-import {
-    container,
-    countryInfo,
-    image,
-    infoContainer,
-    logoContainer,
-    subHeading
-} from "./styles";
+import { container, countryInfo, image, infoContainer, logoContainer, subHeading } from "./styles";
 
 const Footer = () => (
     <footer>
@@ -23,13 +16,7 @@ const Logo = () => {
     return (
         <div className={logoContainer}>
             <div className={image}>
-                <Image
-                    src={footerImage}
-                    alt="Zomato Footer"
-                    loading="lazy"
-                    width={100}
-                    height={25}
-                />
+                <Image src={footerImage} alt="Zomato Footer" loading="lazy" width={100} height={25} />
             </div>
             <div className={countryInfo}>
                 <CommonDropDown title="India" value={countries} />
@@ -42,14 +29,7 @@ const Logo = () => {
 type HeadingType = "Company" | "For Foodies" | "Restaurants" | "For You";
 
 type SubHeadingType =
-    | [
-        "Who We Are",
-        "Blog",
-        "Careers",
-        "Report Fraud",
-        "Contact",
-        "Investor Relations"
-    ]
+    | ["Who We Are", "Blog", "Careers", "Report Fraud", "Contact", "Investor Relations"]
     | ["Code of Conduct", "Community", "Blogger Help", "Mobile Apps"]
     | ["Add Restaurants"]
     | ["Privacy", "Terms", "Security", "Sitemap"];
@@ -62,14 +42,7 @@ type InfoArray = {
 const infoArray: InfoArray[] = [
     {
         heading: "Company",
-        subHeading: [
-            "Who We Are",
-            "Blog",
-            "Careers",
-            "Report Fraud",
-            "Contact",
-            "Investor Relations"
-        ]
+        subHeading: ["Who We Are", "Blog", "Careers", "Report Fraud", "Contact", "Investor Relations"]
     },
     {
         heading: "For Foodies",
@@ -96,11 +69,7 @@ const Info = () => (
     </div>
 );
 
-interface ISubHeading {
-    data: string[];
-}
-
-const SubHeading = ({ data }: ISubHeading) => (
+const SubHeading = ({ data }: { data: string[] }) => (
     <>
         {data.map((el) => (
             <p key={el} className={subHeading}>
