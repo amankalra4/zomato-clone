@@ -2,17 +2,12 @@ import AppWrapper from "@src/components/app";
 import OgMetaData from "@src/components/og-meta-combo";
 import BreadCrumbs from "@src/components/breadcrumbs";
 import ScrollableTabs from "@src/components/tabs";
-import { useRouter } from "next/router";
 import { changeToCamelCase } from "@src/modules/camel-case";
 import Container from "@src/components/container";
+import useLocationInfo from "@custom-hooks/use-location-info";
 
 const Locations = () => {
-    const { query } = useRouter();
-    const cityId: string = (query.cityId as string) ?? "11307";
-    const cityName: string = (query.cityName as string) ?? "Jammu";
-    const area: string = (query.area as string) ?? "Jammu";
-    const cuisineIds: string = query.cuisineId as string;
-    const countryName: string = (query.countryName as string) ?? "India";
+    const { area, cityId, cityName, countryName, cuisineId: cuisineIds } = useLocationInfo();
 
     return (
         <AppWrapper>
