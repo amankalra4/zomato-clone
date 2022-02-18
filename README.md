@@ -19,12 +19,22 @@ All APIs used here were provided by Zomato.
 8. Bootstrap
 9. React Error Boundary
 
-## Dev Related Details
+## Formatting and Linting
+
+- ES Lint
+- Prettier
+
+## Deployment
+
+- Vercel
+
+## Development Details
 
 1. Used NextJS built in features:
 - Server Side Rendering and Client Side Rendering
 - Dynamic Imports
 - Image component
+- Serving Static Pages
 
 2. Infinite Scrolling
 - Implemented with the help of react-query to load more data based on user requirement.
@@ -46,8 +56,5 @@ All APIs used here were provided by Zomato.
 6. Created custom hooks
 - Created custom hooks wherever required so as to have easy development.
 
-7. Deployment
-- Deployed the application on vercel.
-
-8. PWA
+7. Progressive Web App - PWA
 - Have made the application compatible on any device with the help of PWA.
