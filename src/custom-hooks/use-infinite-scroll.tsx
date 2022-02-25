@@ -3,9 +3,16 @@ import { CARDS_TO_BE_SHOWN, getRestaurants } from "@src/constants";
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import { RestaurantRootInterface } from "@src/modules/interface/restuarant";
 
-const getPaginatedRestaurants = async (cityId: string, cuisineId: string, resultStart: number, cityName: string) => {
+const getPaginatedRestaurants = async (
+    cityId: string,
+    cuisineId: string,
+    resultStart: number,
+    cityName: string,
+    entityType: string
+) => {
     const result = await getRestaurants(
         cityId,
+        entityType,
         cuisineId ? undefined : cityName,
         cuisineId as string,
         resultStart,
@@ -19,14 +26,15 @@ interface IInfiniteScrollProps {
     cuisineId: string;
     queryKey: string;
     cityName: string;
+    entityType: string;
 }
 
-const useInfiniteScroll = ({ cityId, cuisineId, queryKey, cityName }: IInfiniteScrollProps) => {
+const useInfiniteScroll = ({ cityId, cuisineId, queryKey, cityName, entityType }: IInfiniteScrollProps) => {
     const queryClient = useQueryClient();
     const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status, isFetched, isLoading } =
         useInfiniteQuery<RestaurantRootInterface>(
             queryKey,
-            ({ pageParam = 0 }) => getPaginatedRestaurants(cityId, cuisineId, pageParam, cityName),
+            ({ pageParam = 0 }) => getPaginatedRestaurants(cityId, cuisineId, pageParam, cityName, entityType),
             {
                 getNextPageParam: (lastPage, allPages) => {
                     const totalPages = lastPage.results_found > 100 ? 100 : lastPage.results_found;

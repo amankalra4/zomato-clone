@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import debounce from "lodash-es/debounce";
 
 interface IDebounceProps {
-    handleChange: (input: string) => void;
+    handleChange: (searchQuery: string, entityId?: number, entityType?: string) => void;
     time: number;
 }
 

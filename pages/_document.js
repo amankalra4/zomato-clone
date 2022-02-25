@@ -15,7 +15,7 @@ class MyDocument extends Document {
         <link rel="preconnect" href="https://b.zmtcdn.com" />
         <link rel="dns-prefetch" href="https://b.zmtcdn.com" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" defer />
-        <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet" defer />
+        <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap&text=About" rel="stylesheet" defer />
         </Head>
         <body>
           <Main />

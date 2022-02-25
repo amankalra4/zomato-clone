@@ -1,4 +1,4 @@
-export interface RootObject {
+export interface LocationsRoot {
     location_suggestions: LocationSuggestion[];
     status: string;
     has_more: number;

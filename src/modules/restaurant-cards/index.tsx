@@ -11,11 +11,12 @@ import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
 import { Rating } from "@src/components/restaurant-data";
 import { Restaurant2 } from "../interface/restuarant";
-import { cardsContainer, cardsRoot, cuisinesContainer, ellipsis, media, nameContainer, mediaRoot } from "./styles";
+import { cardsRoot, cuisinesContainer, ellipsis, media, nameContainer, mediaRoot, getStyles } from "./styles";
 
 function MediaCard({ cardData }: { cardData: Restaurant2[] }) {
+    const classes = getStyles(cardData.length);
     return (
-        <div className={cardsContainer}>
+        <div className={classes.cardsContainer}>
             {cardData.length > 0 ? (
                 cardData.map((el) => <CardComponent key={el.id} data={el} />)
             ) : (

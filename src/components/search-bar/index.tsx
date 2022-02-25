@@ -1,98 +1,25 @@
-import { ChangeEvent, useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import { Autocomplete } from "@material-ui/lab";
-import { GET_LOCATIONS } from "@src/constants";
-import { useSnackbar } from "notistack";
-import useDebounce from "@src/modules/use-debounce";
-import { useRouter } from "next/router";
-import { Search } from "@material-ui/icons";
-import { InputAdornment } from "@material-ui/core";
-import useDevice from "@src/custom-hooks/use-is-Phone";
-import { commonHeader } from "@src/constants/api-call";
-import { LocationSuggestion } from "./location";
-import { autoComplete, autoCompleteLoader } from "./styles";
+import Divider from "@material-ui/core/Divider";
+import LocationAutoComplete from "./location-auto-complete";
+import RestaurantAutoComplete from "./restaurant-auto-complete";
+import { topContainer, restContainer, mobileContainer } from "./styles";
 
-const Searchbar = ({ searchBarBackground = "none" }) => {
-    const [output, setOutput] = useState<LocationSuggestion[]>([]);
-    const { enqueueSnackbar } = useSnackbar();
-    const { inputRef } = useDebounce({ handleChange, time: 500 });
-    const { push } = useRouter();
-    const isPhone = useDevice("767");
-    // console.log("env check", process.env.NODE_ENV) -- to check ENV
-
-    function handleChange(inputValue: string) {
-        const inputURL = GET_LOCATIONS.replace("%s", inputValue);
-        commonHeader(inputURL)
-            .then((result) => {
-                if (result.data.location_suggestions.length) {
-                    setOutput(result.data.location_suggestions);
-                } else {
-                    enqueueSnackbar("No location found", { variant: "error" });
-                }
-            })
-            .catch(() => {
-                enqueueSnackbar("Incorrect location given", { variant: "error" });
-            });
-    }
-
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        inputRef.current(event.target.value);
-    };
-
-    const handleAutoCompleteChange = (event: ChangeEvent<{}>, newValue: any) => {
-        const getSubLocation: string = newValue.title.split(",")[0].toLowerCase();
-        push({
-            pathname: "/location",
-            query: {
-                countryName: newValue.country_name,
-                cityName: newValue.city_name?.toLowerCase(),
-                area: getSubLocation,
-                cityId: newValue.city_id
-            }
-        });
-        // Need to check later
-        // push(`/${newValue.city_name?.toLowerCase()}?area=${encodeURIComponent(getSubLocation)}`);
-    };
-
+const Searchbar = () => {
     return (
-        <Autocomplete
-            options={output}
-            getOptionLabel={(option) => {
-                return option.title;
-            }}
-            renderInput={(params) => (
-                <TextField
-                    {...params}
-                    variant="outlined"
-                    fullWidth
-                    onChange={handleInputChange}
-                    // className={searchBar}
-                    style={{ margin: searchBarBackground === "none" ? "20px 0" : "0" }}
-                    InputProps={{
-                        ...params.InputProps,
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <Search />
-                            </InputAdornment>
-                        )
-                    }}
-                    placeholder="Search for a location here"
-                />
-            )}
-            style={{ backgroundColor: searchBarBackground }}
-            loading={!output.length}
-            loadingText={<AutoCompleteLoader />}
-            freeSolo
-            closeIcon={null}
-            onChange={handleAutoCompleteChange}
-            className={autoComplete}
-            data-src={!isPhone && searchBarBackground ? "true" : "false"}
-            disableClearable
-            forcePopupIcon={false}
-        />
+        <>
+            <div className={topContainer}>
+                <LocationAutoComplete />
+                <div className={restContainer}>
+                    <Divider orientation="vertical" style={{ height: "25px", margin: "16px 0 0", border: "1px solid black" }} />
+                </div>
+                <div className={restContainer} style={{ width: "100%" }}>
+                    <RestaurantAutoComplete />
+                </div>
+            </div>
+            <div className={mobileContainer}>
+                <RestaurantAutoComplete />
+            </div>
+        </>
     );
 };
-
-const AutoCompleteLoader = () => <div className={autoCompleteLoader}>Loading...</div>;
 
 export default Searchbar;

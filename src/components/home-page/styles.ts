@@ -15,7 +15,7 @@ const bannerHeadingClass = css`
     margin: 1rem 0;
     @media (max-width: 767px) {
         text-align: center;
-        margin: 2rem 0;
+        margin: 2rem 0 0;
     }
 `;
 
@@ -58,15 +58,15 @@ const imageTitles = css`
 
 const topBannerContainer = css`
     position: relative;
-    min-height: 25rem;
+    min-height: 28rem;
     max-height: 50rem;
 `;
 
-export {
-    bannerHeadingClass,
-    cardRoot,
-    imageTitles,
-    imagesContainer,
-    logoContainer,
-    topBannerContainer
-};
+const homePageLogo = css`
+    width: 20%;
+    @media (max-width: 767px) {
+        width: 50%;
+    }
+`;
+
+export { bannerHeadingClass, cardRoot, imageTitles, imagesContainer, logoContainer, topBannerContainer, homePageLogo };

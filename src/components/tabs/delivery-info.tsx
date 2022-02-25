@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable function-paren-newline */
 /* eslint-disable react/jsx-one-expression-per-line */
 import { createContext, useEffect, useMemo, useState } from "react";
@@ -9,6 +10,7 @@ import { IRestaurant, Restaurant2, RestaurantRootInterface } from "@src/modules/
 import { useQueryClient } from "react-query";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import useLocationInfo from "@custom-hooks/use-location-info";
 import FirstOrderSection from "../first-order";
 import CardSkeleton from "../card-skeletons";
 import { circularProgress, commonHeading } from "./styles";
@@ -35,7 +37,8 @@ export const FiltersContext = createContext<IFiltersContext>({
     handleDataChange: () => {}
 });
 
-const DeliveryInfo = ({ location, area, cityId, cuisineId, showByCuisine, queryKey, isLocationPage }: IScrollableTabsProps) => {
+const DeliveryInfo = ({ showByCuisine, queryKey, isLocationPage }: IScrollableTabsProps) => {
+    const { cityName: location, area, cityId, cuisineId, entityType } = useLocationInfo();
     const {
         data: paginatedRestaurantData,
         isFetchingNextPage,
@@ -45,7 +48,8 @@ const DeliveryInfo = ({ location, area, cityId, cuisineId, showByCuisine, queryK
         cityId,
         cuisineId: showByCuisine ? cuisineId! : "",
         queryKey: queryKey!,
-        cityName: location
+        cityName: location,
+        entityType
     });
     const [filteredCuisines, setFilteredCuisines] = useState<ICuisine>({} as ICuisine);
     const [restaurantsData, setRestaurantsData] = useState<Restaurant2[]>([]);
@@ -120,10 +124,17 @@ const DeliveryInfo = ({ location, area, cityId, cuisineId, showByCuisine, queryK
                         </h2>
                     ) : (
                         <h1 className={commonHeading} style={{ fontSize: "1.7rem" }}>
-                            {`${query.item ?? "Food"} Restaurants for your first order in ${changeToCamelCase(location)}`}
+                            {`${query.item ?? "Food"} Restaurants in ${changeToCamelCase(area)}, ${changeToCamelCase(location)}`}
                         </h1>
                     )}
-                    {paginatedRestaurantData?.pages[0].results_found && <MediaCard cardData={restaurantsData.map((el) => el)} />}
+                    {paginatedRestaurantData?.pages[0].results_found! > 0 ? (
+                        <MediaCard cardData={restaurantsData.map((el) => el)} />
+                    ) : (
+                        <h4 style={{ margin: "20px auto", width: "max-content" }}>
+                            Sorry! We Couldn't find any restaurants.
+                            <EndOfSearchResults />
+                        </h4>
+                    )}
                 </>
             ) : (
                 <>

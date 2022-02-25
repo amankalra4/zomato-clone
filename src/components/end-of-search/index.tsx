@@ -11,14 +11,8 @@ const container = css`
 
 const EndOfSearchResults = () => (
     <div className={container}>
-        <h3>End of search results</h3>
-        <Image 
-            src={END_OF_SEARCH_RESULTS} 
-            alt="end-of-search" 
-            width={180} 
-            height={150}
-            loading="lazy" 
-        />
+        <h3 style={{ marginRight: "20px" }}>End of search results</h3>
+        <Image src={END_OF_SEARCH_RESULTS} alt="end-of-search" width={180} height={150} loading="lazy" />
     </div>
 );
 

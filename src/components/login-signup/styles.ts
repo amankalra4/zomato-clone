@@ -13,8 +13,18 @@ const signUp = css`
     margin-left: 20px !important;
 `;
 
-export {
-    container,
-    personIcon,
-    signUp
-};
+const personIconContainer = css`
+    display: none;
+    @media (max-width: 767px) {
+        display: block;
+    }
+`;
+
+const signUpContainer = css`
+    display: block;
+    @media (max-width: 767px) {
+        display: none;
+    }
+`;
+
+export { container, personIcon, signUp, personIconContainer, signUpContainer };

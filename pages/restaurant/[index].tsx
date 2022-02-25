@@ -15,7 +15,9 @@ const RestaurantInfo = ({ restaurantInfo }: { restaurantInfo: Restaurant2 }) => 
                 title={`${restaurantInfo.name} - ${restaurantInfo.location.city}`}
             />
             <Container>
-                <BreadCrumbs pathArray={["Home", restaurantInfo.location.city, restaurantInfo.name]} />
+                <BreadCrumbs
+                    pathArray={["Home", restaurantInfo.location.city, restaurantInfo.location.locality, restaurantInfo.name]}
+                />
                 <RestaurantData restaurantInfo={restaurantInfo} />
             </Container>
         </AppWrapper>
