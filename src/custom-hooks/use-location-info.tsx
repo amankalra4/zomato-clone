@@ -7,12 +7,14 @@ const useLocationInfo = () => {
     const area: string = (query.area as string) ?? "Jammu";
     const cuisineId: string = query.cuisineId as string;
     const countryName: string = (query.countryName as string) ?? "India";
+    const entityType: string = (query.entityType as string) ?? "city";
     return {
         cityId,
         cityName,
         area,
         cuisineId,
-        countryName
+        countryName,
+        entityType
     };
 };
 

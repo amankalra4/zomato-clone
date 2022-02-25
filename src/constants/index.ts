@@ -1,4 +1,7 @@
 /* eslint-disable max-len */
+import { LocationsRoot } from "@src/modules/interface/location-interface";
+import { IRestaurantSuggestionsRoot } from "@src/modules/interface/restaurant-suggestions-interface";
+import axios, { AxiosResponse } from "axios";
 import { commonHeader } from "./api-call";
 
 const endPoint = "https://b.zmtcdn.com";
@@ -121,8 +124,6 @@ export const countries = [
 
 export const CARDS_TO_BE_SHOWN = 12;
 
-export const GET_LOCATIONS = "locations?query=%s&count=10";
-
 export const getCities = (cityName: string) => {
     const cityURL = `cities?q=${cityName}`;
     return commonHeader(cityURL)
@@ -132,12 +133,13 @@ export const getCities = (cityName: string) => {
 
 export const getRestaurants = (
     entityId: string,
+    entityType: string,
     cityName?: string | undefined,
     cuisineId?: string,
     start = 0,
     count = CARDS_TO_BE_SHOWN
 ) => {
-    const commonURL = `search?entity_id=${entityId}&entity_type=city&start=${start}&count=${count}`;
+    const commonURL = `search?entity_id=${entityId}&entity_type=${entityType}&start=${start}&count=${count}`;
     let appendedString = "";
     // if case is for restuarnt search in search bar
     // else case is for searching a particular cuisine in an area.
@@ -175,4 +177,34 @@ export const getCuisines = (cityId: string) => {
     return commonHeader(collectionsURL)
         .then((res) => res.data)
         .catch((err) => err?.response?.status);
+};
+
+export const getLocationSuggestions = (locationName: string) => {
+    const locationURL = `locations?query=${locationName}&count=10`;
+    return commonHeader(locationURL)
+        .then((result: AxiosResponse<LocationsRoot>) => {
+            if (result.data.location_suggestions.length) {
+                return result.data.location_suggestions;
+            }
+            return [];
+        })
+        .catch(() => {
+            return [];
+        });
+};
+
+export const getRestaurantSuggestions = (entityId: number, entityType: string, searchQuery: string) => {
+    return axios
+        .get(
+            `https://www.zomato.com/webroutes/search/autoSuggest?entityId=${entityId}&entityType=${entityType}&otherRestaurantsUrl=&q=${searchQuery}`
+        )
+        .then((result: AxiosResponse<IRestaurantSuggestionsRoot>) => {
+            if (result.data.results.length) {
+                return result.data.results;
+            }
+            return [];
+        })
+        .catch(() => {
+            return [];
+        });
 };

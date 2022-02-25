@@ -7,7 +7,7 @@ import Container from "@src/components/container";
 import useLocationInfo from "@custom-hooks/use-location-info";
 
 const FirstOrder = () => {
-    const { area, cityId, cityName, countryName, cuisineId } = useLocationInfo();
+    const { area, cityName, countryName } = useLocationInfo();
 
     return (
         <AppWrapper>
@@ -17,14 +17,7 @@ const FirstOrder = () => {
             />
             <Container>
                 <BreadCrumbs pathArray={["Home", countryName, cityName, area]} />
-                <ScrollableTabs
-                    location={cityName}
-                    area={area}
-                    cityId={cityId}
-                    cuisineId={cuisineId}
-                    showByCuisine
-                    queryKey="cuisine-based-restaurants"
-                />
+                <ScrollableTabs showByCuisine queryKey="cuisine-based-restaurants" />
             </Container>
         </AppWrapper>
     );

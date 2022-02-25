@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import { ArrowRight } from "@material-ui/icons";
 import { NIGHTLIFE_IMAGE_1, NIGHTLIFE_IMAGE_2, NIGHTLIFE_IMAGE_3, NIGHTLIFE_IMAGE_4 } from "@src/constants";
+import useLocationInfo from "@custom-hooks/use-location-info";
 import Link from "next/link";
 import { imageSubHeading, nightLife, subHeading } from "./styles";
 
@@ -34,10 +35,11 @@ const nightLifeCollectionArray: nightLifeCollection[] = [
     }
 ];
 
-const NightLife = ({ location }: { location: string }) => {
+const NightLife = () => {
+    const { cityName } = useLocationInfo();
     return (
         <div>
-            <CommonHeading location={location} />
+            <CommonHeading location={cityName} />
             <CommonBanners imagesTextArray={nightLifeCollectionArray} />
         </div>
     );

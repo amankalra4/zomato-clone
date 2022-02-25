@@ -29,24 +29,13 @@ type Disabled = {
     nightLife: boolean;
 };
 export interface IScrollableTabsProps {
-    location: string;
-    area: string;
-    cityId: string;
-    cuisineId?: string;
     showByCuisine?: boolean;
     queryKey?: string;
     isLocationPage?: boolean;
 }
 
-const ScrollableTabs = ({
-    location,
-    area,
-    cityId,
-    cuisineId,
-    showByCuisine = false,
-    queryKey,
-    isLocationPage = false
-}: IScrollableTabsProps) => {
+const ScrollableTabs = ({ showByCuisine = false, queryKey, isLocationPage = false }: IScrollableTabsProps) => {
+    // const { area, cityName, countryName, cuisineId: cuisineIds } = useLocationInfo();
     const [value, setValue] = useState<number>(0);
     const [disabled, setDisabled] = useState<Disabled>({
         delivery: false,
@@ -121,21 +110,13 @@ const ScrollableTabs = ({
                 />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <DeliveryInfo
-                    location={location}
-                    area={area}
-                    cityId={cityId}
-                    cuisineId={cuisineId}
-                    showByCuisine={showByCuisine}
-                    queryKey={queryKey}
-                    isLocationPage={isLocationPage}
-                />
+                <DeliveryInfo showByCuisine={showByCuisine} queryKey={queryKey} isLocationPage={isLocationPage} />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <DiningOut />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <NightLife location={location} />
+                <NightLife />
             </TabPanel>
         </div>
     );

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { ButtonBase } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
-import useDevice from "@src/custom-hooks/use-is-Phone";
 import { IHeaderProps } from "../app";
-import { container, personIcon, signUp } from "./styles";
+import { container, personIcon, personIconContainer, signUp, signUpContainer } from "./styles";
 import ModalLoader from "../dynamic-component-loader/modal-loader";
 
 const CenteredModal = dynamic(() => import("../modal"), { loading: () => <ModalLoader /> });
@@ -16,7 +15,6 @@ type LoginSignUp = {
 const CommonLogin = ({ color }: IHeaderProps) => {
     const [loginSignUp, setLoginSignUp] = useState<LoginSignUp>({} as LoginSignUp);
     const [showHeading, setShowHeading] = useState<string>("");
-    const isPhone: boolean = useDevice("767");
 
     const handleLoginSingUp = (value: string) => {
         if (value === "Login") {
@@ -45,18 +43,17 @@ const CommonLogin = ({ color }: IHeaderProps) => {
 
     return (
         <div className={container} style={{ color }}>
-            {isPhone ? (
+            <div className={personIconContainer}>
                 <ButtonBase onClick={() => handleLoginSingUp("Login")}>
                     <PersonIcon color="primary" className={personIcon} />
                 </ButtonBase>
-            ) : (
-                <>
-                    <ButtonBase onClick={() => handleLoginSingUp("Login")}>Login</ButtonBase>
-                    <ButtonBase className={signUp} onClick={() => handleLoginSingUp("SignUp")}>
-                        Sign Up
-                    </ButtonBase>
-                </>
-            )}
+            </div>
+            <div className={signUpContainer}>
+                <ButtonBase onClick={() => handleLoginSingUp("Login")}>Login</ButtonBase>
+                <ButtonBase className={signUp} onClick={() => handleLoginSingUp("SignUp")}>
+                    Sign Up
+                </ButtonBase>
+            </div>
             {(loginSignUp.login || loginSignUp.signUp) && (
                 <CenteredModal
                     show={loginSignUp.login || loginSignUp.signUp}
