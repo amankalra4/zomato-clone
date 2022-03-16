@@ -106,6 +106,7 @@ const LocationAutoComplete = () => {
             loading={!output.length}
             loadingText={<AutoCompleteLoader />}
             freeSolo
+            filterOptions={(data) => data}
             closeIcon={null}
             className={autoComplete}
             disableClearable
