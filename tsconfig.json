@@ -19,6 +19,7 @@
             "@pages/*": ["pages/*"],
             "@src/*": ["src/*"],
             "@components/*": ["src/components/*"],
+            "@modules/*": ["src/modules/*"],
             "@constants/*": ["src/constants/*"],
             "@custom-hooks/*":["src/custom-hooks/*"]
         }

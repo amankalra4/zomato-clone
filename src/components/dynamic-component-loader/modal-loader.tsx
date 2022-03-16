@@ -1,6 +1,6 @@
 import Box from "@material-ui/core/Box";
 import Modal from "@material-ui/core/Modal";
-import useDevice from "@src/custom-hooks/use-is-Phone";
+import useDevice from "@custom-hooks/use-is-Phone";
 import CircularLoader from "./circular-loader";
 
 const style = {

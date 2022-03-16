@@ -6,7 +6,8 @@ const theme = createTheme({
             main: "#ef4f5f",
             contrastText: "#fff"
         },
-        secondary: { // this color is for disablement
+        secondary: {
+            // this color is for disablement
             main: "#cecece",
             contrastText: "#fff"
         }

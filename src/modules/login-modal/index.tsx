@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import { Button } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import { INIDAN_THUMBNAIL } from "@src/constants";
+import { INIDAN_THUMBNAIL } from "@constants/index";
 import { ChangeEvent, useState } from "react";
-import DividerWithText from "@src/components/divider-with-text";
+import DividerWithText from "@components/divider-with-text";
 import { Email } from "@material-ui/icons";
 import Image from "next/image";
 import GoogleLogo from "../../../public/icons/googleLogo.svg";

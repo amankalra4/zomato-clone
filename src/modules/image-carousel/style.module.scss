@@ -7,23 +7,19 @@
       color: unset;
   }
 }
+
 .container {
     @extend .root;
+    width: 50%;
+    margin: 2rem auto 0;
     .sliderRoot {
         img {
             border-radius: 16px;
-            width: 15% !important;
-            margin: 0 auto;
+            object-fit: cover;
         }
     }
-    @include width-greater-than(md) {
-        :global(.glider-contain) {
-            width: 50% !important;
-        }
-        .sliderRoot {
-            img {
-                width: 10% !important;
-            }
-        }
+    @include width-lesser-than(md) {
+        width: 100%;
+        margin: 2rem 0 0;
     }
 }

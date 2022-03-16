@@ -1,11 +1,11 @@
 import { ReactText } from "react";
 import Head from "next/head";
 import { NextPageContext } from "next";
-import AppWrapper from "@src/components/app";
+import AppWrapper from "@components/app";
 import dynamic from "next/dynamic";
-import { ERROR_404_IMAGE, ERROR_500_IMAGE } from "@src/constants";
+import { ERROR_404_IMAGE, ERROR_500_IMAGE } from "@constants/index";
 
-const ErrorFallback = dynamic(() => /* webpackChunkName: "error-component" */ import("@src/components/error-component"));
+const ErrorFallback = dynamic(() => /* webpackChunkName: "error-component" */ import("@components/error-component"));
 
 interface IProps {
     _url?: string;

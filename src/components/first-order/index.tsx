@@ -1,4 +1,4 @@
-import { FIRST_ORDER_BURGER, FIRST_ORDER_SANDWICH, FIRST_ORDER_PIZZA, FIRST_ORDER_ROLLS } from "@src/constants";
+import { FIRST_ORDER_BURGER, FIRST_ORDER_SANDWICH, FIRST_ORDER_PIZZA, FIRST_ORDER_ROLLS } from "@constants/index";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import { ButtonBase } from "@material-ui/core";

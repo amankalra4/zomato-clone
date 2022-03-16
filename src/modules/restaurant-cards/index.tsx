@@ -9,7 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Link from "next/link";
-import { Rating } from "@src/components/restaurant-data";
+import { Rating } from "@components/restaurant-data";
 import { Restaurant2 } from "../interface/restuarant";
 import { cardsRoot, cuisinesContainer, ellipsis, media, nameContainer, mediaRoot, getStyles } from "./styles";
 

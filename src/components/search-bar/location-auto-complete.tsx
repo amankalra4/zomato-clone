@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { getLocationSuggestions } from "@src/constants";
+import { getLocationSuggestions } from "@constants/index";
 import { useSnackbar } from "notistack";
-import useDebounce from "@src/modules/use-debounce";
+import useDebounce from "@modules/use-debounce";
 import { useRouter } from "next/router";
 import { LocationOn } from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -14,7 +14,8 @@ export type IAutoCompleteValue = {
     cityName: string;
     entityId: number;
     entityType: string;
-    location?: string;
+    locationName: string;
+    locationId: number;
 };
 
 const LocationAutoComplete = () => {
@@ -58,7 +59,8 @@ const LocationAutoComplete = () => {
             entityId: filteredLocationData.entity_id ?? 11307,
             entityType: filteredLocationData.entity_type ?? "city",
             cityName: filteredLocationData.title ?? "Jammu",
-            location: filteredLocationData.city_name ?? "Jammu"
+            locationName: filteredLocationData.city_name ?? "Jammu",
+            locationId: filteredLocationData.city_id ?? "11307"
         };
         localStorage.setItem("userLocations", JSON.stringify(localStorageUpdatedData));
 
@@ -89,7 +91,7 @@ const LocationAutoComplete = () => {
                     {...params}
                     variant="outlined"
                     fullWidth
-                    placeholder="Search restaurants"
+                    placeholder="Search for locations here"
                     InputProps={{
                         ...params.InputProps,
                         startAdornment: (

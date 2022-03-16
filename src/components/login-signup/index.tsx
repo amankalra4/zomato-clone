@@ -1,12 +1,9 @@
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { ButtonBase } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import { IHeaderProps } from "../app";
 import { container, personIcon, personIconContainer, signUp, signUpContainer } from "./styles";
-import ModalLoader from "../dynamic-component-loader/modal-loader";
-
-const CenteredModal = dynamic(() => import("../modal"), { loading: () => <ModalLoader /> });
+import CenteredModal from "../modal";
 
 type LoginSignUp = {
     login: boolean;

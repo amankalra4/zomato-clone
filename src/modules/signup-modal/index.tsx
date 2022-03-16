@@ -1,6 +1,9 @@
 /* eslint-disable max-len */
-import { Button, Checkbox, FormControlLabel, TextField } from "@material-ui/core";
-import DividerWithText from "@src/components/divider-with-text";
+import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import TextField from "@material-ui/core/TextField";
+import DividerWithText from "@components/divider-with-text";
 import { useState, ChangeEvent } from "react";
 import { GoogleButton } from "../login-modal";
 import { container } from "./styles";

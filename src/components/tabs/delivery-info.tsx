@@ -3,10 +3,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import { createContext, useEffect, useMemo, useState } from "react";
 import { CircularProgress } from "@material-ui/core";
-import MediaCard from "@src/modules/restaurant-cards";
-import { changeToCamelCase } from "@src/modules/camel-case";
-import useInfiniteScroll from "@src/custom-hooks/use-infinite-scroll";
-import { IRestaurant, Restaurant2, RestaurantRootInterface } from "@src/modules/interface/restuarant";
+import MediaCard from "@modules/restaurant-cards";
+import { changeToCamelCase } from "@modules/camel-case";
+import useInfiniteScroll from "@custom-hooks/use-infinite-scroll";
+import { IRestaurant, Restaurant2, RestaurantRootInterface } from "@modules/interface/restuarant";
 import { useQueryClient } from "react-query";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
@@ -127,10 +127,11 @@ const DeliveryInfo = ({ showByCuisine, queryKey, isLocationPage }: IScrollableTa
                             {`${query.item ?? "Food"} Restaurants in ${changeToCamelCase(area)}, ${changeToCamelCase(location)}`}
                         </h1>
                     )}
+                    {isLoading && <CardSkeleton arrayLength={12} />}
                     {paginatedRestaurantData?.pages[0].results_found! > 0 ? (
                         <MediaCard cardData={restaurantsData.map((el) => el)} />
                     ) : (
-                        <h4 style={{ margin: "20px auto", width: "max-content" }}>
+                        <h4 style={{ margin: "20px auto" }}>
                             Sorry! We Couldn't find any restaurants.
                             <EndOfSearchResults />
                         </h4>
@@ -140,7 +141,11 @@ const DeliveryInfo = ({ showByCuisine, queryKey, isLocationPage }: IScrollableTa
                 <>
                     <FirstOrderSection />
                     <CommonSection heading={`Best food near ${changeToCamelCase(area)}`} />
-                    {paginatedRestaurantData?.pages[0].results_found && <MediaCard cardData={restaurantsData.map((el) => el)} />}
+                    {paginatedRestaurantData?.pages[0].results_found ? (
+                        <MediaCard cardData={restaurantsData.map((el) => el)} />
+                    ) : (
+                        <CardSkeleton arrayLength={12} />
+                    )}
                 </>
             )}
             {isFetchingNextPage ? (
@@ -148,7 +153,6 @@ const DeliveryInfo = ({ showByCuisine, queryKey, isLocationPage }: IScrollableTa
             ) : (
                 !hasNextPage && !isLoading && paginatedRestaurantData?.pages[0].results_found! > 0 && <EndOfSearchResults />
             )}
-            {isLoading && <CardSkeleton arrayLength={12} />}
         </FiltersContext.Provider>
     );
 };

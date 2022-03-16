@@ -25,7 +25,7 @@ const TopBanner = ({ logo, banner }: any) => {
     if (typeof window !== "undefined") {
         userLocation = JSON.parse(localStorage.getItem("userLocations")!);
     }
-    const bannerHeading = `Discover the best food & drinks in ${userLocation!?.location ?? "Jammu"}`;
+    const bannerHeading = `Discover the best food & drinks in ${userLocation!?.locationName ?? "Jammu"}`;
     return (
         <div className={topBannerContainer}>
             <img
