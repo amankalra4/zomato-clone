@@ -35,8 +35,8 @@ const RestaurantAutoComplete = () => {
         };
     }, []);
 
-    async function handleChange(searchQuery: string, entityId?: number) {
-        const data = await getRestaurantSuggestions(entityId!, searchQuery);
+    async function handleChange(searchQuery: string, locationId?: number) {
+        const data = await getRestaurantSuggestions(locationId!, searchQuery);
         if (data) {
             setOutput(data);
         } else {
@@ -44,8 +44,8 @@ const RestaurantAutoComplete = () => {
         }
     }
 
-    const handleInputChange = (entityId: number, entityType: string) => {
-        inputRef.current(autoCompleteInputValue, entityId, entityType);
+    const handleInputChange = (locationId: number) => {
+        inputRef.current(autoCompleteInputValue, locationId);
     };
 
     const handleAutoCompleteValueChange = (event: ChangeEvent<{}>, inputValue: string | IRestaurant) => {
@@ -73,7 +73,7 @@ const RestaurantAutoComplete = () => {
                 locationId: 11307
             };
         }
-        handleInputChange(localStorageData.entityId, localStorageData.entityType);
+        handleInputChange(localStorageData.locationId);
     };
 
     return (
@@ -99,6 +99,7 @@ const RestaurantAutoComplete = () => {
             loading={!output.length}
             loadingText={<AutoCompleteLoader />}
             freeSolo
+            filterOptions={(data) => data}
             closeIcon={null}
             className={`${autoComplete} ${restaurantData}`}
             disableClearable

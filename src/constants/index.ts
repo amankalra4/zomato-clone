@@ -196,7 +196,7 @@ export const getLocationSuggestions = (locationName: string) => {
 const RESTAURANT_SUGGESTIONS = 5;
 
 export const getRestaurantSuggestions = (entityId: number, searchQuery: string) => {
-    const suggestionsURL = `/search?entity_id=${entityId}&count=${RESTAURANT_SUGGESTIONS}&q=${searchQuery}`;
+    const suggestionsURL = `/search?entity_id=${entityId}&entity_type=city&count=${RESTAURANT_SUGGESTIONS}&q=${searchQuery}`;
     return commonHeader(suggestionsURL)
         .then((result: AxiosResponse<RestaurantRootInterface>) => {
             if (result.data.results_found) {
