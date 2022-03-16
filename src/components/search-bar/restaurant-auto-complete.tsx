@@ -1,15 +1,13 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import { getRestaurantSuggestions } from "@constants/index";
 import { useSnackbar } from "notistack";
-import useDebounce from "@src/modules/use-debounce";
+import useDebounce from "@modules/use-debounce";
 import { useRouter } from "next/router";
 import { Search, Star } from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { ChangeEvent, useEffect, useState } from "react";
-import { IRestaurantSuggestionResult } from "@src/modules/interface/restaurant-suggestions-interface";
+import { IRestaurant } from "@modules/interface/restuarant";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
-import Divider from "@material-ui/core/Divider";
 import { IAutoCompleteValue } from "./location-auto-complete";
 import {
     autoComplete,
@@ -20,13 +18,11 @@ import {
     restaurantInfoContainer,
     restaurantName,
     ratingContainer,
-    getStyles,
-    flexClass,
-    divider
+    getStyles
 } from "./styles";
 
 const RestaurantAutoComplete = () => {
-    const [output, setOutput] = useState<IRestaurantSuggestionResult[]>([]);
+    const [output, setOutput] = useState<IRestaurant[]>([]);
     const [autoCompleteValue, setAutoCompleteValue] = useState("");
     const [autoCompleteInputValue, setAutoCompleteInputValue] = useState("");
     const { enqueueSnackbar } = useSnackbar();
@@ -39,10 +35,10 @@ const RestaurantAutoComplete = () => {
         };
     }, []);
 
-    async function handleChange(searchQuery: string, entityId?: number, entityType?: string) {
-        const data = await getRestaurantSuggestions(entityId!, entityType!, searchQuery);
+    async function handleChange(searchQuery: string, entityId?: number) {
+        const data = await getRestaurantSuggestions(entityId!, searchQuery);
         if (data) {
-            setOutput(data.filter((el) => el.entityType === "restaurant"));
+            setOutput(data);
         } else {
             enqueueSnackbar("No restaurants found", { variant: "error" });
         }
@@ -52,13 +48,13 @@ const RestaurantAutoComplete = () => {
         inputRef.current(autoCompleteInputValue, entityId, entityType);
     };
 
-    const handleAutoCompleteValueChange = (event: ChangeEvent<{}>, inputValue: string | IRestaurantSuggestionResult) => {
-        const value = inputValue as IRestaurantSuggestionResult;
-        setAutoCompleteValue(value.info.name);
+    const handleAutoCompleteValueChange = (event: ChangeEvent<{}>, inputValue: string | IRestaurant) => {
+        const value = inputValue as IRestaurant;
+        setAutoCompleteValue(value.restaurant.name);
         push({
-            pathname: `restaurant/${value.info.name.split(" ").join("-").toLowerCase()}`,
+            pathname: `restaurant/${value.restaurant.name.split(" ").join("-").toLowerCase()}`,
             query: {
-                id: value.info.resId
+                id: value.restaurant.id
             }
         });
     };
@@ -72,7 +68,9 @@ const RestaurantAutoComplete = () => {
             localStorageData = {
                 cityName: "Jammu",
                 entityId: 11307,
-                entityType: "city"
+                entityType: "city",
+                locationName: "Jammu",
+                locationId: 11307
             };
         }
         handleInputChange(localStorageData.entityId, localStorageData.entityType);
@@ -111,44 +109,32 @@ const RestaurantAutoComplete = () => {
             onInputChange={handleAutoCompleteInputChange}
             options={output}
             getOptionLabel={(option) => {
-                return option?.info?.name ?? "";
+                return option?.restaurant?.name ?? "";
             }}
-            renderOption={(option: IRestaurantSuggestionResult, state: any) => {
+            renderOption={(option: IRestaurant) => {
                 return (
                     <div className={dropDownContainer}>
                         {output.length ? (
                             <div className={dropDownRestaurantContainer}>
                                 <img
                                     style={{ borderRadius: "8px" }}
-                                    src={option.info.image.url}
-                                    alt={option.info.name}
+                                    src={option.restaurant.featured_image}
+                                    alt={option.restaurant.name}
                                     height={90}
                                     width={90}
                                 />
                                 <div className={restaurantInfoContainer}>
-                                    <span className={restaurantName}>{option.info.name}</span>
+                                    <span className={restaurantName}>{option.restaurant.name}</span>
                                     <div className={ratingContainer}>
-                                        <div className={flexClass}>
-                                            <div className={getStyles(`#${option.info.rating.color}`).ratingClass}>
-                                                <span>{option.info.ratingNew.ratings.DINING?.rating || "-"}</span>
-                                                <Star style={{ width: "12px", height: "12px" }} />
-                                            </div>
-                                            <span style={{ marginLeft: "5px", fontSize: "12px" }}>DINING</span>
-                                        </div>
-                                        <Divider orientation="vertical" className={divider} />
-                                        <div className={flexClass}>
-                                            <div
-                                                className={
-                                                    getStyles(option.info.ratingNew.ratings.DELIVERY?.bgColorV2.type).ratingClass
-                                                }
-                                            >
-                                                <span>{option.info.ratingNew.ratings.DELIVERY?.rating || "-"}</span>
-                                                <Star style={{ width: "12px", height: "12px" }} />
-                                            </div>
-                                            <span style={{ marginLeft: "5px", fontSize: "12px" }}>DELIVERY</span>
+                                        Rated
+                                        <div className={getStyles(option.restaurant.user_rating.rating_color).ratingClass}>
+                                            <span>{option.restaurant.user_rating.aggregate_rating || "-"}</span>
+                                            <Star style={{ width: "12px", height: "12px" }} />
                                         </div>
                                     </div>
-                                    <span style={{ fontSize: "12px", fontWeight: 500 }}>{option.info.locality.name}</span>
+                                    <span style={{ fontSize: "12px", fontWeight: 500 }}>
+                                        {option.restaurant.location.locality}
+                                    </span>
                                 </div>
                             </div>
                         ) : (

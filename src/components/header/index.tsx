@@ -1,4 +1,4 @@
-import { webAssets } from "@src/constants";
+import { webAssets } from "@constants/index";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Searchbar from "../search-bar";

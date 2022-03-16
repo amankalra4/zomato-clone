@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { CARDS_TO_BE_SHOWN, getRestaurants } from "@src/constants";
+import { CARDS_TO_BE_SHOWN, getRestaurants } from "@constants/index";
 import { useInfiniteQuery, useQueryClient } from "react-query";
-import { RestaurantRootInterface } from "@src/modules/interface/restuarant";
+import { RestaurantRootInterface } from "@modules/interface/restuarant";
 
 const getPaginatedRestaurants = async (
     cityId: string,

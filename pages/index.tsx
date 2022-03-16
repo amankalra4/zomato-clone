@@ -1,6 +1,6 @@
-import OgMetaData from "@src/components/og-meta-combo";
-import Footer from "@src/components/footer";
-import HomePageData from "@src/components/home-page";
+import OgMetaData from "@components/og-meta-combo";
+import Footer from "@components/footer";
+import HomePageData from "@components/home-page";
 import {
     HOME_PAGE_GO_OUT_FOR_A_MEAL,
     HOME_PAGE_LOGO,
@@ -8,7 +8,7 @@ import {
     HOME_PAGE_ORDER_FOOD_ONLINE,
     HOME_PAGE_TOP_BANNER,
     HOME_PAGE_ZOMATO_PRO
-} from "@src/constants";
+} from "@constants/index";
 
 const Home = ({ data }: { data: string[] }) => {
     return (

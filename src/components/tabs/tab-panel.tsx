@@ -9,13 +9,7 @@ interface TabPanelProps {
 }
 const TabPanel = (props: TabPanelProps) => {
     const { value, index, children, text } = props;
-    return (
-        <div>
-            {value === index && (
-                <Box>{typeof text === "string" ? text : children}</Box>
-            )}
-        </div>
-    );
+    return <div>{value === index && <Box className="boxContainer">{typeof text === "string" ? text : children}</Box>}</div>;
 };
 
 export default TabPanel;

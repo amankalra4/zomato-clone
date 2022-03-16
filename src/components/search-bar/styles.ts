@@ -131,26 +131,16 @@ const ratingContainer = css`
 const getStyles = (backgroundColor: string) => {
     return {
         ratingClass: css`
-            background-color: ${backgroundColor};
+            background-color: #${backgroundColor};
             color: white;
             border-radius: 5px;
-            padding: 2px;
+            padding: 2px 5px;
             display: flex;
             align-items: center;
+            margin-left: 5px;
         `
     };
 };
-
-const flexClass = css`
-    display: flex;
-    align-items: center;
-`;
-
-const divider = css`
-    height: 15px;
-    margin: 4px 8px;
-    border: 1px solid black;
-`;
 
 export {
     autoComplete,
@@ -166,7 +156,5 @@ export {
     restaurantInfoContainer,
     restaurantName,
     ratingContainer,
-    getStyles,
-    flexClass,
-    divider
+    getStyles
 };

@@ -1,4 +1,4 @@
-import useDevice from "@src/custom-hooks/use-is-Phone";
+import useDevice from "@custom-hooks/use-is-Phone";
 import { tabImage } from "./styles";
 
 type Label_types = "Delivery" | "Dining Out" | "Night Life";
@@ -10,12 +10,7 @@ interface ITabImageProps {
     altText: Label_types;
 }
 
-const TabImage = ({
-    path,
-    width = "75",
-    height = "55",
-    altText
-}: ITabImageProps) => {
+const TabImage = ({ path, width = "75", height = "55", altText }: ITabImageProps) => {
     const isPhone = useDevice("575");
     return (
         <img

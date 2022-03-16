@@ -7,13 +7,17 @@ import {
     DINEOUT_ICON_ENABLED,
     NIGHTLIFE_ICON_DISABLED,
     NIGHTLIFE_ICON_ENABLED
-} from "@src/constants";
+} from "@constants/index";
 import dynamic from "next/dynamic";
 import CardSkeleton from "../card-skeletons";
-import DeliveryInfo from "./delivery-info";
+// import DeliveryInfo from "./delivery-info";
 import TabImage from "./tab-image";
 import TabPanel from "./tab-panel";
 import MyTabScrollButton from "./tab-scroll-button";
+
+const DeliveryInfo = dynamic(() => import("./delivery-info"), {
+    loading: () => <CardSkeleton arrayLength={4} />
+});
 
 const NightLife = dynamic(() => import("../night-life"), {
     loading: () => <CardSkeleton arrayLength={4} />

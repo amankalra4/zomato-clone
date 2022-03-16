@@ -1,9 +1,9 @@
 import { ButtonBase, Chip, Collapse, IconButton, Typography } from "@material-ui/core";
-import { Call, Close, Directions, MenuBook, Share, Check, StarRate, QueryBuilder } from "@material-ui/icons";
+import { Call, Close, Directions, MenuBook, Share, Check, StarRate, QueryBuilder, Money, Star } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
-import ImageCarousel from "@src/modules/image-carousel";
-import { Photo, Restaurant2, UserRating } from "@src/modules/interface/restuarant";
-import { useEffect, useState } from "react";
+import ImageCarousel from "@modules/image-carousel";
+import { Photo, Restaurant2, UserRating } from "@modules/interface/restuarant";
+import { useEffect, useState, ReactNode, ReactElement } from "react";
 import {
     container,
     chipContainer,
@@ -14,9 +14,7 @@ import {
     heading,
     moreInfoContainer,
     openClosed,
-    orderNow,
-    ratingClass,
-    timingsClass
+    orderNow
 } from "./styles";
 
 const RestaurantData = ({ restaurantInfo }: { restaurantInfo: Restaurant2 }) => {
@@ -92,21 +90,20 @@ const RestaurantData = ({ restaurantInfo }: { restaurantInfo: Restaurant2 }) => 
                 </ButtonBase>
             </div>
             <MoreInfo highlights={restaurantInfo.highlights} />
-            <PhoneNumbers phoneNumbers={restaurantInfo.phone_numbers} />
-            <div className={ratingClass}>
-                <h3>Rated</h3>
+            <CommonIconData displayText="Rating" icon={<Star />}>
                 <Rating rating={restaurantInfo.user_rating} />
-            </div>
-            <div className={timingsClass}>
-                <h3>Timings</h3>
+            </CommonIconData>
+            <CommonIconData displayText="Phone Number(s)" icon={<Call />}>
+                <p>{restaurantInfo.phone_numbers}</p>
+            </CommonIconData>
+            <CommonIconData displayText="Timings" icon={<QueryBuilder />}>
                 <Timings timings={restaurantInfo.timings} />
-            </div>
-            <div className={ratingClass}>
-                <h3>Average Cost</h3>
+            </CommonIconData>
+            <CommonIconData displayText="Average Cost" icon={<Money />}>
                 <p style={{ paddingBottom: "5px" }}>
                     {`${restaurantInfo.currency} ${restaurantInfo.average_cost_for_two} for two people (approx.)`}
                 </p>
-            </div>
+            </CommonIconData>
             <ImagesByPeople photos={restaurantInfo.photos} firstImage={restaurantInfo.thumb} />
         </div>
     );
@@ -125,10 +122,15 @@ const MoreInfo = ({ highlights }: { highlights: string[] }) => (
     </div>
 );
 
-const PhoneNumbers = ({ phoneNumbers }: { phoneNumbers: string }) => (
+interface ICommonIconDataProps {
+    displayText: string;
+    children: ReactNode;
+    icon: ReactElement;
+}
+const CommonIconData = ({ displayText, children, icon }: ICommonIconDataProps) => (
     <div className={phoneNumberContainer}>
-        <Chip icon={<Call />} label="Phone Number(s)" color="primary" />
-        <p>{phoneNumbers}</p>
+        <Chip icon={icon} label={displayText} color="primary" style={{ padding: "10px 5px" }} />
+        {children}
     </div>
 );
 
@@ -157,7 +159,6 @@ export const Rating = ({ rating }: { rating: UserRating }) => (
 
 const Timings = ({ timings }: { timings: string }) => (
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <QueryBuilder color="primary" />
         <p>{timings}</p>
     </div>
 );

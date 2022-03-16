@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { END_OF_SEARCH_RESULTS } from "@src/constants";
+import { END_OF_SEARCH_RESULTS } from "@constants/index";
 import { css } from "@emotion/css";
 
 const container = css`

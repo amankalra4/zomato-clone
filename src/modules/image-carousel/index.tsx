@@ -5,42 +5,35 @@ import classes from "./style.module.scss";
 import { Photo } from "../interface/restuarant";
 
 const ImageSlider = ({ imageArray, firstImage }: IImageCarouselProps) => (
-  <>
-    <img src={firstImage} alt="restaurant" width={150} height={150} loading="lazy" />
-    {imageArray.map((el) => (
-        <img
-            src={el.photo.thumb_url}
-            alt="restaurant"
-            width={150}
-            height={150}
-            loading="lazy"
-            key={el.photo.id}
-        />
-    ))}
-  </>
+    <>
+        <img src={firstImage} alt="restaurant" width={100} height={150} loading="lazy" />
+        {imageArray.map((el) => (
+            <img src={el.photo.thumb_url} alt="restaurant" width={150} height={150} loading="lazy" key={el.photo.id} />
+        ))}
+    </>
 );
 
 interface IImageCarouselProps {
-  imageArray: Photo[];
-  firstImage: string;
+    imageArray: Photo[];
+    firstImage: string;
 }
 const ImageCarousel = ({ imageArray, firstImage }: IImageCarouselProps) => {
-  const settings: GliderProps = {
-    hasArrows: true,
-    hasDots: true,
-    slidesToScroll: 1,
-    slidesToShow: 1,
-    scrollLock: true,
-    duration: 1,
-    iconLeft: <ChevronLeft />,
-    iconRight: <ChevronRight />,
-    children: <ImageSlider imageArray={imageArray} firstImage={firstImage} />
-  };
-  return (
-    <div className={classes.container}>
-      <Glider {...settings} className={classes.sliderRoot} />
-    </div>
-  );
+    const settings: GliderProps = {
+        hasArrows: true,
+        hasDots: true,
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        scrollLock: true,
+        duration: 1,
+        iconLeft: <ChevronLeft style={{ margin: "0 2.5rem 0 0" }} />,
+        iconRight: <ChevronRight style={{ margin: "0 0 0 2rem" }} />,
+        children: <ImageSlider imageArray={imageArray} firstImage={firstImage} />
+    };
+    return (
+        <div className={classes.container}>
+            <Glider {...settings} className={classes.sliderRoot} />
+        </div>
+    );
 };
 
 export default ImageCarousel;

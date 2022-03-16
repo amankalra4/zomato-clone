@@ -1,11 +1,11 @@
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { getRestaurantDetails } from "@src/constants";
-import { Restaurant2 } from "@src/modules/interface/restuarant";
-import OgMetaData from "@src/components/og-meta-combo";
-import AppWrapper from "@src/components/app";
-import BreadCrumbs from "@src/components/breadcrumbs";
-import RestaurantData from "@src/components/restaurant-data";
-import Container from "@src/components/container";
+import { getRestaurantDetails } from "@constants/index";
+import { Restaurant2 } from "@modules/interface/restuarant";
+import OgMetaData from "@components/og-meta-combo";
+import AppWrapper from "@components/app";
+import BreadCrumbs from "@components/breadcrumbs";
+import RestaurantData from "@components/restaurant-data";
+import Container from "@components/container";
 
 const RestaurantInfo = ({ restaurantInfo }: { restaurantInfo: Restaurant2 }) => {
     return (
