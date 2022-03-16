@@ -18,6 +18,7 @@ All APIs used here were provided by Zomato.
 7. Axios
 8. Bootstrap
 9. React Error Boundary
+10. Service workers
 
 ## Formatting and Linting
 
