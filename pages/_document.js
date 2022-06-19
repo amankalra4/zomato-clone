@@ -16,6 +16,23 @@ class MyDocument extends Document {
         <link rel="dns-prefetch" href="https://b.zmtcdn.com" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" defer />
         <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap" rel="stylesheet" defer />
+        {/* <link 
+            rel="stylesheet" 
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossOrigin="anonymous"
+            as="style" 
+            onLoad="this.onload=null;this.rel='stylesheet'" 
+        />
+        <noscript>
+          <link 
+              rel="stylesheet" 
+              href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+              crossOrigin="anonymous"
+          />
+        </noscript> */}
+        {/* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" type="stylesheet" /> */}
         </Head>
         <body>
           <Main />

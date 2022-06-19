@@ -3,10 +3,12 @@ import OgMetaData from "@components/og-meta-combo";
 import BreadCrumbs from "@components/breadcrumbs";
 import ScrollableTabs from "@components/tabs";
 import { changeToCamelCase } from "@modules/camel-case";
+import { connect } from "react-redux";
+import { CombinedReducer } from "redux/reducers/root-reducer";
 import Container from "@components/container";
 import useLocationInfo from "@custom-hooks/use-location-info";
 
-const Locations = () => {
+const Locations = ({ name }: { name: string }) => {
     const { area, cityName, countryName, cuisineId: cuisineIds } = useLocationInfo();
 
     return (
@@ -15,6 +17,7 @@ const Locations = () => {
                 title={`Food Devlivery - ${changeToCamelCase(cityName)}`}
                 description={`Best food near ${changeToCamelCase(cityName)}`}
             />
+            {name}
             <Container>
                 <BreadCrumbs pathArray={["Home", countryName, cityName, area]} />
                 <ScrollableTabs
@@ -27,4 +30,10 @@ const Locations = () => {
     );
 };
 
-export default Locations;
+const mapStateToProps = (state: CombinedReducer) => {
+    return {
+        name: state.first.name
+    };
+};
+
+export default connect(mapStateToProps)(Locations);
